@@ -1,0 +1,389 @@
+ERMHDR	8.0	2025-05-13	Project	barry@nplan.io	nPlan GraphGen v2	dbxDatabaseNoName	Project Management	USD
+%T	CURRTYPE
+%F	curr_id	decimal_digit_cnt	curr_symbol	decimal_symbol	digit_group_symbol	pos_curr_fmt_type	neg_curr_fmt_type	curr_type	curr_short_name	group_digit_cnt	base_exch_rate
+%R	1	2	$	.	,	#1.1	(#1.1)	US Dollar	USD	3	1
+%R	10	2	$	.	,	#1.1	(#1.1)	Argentine Peso	ARS	3	3.077
+%R	11	2	A$	.	,	#1.1	(#1.1)	Australian Dollar	AUST	3	1.208
+%R	13	2	R$	.	,	#1.1	(#1.1)	Brazilian Real	BRL	3	2.014
+%R	14	2	£	.	,	#1.1	(#1.1)	British Pound	U.K.	3	0.501762
+%R	15	2	CA$	.	,	#1.1	(#1.1)	Canadian Dollar	CAD	3	1.10573
+%R	16	2	Y	.	,	#1.1	(#1.1)	Chinese Yuan	CNY	3	7.694
+%R	17	2	€	.	,	#1.1	(#1.1)	EURO	EUR	3	0.739088
+%R	20	2	HK$	.	,	#1.1	(#1.1)	Hong Kong Dollar	HKD	3	7.81967
+%R	21	2	Rs	.	,	#1.1	(#1.1)	Indian Rupee	INR	3	40.67
+%R	23	2	¥	.	,	#1.1	(#1.1)	Japanese Yen	JPY	3	120.167
+%R	24	2	K	.	,	#1.1	(#1.1)	Korean Won	KRW	3	924.743
+%R	25	2	N$	.	,	#1.1	(#1.1)	Mexican Peso	MXN	3	10.7938
+%R	26	2	R	.	,	#1.1	(#1.1)	Russian Rouble	RUB	3	25.8085
+%R	28	2	Sk	.	,	#1.1	(#1.1)	Swedish Krona	SEK	3	6.80579
+%R	29	2	kr	.	,	#1.1	(#1.1)	Swiss Franc	CHF	3	1.21864
+%R	30	2	NIS	.	,	#1.1	(#1.1)	Israel Shefkel	ILS	3	3.96384
+%T	FINTMPL
+%F	fintmpl_id	fintmpl_name	default_flag
+%R	1	Calendar	Y
+%T	OBS
+%F	obs_id	parent_obs_id	guid	seq_num	obs_name	obs_descr
+%R	565			0	Enterprise	<HTML><BODY></BODY></HT
+%T	PROJECT
+%F	proj_id	fy_start_month_num	rsrc_self_add_flag	allow_complete_flag	rsrc_multi_assign_flag	checkout_flag	project_flag	step_complete_flag	cost_qty_recalc_flag	batch_sum_flag	name_sep_char	def_complete_pct_type	proj_short_name	acct_id	orig_proj_id	source_proj_id	base_type_id	clndr_id	sum_base_proj_id	task_code_base	task_code_step	priority_num	wbs_max_sum_level	strgy_priority_num	last_checksum	critical_drtn_hr_cnt	def_cost_per_qty	last_recalc_date	plan_start_date	plan_end_date	scd_end_date	add_date	last_tasksum_date	fcst_start_date	def_duration_type	task_code_prefix	guid	def_qty_type	add_by_name	web_local_root_path	proj_url	def_rate_type	add_act_remain_flag	act_this_per_link_flag	def_task_type	act_pct_link_flag	critical_path_type	task_code_prefix_flag	def_rollup_dates_flag	use_project_baseline_flag	rem_target_link_flag	reset_planned_flag	allow_neg_act_flag	sum_assign_level	last_fin_dates_id	last_baseline_update_date	cr_external_key	apply_actuals_date	location_id	loaded_scope_level	export_flag	new_fin_dates_id	baselines_to_export	baseline_names_to_export	next_data_date	close_period_flag	sum_refresh_date	trsrcsum_loaded
+%R	1	1	Y	Y	Y	N	Y	N	N	Y	.	CP_Drtn						1		1000	10	10	2	500		0	0.0		2025-06-01 00:00	2025-11-13 17:00	2025-11-13 17:00	2025-05-13 20:32			DT_FixedDUR2	A	AR6oDMS1QKitWoufXjA47A	QT_Hour	admin			COST_PER_QTY	N	Y	TT_Task	Y	CT_TotFloat	Y	Y	Y	Y	N	N	SL_Taskrsrc						7	Y							N
+%T	PROJWBS
+%F	wbs_id	proj_id	obs_id	seq_num	est_wt	proj_node_flag	sum_data_flag	status_code	wbs_short_name	wbs_name	phase_id	parent_wbs_id	ev_user_pct	ev_etc_user_value	orig_cost	indep_remain_total_cost	ann_dscnt_rate_pct	dscnt_period_type	indep_remain_work_qty	anticip_start_date	anticip_end_date	ev_compute_type	ev_etc_compute_type	guid	tmpl_guid	plan_open_state
+%R	5401	1	565	1	1	Y	N	WS_Open	ROOT	Gimmer Crag Emergency Shelter Project	3667	6	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					bVmqqPFORxizGvPNWhRgbV		
+%R	5403	1	565	2	1	N	N	WS_Open	PH1	 Design	3667	5401	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					ZNMMQJm3SC2orD1arOPfZA		
+%R	5404	1	565	3	1	N	N	WS_Open	CA1	 Architectural Design Documentation	3667	5403	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					LruxhjK1Sj21L2Gk0F8Y1Q		
+%R	5405	1	565	4	1	N	N	WS_Open	WS1.1	 Shelter Layout and Space Planning	3667	5404	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					udO71IMnTRAoAl4WPdJjQu		
+%R	5406	1	565	5	1	N	N	WS_Open	WS1.2	 Visual Integration and Material Specifications	3667	5404	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					xXfMdH5RiuP0nMDBnKnqgx		
+%R	5407	1	565	6	1	N	N	WS_Open	WS1.3	 Architectural Models and Renderings	3667	5404	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Gqd6R5STTVu45ej0pEgOJw		
+%R	5518	1	565	7	1	N	N	WS_Open	WS1.4	 Operational Use specification	3667	5404	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					E0dEWf5zQOofQDXCJXVewE		
+%R	5519	1	565	8	1	N	N	WS_Open	WP1.4.1	 Operational use requirements	3667	5518	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					khDS1J3JRCGtgMvG3QJqwk		
+%R	5521	1	565	9	1	N	N	WS_Open	WP1.4.2	 Operational use validation	3667	5518	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Yge3YBWTEiPrLe9LbYZ6gY		
+%R	5408	1	565	10	1	N	N	WS_Open	CA2	 Structural Engineering Specifications	3667	5403	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					X5IadnjSQxqREygjaYsVgw		
+%R	5409	1	565	11	1	N	N	WS_Open	WS2.1	 Load Calculations and Analysis	3667	5408	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					bgo65RDJSeW6HHYROCmsQg		
+%R	5410	1	565	12	1	N	N	WS_Open	WS2.2	 Reversible Installation Methodology	3667	5408	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					GEUUgEuRvG6p2JW8bFvDwG		
+%R	5411	1	565	13	1	N	N	WS_Open	WS2.3	 Structural System Design Documents	3667	5408	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					rAF93xfGTulOf0MfEZw6gr		
+%R	5412	1	565	14	1	N	N	WS_Open	WS2.4	 Foundation Interface Solutions	3667	5408	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					FoPsSnGOTbeKq0ZH9OYrBA		
+%R	5413	1	565	15	1	N	N	WS_Open	CA3	 Environmental Impact Assessment	3667	5403	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					zbn576qqS8OP2OOfUKfgAz		
+%R	5414	1	565	16	1	N	N	WS_Open	WS3.1	 Flora Protection and Moss Relocation Plan	3667	5413	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					r0rTv8jcQAKdKVgorpWpAr		
+%R	5415	1	565	17	1	N	N	WS_Open	WS3.2	 Ground Disturbance Minimization Strategy	3667	5413	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					2wblGfoRamdJKVubiCSg2w		
+%R	5416	1	565	18	1	N	N	WS_Open	WS3.3	 Carbon Footprint Analysis	3667	5413	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					x7D8epISdKcbjGIaivspAx		
+%R	5417	1	565	19	1	N	N	WS_Open	WS3.4	 Environmental Compliance Documentation	3667	5413	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					wTVbRx1TeyY1f59LGPTEgw		
+%R	5520	1	565	20	1	N	N	WS_Open	CA4	 Use of facility Operations analysis	3667	5403	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					OklHSRzRSrCu0kSU77HeVw		
+%R	5418	1	565	21	1	N	N	WS_Open	PH2	 Pre-construction	3667	5401	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					BGbapmERFCIOqNusLOwBGb		
+%R	5419	1	565	22	1	N	N	WS_Open	CA5	 Regulatory Permits and Approvals	3667	5418	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					gVk525NTviwpLj6uS2YIQg		
+%R	5420	1	565	23	1	N	N	WS_Open	WS5.1	 National Park Authority Documentation	3667	5419	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					sUjcE3xmT3qA8IrGhQzYws		
+%R	5421	1	565	24	1	N	N	WS_Open	WS5.2	 Environmental Agency Permits	3667	5419	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					WZ5KbMHiTPGcZxkTHgbRoA		
+%R	5422	1	565	25	1	N	N	WS_Open	WS5.3	 Access Rights Agreements	3667	5419	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					vm6yVh3KQQ25xTF1L79pXQ		
+%R	5423	1	565	26	1	N	N	WS_Open	WS5.4	 Planning Permission Package	3667	5419	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Yg09v961QeedfvQ3v1E3gY		
+%R	5424	1	565	27	1	N	N	WS_Open	CA6	 Site Survey and Analysis	3667	5418	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					nPPLOMXSjSVtbatog0bhwn		
+%R	5425	1	565	28	1	N	N	WS_Open	WS6.1	 Ledge Geometry Documentation	3667	5424	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					9fFm3DLmQvKzXK1IPPLpQ9		
+%R	5426	1	565	29	1	N	N	WS_Open	WS6.2	 Rock Face Condition Assessment	3667	5424	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					VGZymhehSYKe14x2DrjpAV		
+%R	5427	1	565	30	1	N	N	WS_Open	WS6.3	 Environmental Sensitive Areas Mapping	3667	5424	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					MYYmUvgQ6KGgOm3k9NIgMY		
+%R	5428	1	565	31	1	N	N	WS_Open	WS6.4	 Access Route Identification	3667	5424	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					vUSTZnOZTImuYcpMdxoD9w		
+%R	5429	1	565	32	1	N	N	WS_Open	CA7	 Stakeholder Engagement Framework	3667	5418	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					fdLjCeAKTXiETl2eTn0IrQ		
+%R	5430	1	565	33	1	N	N	WS_Open	WS7.1	 Land-Owner Coordination Framework	3667	5429	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					y5HfpxboR20XjlJuhAtQy5		
+%R	5431	1	565	34	1	N	N	WS_Open	WS7.2	 Mountain Rescue Liaison Plan	3667	5429	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					FJtx7hpjSTG3LFDK0n9xgF		
+%R	5432	1	565	35	1	N	N	WS_Open	WS7.3	 Climbing Club Consultation Process	3667	5429	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					rOx5nyQUR9WEs3bceVMH1w		
+%R	5433	1	565	36	1	N	N	WS_Open	WS7.4	 Environmental NGO Communication Strategy	3667	5429	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Gnu2vq7YQtq8CtryT9THAG		
+%R	5434	1	565	37	1	N	N	WS_Open	PH3	 Procurement	3667	5401	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					4An8CvB1RWKQ5gvoRLKC3A		
+%R	5435	1	565	38	1	N	N	WS_Open	CA8	 Materials and Equipment	3667	5434	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					y2QkuEOaQh2HfdjyOhBgy2		
+%R	5436	1	565	39	1	N	N	WS_Open	WS8.1	 Weather-Resistant Materials List	3667	5435	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					w81JEspURYOyQ5G3E37Rhw		
+%R	5437	1	565	40	1	N	N	WS_Open	WS8.2	 Structural Components Specifications	3667	5435	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Hz2jAEJOShi2GBUpBSMDhg		
+%R	5438	1	565	41	1	N	N	WS_Open	WS8.3	 Anchoring System Requirements	3667	5435	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					jDkCgnJfRazsjXPPqDtgjD		
+%R	5439	1	565	42	1	N	N	WS_Open	WS8.4	 Insulation Materials Schedule	3667	5435	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					o9OK49BSaaZnOFXNAIrcgo		
+%R	5440	1	565	43	1	N	N	WS_Open	CA9	 Logistics Services	3667	5434	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					tXivOfLZTgnqT2mtn5Q0At		
+%R	5441	1	565	44	1	N	N	WS_Open	WS9.1	 Helicopter Transport Contract	3667	5440	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					J4OtGsF6S5W1Xmu3x6U1Fw		
+%R	5442	1	565	45	1	N	N	WS_Open	WS9.2	 Materials Delivery Schedule	3667	5440	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					dPWLDSiSve9SNk1BlHmIAd		
+%R	5443	1	565	46	1	N	N	WS_Open	WS9.3	 Personnel Transport Plan	3667	5440	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					SKXjSPT3ZP9B3ElvDgSKXj		
+%R	5444	1	565	47	1	N	N	WS_Open	WS9.4	 Carbon Offset Arrangements	3667	5440	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					55Cw3p39RaucTEE6UR3NxQ		
+%R	5445	1	565	48	1	N	N	WS_Open	CA10	 Quality Assurance Standards	3667	5434	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					VKnENpAEQyuuxGGCEPhQUQ		
+%R	5446	1	565	49	1	N	N	WS_Open	WS10.1	 Materials Testing Protocol	3667	5445	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					OK53sCBSVCyrqF9tdmXQOK		
+%R	5447	1	565	50	1	N	N	WS_Open	WS10.2	 Fabrication Quality Guidelines	3667	5445	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					taXETyR1CKWqPdPySUrgta		
+%R	5448	1	565	51	1	N	N	WS_Open	WS10.3	 Installation Quality Control Plan	3667	5445	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Iv3CgIPMTZ6RFrbVrHLTHg		
+%R	5449	1	565	52	1	N	N	WS_Open	WS10.4	 Environmental Compliance Verification	3667	5445	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					62OdWNDnQyCZuAbS3MJAdQ		
+%R	5450	1	565	53	1	N	N	WS_Open	PH4	 Construction	3667	5401	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					2thQvq8hTCUI7i0EAGvRQ2		
+%R	5451	1	565	54	1	N	N	WS_Open	CA11	 Site Access Infrastructure	3667	5450	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					PL8EXq5iSEiRIv8IQkXAAP		
+%R	5452	1	565	55	1	N	N	WS_Open	WS11.1	 Temporary Access Platform System	3667	5451	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					hpy3hZ12TuGn3qiQHn2vLw		
+%R	5453	1	565	56	1	N	N	WS_Open	WS11.2	 Safety Line Installation Framework	3667	5451	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					k10KYNkuTxmwogKxoqW3gk		
+%R	5454	1	565	57	1	N	N	WS_Open	WS11.3	 Personnel Safety Equipment Requirements	3667	5451	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					O1xvmMIhRmODjq4lQKTGgO		
+%R	5455	1	565	58	1	N	N	WS_Open	WS11.4	 Staging Area Configuration	3667	5451	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					7kEM249RmCzEDxdrIXm8Q7		
+%R	5456	1	565	59	1	N	N	WS_Open	WS11.5	 Equipment Hoisting Points	3667	5451	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					ihkZNfP9RKa6kKwTbg8x3w		
+%R	5457	1	565	60	1	N	N	WS_Open	CA12	 Foundation System	3667	5450	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					X1yPpy1vTuJPxQPC7UewX1		
+%R	5458	1	565	61	1	N	N	WS_Open	WS12.1	 Rock Surface Preparation	3667	5457	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					wcf4BIVkRik3kloFSjTwwc		
+%R	5459	1	565	62	1	N	N	WS_Open	WS12.2	 Non-Invasive Anchoring Points	3667	5457	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					iWDFknFwSEWsvKxSyI9Ldg		
+%R	5460	1	565	63	1	N	N	WS_Open	WS12.3	 Leveling System Components	3667	5457	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					5ZusIiMLQKaU4wWg6ff1A5		
+%R	5461	1	565	64	1	N	N	WS_Open	WS12.4	 Load Distribution Mechanism	3667	5457	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					XEPsHl5VRjm3dTbSpAMRgX		
+%R	5462	1	565	65	1	N	N	WS_Open	WS12.5	 Foundation Weather Sealing	3667	5457	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					3tqgoARfSsG3EvClFaHyqg		
+%R	5463	1	565	66	1	N	N	WS_Open	WS12.6	 Environmental Protection Measures	3667	5457	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					YSFusZTnRMGBGtgqKlCcwY		
+%R	5464	1	565	67	1	N	N	WS_Open	CA13	 Structural Frame	3667	5450	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					qpx1kbdcRz2xyHmTskPOAq		
+%R	5465	1	565	68	1	N	N	WS_Open	WS13.1	 Primary Frame Components	3667	5464	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					NsF3eX2QtivCVBsREcpgNs		
+%R	5466	1	565	69	1	N	N	WS_Open	WS13.2	 Secondary Support Structure	3667	5464	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					bpx5fj4WQVGEQu7bWavcxQ		
+%R	5467	1	565	70	1	N	N	WS_Open	WS13.3	 Connection Systems Assembly	3667	5464	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Wmswv8jVSVGQz1ZI7RS5mA		
+%R	5468	1	565	71	1	N	N	WS_Open	WS13.4	 Frame Bracing Elements	3667	5464	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					RLzzJ6yRJqfDPrmf61gARL		
+%R	5469	1	565	72	1	N	N	WS_Open	WS13.5	 Wind Resistance Reinforcements	3667	5464	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					WezA4sSmTw6eQPwITjsbVw		
+%R	5470	1	565	73	1	N	N	WS_Open	WS13.6	 Thermal Break Components	3667	5464	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					rbH0yNh9SI2DmJGf1pve2Q		
+%R	5471	1	565	74	1	N	N	WS_Open	CA14	 External Envelope and Weatherproofing	3667	5450	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					b1NpcdtIQ2i0H5xVohmAb1		
+%R	5472	1	565	75	1	N	N	WS_Open	WS14.1	 Wall Panel Installation	3667	5471	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					YRFGfiXvTtKCJZOsELh4Ag		
+%R	5473	1	565	76	1	N	N	WS_Open	WS14.2	 Roof System Components	3667	5471	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					bE1jz5wFSMK2HKQslTZ0gb		
+%R	5474	1	565	77	1	N	N	WS_Open	WS14.3	 Weather Sealing Elements	3667	5471	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					sY7xtEkTBWTAD2mp5DtgsY		
+%R	5475	1	565	78	1	N	N	WS_Open	WS14.4	 Water Runoff Management	3667	5471	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					RI2RoZeOTsKMHX2W8VAgQR		
+%R	5476	1	565	79	1	N	N	WS_Open	WS14.5	 Exterior Finish Application	3667	5471	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					ezHQfNawQSeCAu684y3zwe		
+%R	5477	1	565	80	1	N	N	WS_Open	WS14.6	 Natural Light Integration	3667	5471	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					SVFrToE3R1ulMeWZVJfqgS		
+%R	5478	1	565	81	1	N	N	WS_Open	CA15	 Internal Fixtures	3667	5450	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					xyvKug0PROWbtzr7qO4IdQ		
+%R	5479	1	565	82	1	N	N	WS_Open	WS15.1	 Interior Wall Lining	3667	5478	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					2o6qMFObS1CGbsnjxUlUA2		
+%R	5480	1	565	83	1	N	N	WS_Open	WS15.2	 Floor System Components	3667	5478	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					muy1Vcw2SZ6vxjGasfyUwm		
+%R	5481	1	565	84	1	N	N	WS_Open	WS15.3	 Emergency Equipment Mounts	3667	5478	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					JsXEGtTbTmerAT4tivAsgJ		
+%R	5482	1	565	85	1	N	N	WS_Open	WS15.4	 Ventilation System	3667	5478	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Y0IEYrCvQkixQQIHhYtlgY		
+%R	5483	1	565	86	1	N	N	WS_Open	WS15.5	 Condensation Management System	3667	5478	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Z78HkFKTHahRjEUXVoMgZ7		
+%R	5484	1	565	87	1	N	N	WS_Open	CA16	 Environmental Protection Implementation	3667	5450	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					LoHeGXfsQhOxG063QlZZgL		
+%R	5485	1	565	88	1	N	N	WS_Open	WS16.1	 Sensitive Moss Temporary Relocation	3667	5484	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					59godpJLRYuSIv66JC81wQ		
+%R	5486	1	565	89	1	N	N	WS_Open	WS16.2	 Ground Protection Measures	3667	5484	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					FGFxr8aRSLCsER6EXYMO2g		
+%R	5487	1	565	90	1	N	N	WS_Open	WS16.3	 Waste Management System	3667	5484	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					qd0N6HFRIeMX80pgpF7Aqd		
+%R	5488	1	565	91	1	N	N	WS_Open	WS16.4	 Environmental Monitoring Setup	3667	5484	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					gnlv2dVqRSOWCfCzo1sYgg		
+%R	5489	1	565	92	1	N	N	WS_Open	WS16.5	 Post-Construction Restoration Elements	3667	5484	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Xg15e8yeQzeIRBjEtGZIrg		
+%R	5490	1	565	93	1	N	N	WS_Open	CA17	 Helicopter Transport Operation	3667	5450	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					kh25UyMdRFCwZdtm9KUeqg		
+%R	5491	1	565	94	1	N	N	WS_Open	WS17.1	 Lift Schedule Coordination	3667	5490	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					T07T2CxSS3iABFFxendDnQ		
+%R	5492	1	565	95	1	N	N	WS_Open	WS17.2	 Load Configuration Documentation	3667	5490	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					0aOfli67Rnu0QdstJmeK6g		
+%R	5493	1	565	96	1	N	N	WS_Open	WS17.3	 Weather Contingency Plan	3667	5490	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					rQw873TwOIMei7oNApGQrQ		
+%R	5494	1	565	97	1	N	N	WS_Open	WS17.4	 Safety Protocol Framework	3667	5490	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Y4VoLyCRWKE02g8QPrF3QY		
+%R	5495	1	565	98	1	N	N	WS_Open	WS17.5	 Component Sequencing Strategy	3667	5490	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					7I1gNAwKQguyg197Qfblmg		
+%R	5496	1	565	99	1	N	N	WS_Open	PH5	 Testing & Commissioning	3667	5401	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					fRbvWCKQgmNVo0wZPUYfwf		
+%R	5497	1	565	100	1	N	N	WS_Open	CA18	 Structural and Weather Resistance Tests	3667	5496	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					QwumtRjTRyD6Mx0bQQH4AQ		
+%R	5498	1	565	101	1	N	N	WS_Open	WS18.1	 Wind Load Performance Assessment	3667	5497	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					F1XNtv55RQGzdMfCIQRhSg		
+%R	5499	1	565	102	1	N	N	WS_Open	WS18.2	 Thermal Resistance Verification	3667	5497	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					dQISRNhQrmuVX6WQeq0ZQd		
+%R	5500	1	565	103	1	N	N	WS_Open	WS18.3	 Water Ingress Testing	3667	5497	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					iMqDX4xuRgmVNYemQMRhhA		
+%R	5501	1	565	104	1	N	N	WS_Open	WS18.4	 Structural Stability Evaluation	3667	5497	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					fq4cq8pDRCO3kRNaqycjgf		
+%R	5502	1	565	105	1	N	N	WS_Open	CA19	 Operational Functionality Assessment	3667	5496	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					yy6AE8vnR469BEIUUC70kw		
+%R	5503	1	565	106	1	N	N	WS_Open	WS19.1	 Emergency Access Verification	3667	5502	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Php2EV63RlCJavnJscIeJA		
+%R	5504	1	565	107	1	N	N	WS_Open	WS19.2	 Interior Environment Monitoring	3667	5502	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					OKiLPRkcQu2Pzb0pWm4yQO		
+%R	5505	1	565	108	1	N	N	WS_Open	WS19.3	 Ventilation Performance Assessment	3667	5502	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					Q4GiH6mfTSerMGlGH5tGQQ		
+%R	5506	1	565	109	1	N	N	WS_Open	WS19.4	 Shelter Capacity Validation	3667	5502	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					oGYlCsiVSCibt885anipwg		
+%R	5507	1	565	110	1	N	N	WS_Open	PH6	 Handover & Close out	3667	5401	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					FM1UP23lSxqUD9PA3qiXkg		
+%R	5508	1	565	111	1	N	N	WS_Open	CA20	 Technical Documentation and Manuals	3667	5507	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					62kiSwXmTq6Yv7KHFog62k		
+%R	5509	1	565	112	1	N	N	WS_Open	WS20.1	 Shelter User Guidelines	3667	5508	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					6jb43pxISRWXYcYe5f8ZA6		
+%R	5510	1	565	113	1	N	N	WS_Open	WS20.2	 Maintenance Protocol Documentation	3667	5508	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					rkHOqdDTuSepLAQ8cXjTgr		
+%R	5511	1	565	114	1	N	N	WS_Open	WS20.3	 Emergency Response Procedures	3667	5508	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					KeVix2P4TqrKLlXzW6sngK		
+%R	5512	1	565	115	1	N	N	WS_Open	WS20.4	 Inspection Schedule Framework	3667	5508	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					bIbDD5GdToafXWM6qjmpQb		
+%R	5513	1	565	116	1	N	N	WS_Open	CA21	 Project Closure Documentation	3667	5507	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					NjVr1Np8SD2yMpAe3vpxQN		
+%R	5514	1	565	117	1	N	N	WS_Open	WS21.1	 Final Inspection Records	3667	5513	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					gTNX2zyjTkSViOgjxRxygg		
+%R	5515	1	565	118	1	N	N	WS_Open	WS21.2	 Stakeholder Sign-off Collection	3667	5513	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					n1NAUhxTUqz0ntQ0Vl2Ewn		
+%R	5516	1	565	119	1	N	N	WS_Open	WS21.3	 Environmental Compliance Report	3667	5513	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					7SB6FlZkRP2AOB8xAd7k9g		
+%R	5517	1	565	120	1	N	N	WS_Open	WS21.4	 Project Completion Certificate	3667	5513	0.88	0	0	0	0	EC_Cmp_pct	EE_Rem_hr					UvLWOcxrQgWRhY77bDjLsA		
+%T	CALENDAR
+%F	clndr_id	default_flag	clndr_name	proj_id	base_clndr_id	last_chng_date	clndr_type	day_hr_cnt	week_hr_cnt	month_hr_cnt	year_hr_cnt	rsrc_private	clndr_data
+%R	1	Y	Weekdays only 8hrs/day	1	0	2025-05-13 20:32	CA_Base	8	40	172	2000	N	(0||CalendarData()(    (0||DaysOfWeek()(      (0||1()())      (0||2()(        (0||0(s|09:00|f|17:00)())))      (0||3()(        (0||0(s|09:00|f|17:00)())))      (0||4()(        (0||0(s|09:00|f|17:00)())))      (0||5()(        (0||0(s|09:00|f|17:00)())))      (0||6()(        (0||0(s|09:00|f|17:00)())))      (0||7()())))    (0||Exceptions()())))
+%T	TASK
+%F	task_id	proj_id	wbs_id	clndr_id	phys_complete_pct	rev_fdbk_flag	est_wt	lock_plan_flag	auto_compute_act_flag	complete_pct_type	task_type	duration_type	status_code	task_code	task_name	rsrc_id	total_float_hr_cnt	free_float_hr_cnt	remain_drtn_hr_cnt	act_work_qty	remain_work_qty	target_work_qty	target_drtn_hr_cnt	target_equip_qty	act_equip_qty	remain_equip_qty	cstr_date	act_start_date	act_end_date	late_start_date	late_end_date	expect_end_date	early_start_date	early_end_date	restart_date	reend_date	target_start_date	target_end_date	rem_late_start_date	rem_late_end_date	cstr_type	priority_type	suspend_date	resume_date	float_path	float_path_order	guid	tmpl_guid	cstr_date2	cstr_type2	driving_path_flag	act_this_per_work_qty	act_this_per_equip_qty	external_early_start_date	external_late_end_date	create_date	update_date	create_user	update_user	location_id
+%R	1	1	5405	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-1	Shelter Layout and Space Planning				80	0	0	0	80	0	0	0				2025-06-01 00:00	2025-06-13 17:00	2025-06-13 17:00	2025-06-01 00:00	2025-06-13 17:00	2025-06-01 00:00	2025-06-13 17:00	2025-06-01 00:00	2025-06-13 17:00				PT_Normal					rSVdAWsYSniTMVKyY9YMBA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	2	1	5406	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-2	Visual Integration and Material Specifications				32	0	0	0	32	0	0	0				2025-06-13 17:00	2025-06-19 17:00	2025-06-19 17:00	2025-06-13 17:00	2025-06-19 17:00	2025-06-13 17:00	2025-06-19 17:00	2025-06-13 17:00	2025-06-19 17:00				PT_Normal					g4ga9xfRzePRetsvCsewg4				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	3	1	5407	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-3	Architectural Models and Renderings				40	0	0	0	40	0	0	0				2025-06-19 17:00	2025-06-26 17:00	2025-06-26 17:00	2025-06-19 17:00	2025-06-26 17:00	2025-06-19 17:00	2025-06-26 17:00	2025-06-19 17:00	2025-06-26 17:00				PT_Normal					5MWEKhj9Q9aWawRzG9GYjA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	4	1	5519	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-4	Operational use requirements				8	0	0	0	8	0	0	0				2025-06-13 17:00	2025-06-16 17:00	2025-06-16 17:00	2025-06-13 17:00	2025-06-16 17:00	2025-06-13 17:00	2025-06-16 17:00	2025-06-13 17:00	2025-06-16 17:00				PT_Normal					jOl7GUSaKpnN1yeN7GwQjO				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	5	1	5521	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-5	Operational use validation				24	0	0	0	24	0	0	0				2025-06-16 17:00	2025-06-19 17:00	2025-06-19 17:00	2025-06-16 17:00	2025-06-19 17:00	2025-06-16 17:00	2025-06-19 17:00	2025-06-16 17:00	2025-06-19 17:00				PT_Normal					HISfEp6oQyKHlvdJmfvWDA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	6	1	5409	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-6	Load Calculations and Analysis				24	0	0	0	24	0	0	0				2025-06-13 17:00	2025-06-18 17:00	2025-06-18 17:00	2025-06-13 17:00	2025-06-18 17:00	2025-06-13 17:00	2025-06-18 17:00	2025-06-13 17:00	2025-06-18 17:00				PT_Normal					Bw8BY8GbRqGiBHPlgCBsIg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	7	1	5410	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-7	Reversible Installation Methodology				24	0	0	0	24	0	0	0				2025-06-18 17:00	2025-06-23 17:00	2025-06-23 17:00	2025-06-18 17:00	2025-06-23 17:00	2025-06-18 17:00	2025-06-23 17:00	2025-06-18 17:00	2025-06-23 17:00				PT_Normal					nSAQdUwaSSCJzoxehlj9Tw				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	8	1	5411	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-8	Structural System Design Documents				80	0	0	0	80	0	0	0				2025-06-23 17:00	2025-07-07 17:00	2025-07-07 17:00	2025-06-23 17:00	2025-07-07 17:00	2025-06-23 17:00	2025-07-07 17:00	2025-06-23 17:00	2025-07-07 17:00				PT_Normal					kf8KVeiRuyL5W5AowCaDAk				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	9	1	5412	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-9	Foundation Interface Solutions				24	0	0	0	24	0	0	0				2025-07-07 17:00	2025-07-10 17:00	2025-07-10 17:00	2025-07-07 17:00	2025-07-10 17:00	2025-07-07 17:00	2025-07-10 17:00	2025-07-07 17:00	2025-07-10 17:00				PT_Normal					J4SD68WWTdKUFfSE5htZdw				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	10	1	5414	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-10	Flora Protection and Moss Relocation Plan				8	0	0	0	8	0	0	0				2025-06-04 17:00	2025-06-05 17:00	2025-06-05 17:00	2025-06-04 17:00	2025-06-05 17:00	2025-06-04 17:00	2025-06-05 17:00	2025-06-04 17:00	2025-06-05 17:00				PT_Normal					UyBVOmvQzssESJgDKezwUy				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	11	1	5415	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-11	Ground Disturbance Minimization Strategy				80	0	0	0	80	0	0	0				2025-06-04 17:00	2025-06-18 17:00	2025-06-18 17:00	2025-06-04 17:00	2025-06-18 17:00	2025-06-04 17:00	2025-06-18 17:00	2025-06-04 17:00	2025-06-18 17:00				PT_Normal					JIFzxdhRLlJ1NLWoVKAJIF				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	12	1	5416	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-12	Carbon Footprint Analysis				16	0	0	0	16	0	0	0				2025-07-10 17:00	2025-07-14 17:00	2025-07-14 17:00	2025-07-10 17:00	2025-07-14 17:00	2025-07-10 17:00	2025-07-14 17:00	2025-07-10 17:00	2025-07-14 17:00				PT_Normal					rC9w5H1tRjaqgnnlXuw7Ar				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	13	1	5417	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-13	Environmental Compliance Documentation				16	0	0	0	16	0	0	0				2025-07-14 17:00	2025-07-16 17:00	2025-07-16 17:00	2025-07-14 17:00	2025-07-16 17:00	2025-07-14 17:00	2025-07-16 17:00	2025-07-14 17:00	2025-07-16 17:00				PT_Normal					5q0QJ1lSckdWt98uxYw5q0				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	14	1	5520	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-14	Use of facility Operations analysis				40	0	0	0	40	0	0	0				2025-06-26 17:00	2025-07-03 17:00	2025-07-03 17:00	2025-06-26 17:00	2025-07-03 17:00	2025-06-26 17:00	2025-07-03 17:00	2025-06-26 17:00	2025-07-03 17:00				PT_Normal					BIi61MX7TO2i168LhTuAwg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	15	1	5420	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-15	National Park Authority Documentation				16	0	0	0	16	0	0	0				2025-07-16 17:00	2025-07-18 17:00	2025-07-18 17:00	2025-07-16 17:00	2025-07-18 17:00	2025-07-16 17:00	2025-07-18 17:00	2025-07-16 17:00	2025-07-18 17:00				PT_Normal					XswJggsCS4SI7yHiuqoOBQ				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	16	1	5421	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-16	Environmental Agency Permits				40	0	0	0	40	0	0	0				2025-07-16 17:00	2025-07-23 17:00	2025-07-23 17:00	2025-07-16 17:00	2025-07-23 17:00	2025-07-16 17:00	2025-07-23 17:00	2025-07-16 17:00	2025-07-23 17:00				PT_Normal					Zkwkj5tJTYec9U0G0zx5vA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	17	1	5422	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-17	Access Rights Agreements				40	0	0	0	40	0	0	0				2025-07-10 17:00	2025-07-17 17:00	2025-07-17 17:00	2025-07-10 17:00	2025-07-17 17:00	2025-07-10 17:00	2025-07-17 17:00	2025-07-10 17:00	2025-07-17 17:00				PT_Normal					MIULXOoSp2Q94Q2Iu6QdgM				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	18	1	5423	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-18	Planning Permission Package				80	0	0	0	80	0	0	0				2025-07-23 17:00	2025-08-06 17:00	2025-08-06 17:00	2025-07-23 17:00	2025-08-06 17:00	2025-07-23 17:00	2025-08-06 17:00	2025-07-23 17:00	2025-08-06 17:00				PT_Normal					tp8PXxNuS6vsfxPxm9uNwt				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	19	1	5425	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-19	Ledge Geometry Documentation				24	0	0	0	24	0	0	0				2025-06-01 00:00	2025-06-04 17:00	2025-06-04 17:00	2025-06-01 00:00	2025-06-04 17:00	2025-06-01 00:00	2025-06-04 17:00	2025-06-01 00:00	2025-06-04 17:00				PT_Normal					AjafScurSems9HCPcXwNAA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	20	1	5426	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-20	Rock Face Condition Assessment				16	0	0	0	16	0	0	0				2025-06-01 00:00	2025-06-03 17:00	2025-06-03 17:00	2025-06-01 00:00	2025-06-03 17:00	2025-06-01 00:00	2025-06-03 17:00	2025-06-01 00:00	2025-06-03 17:00				PT_Normal					sXpH6FL4SIOS07ursx7aDA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	21	1	5427	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-21	Environmental Sensitive Areas Mapping				24	0	0	0	24	0	0	0				2025-06-01 00:00	2025-06-04 17:00	2025-06-04 17:00	2025-06-01 00:00	2025-06-04 17:00	2025-06-01 00:00	2025-06-04 17:00	2025-06-01 00:00	2025-06-04 17:00				PT_Normal					PY05fpmUTtm43mUq6BXhxA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	22	1	5428	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-22	Access Route Identification				40	0	0	0	40	0	0	0				2025-07-03 17:00	2025-07-10 17:00	2025-07-10 17:00	2025-07-03 17:00	2025-07-10 17:00	2025-07-03 17:00	2025-07-10 17:00	2025-07-03 17:00	2025-07-10 17:00				PT_Normal					sBDxINpeSmuKaJ86v2ivws				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	23	1	5430	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-23	Land-Owner Coordination Framework				40	0	0	0	40	0	0	0				2025-06-01 00:00	2025-06-06 17:00	2025-06-06 17:00	2025-06-01 00:00	2025-06-06 17:00	2025-06-01 00:00	2025-06-06 17:00	2025-06-01 00:00	2025-06-06 17:00				PT_Normal					BuVZsWjjTXaGwuPdAzOShg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	24	1	5431	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-24	Mountain Rescue Liaison Plan				16	0	0	0	16	0	0	0				2025-07-03 17:00	2025-07-07 17:00	2025-07-07 17:00	2025-07-03 17:00	2025-07-07 17:00	2025-07-03 17:00	2025-07-07 17:00	2025-07-03 17:00	2025-07-07 17:00				PT_Normal					7quOuz43SQ6enLfysZxxQ7				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	25	1	5432	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-25	Climbing Club Consultation Process				16	0	0	0	16	0	0	0				2025-07-03 17:00	2025-07-07 17:00	2025-07-07 17:00	2025-07-03 17:00	2025-07-07 17:00	2025-07-03 17:00	2025-07-07 17:00	2025-07-03 17:00	2025-07-07 17:00				PT_Normal					aiT8drf4SUO6eGLqyIfIRg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	26	1	5433	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-26	Environmental NGO Communication Strategy				16	0	0	0	16	0	0	0				2025-06-01 00:00	2025-06-03 17:00	2025-06-03 17:00	2025-06-01 00:00	2025-06-03 17:00	2025-06-01 00:00	2025-06-03 17:00	2025-06-01 00:00	2025-06-03 17:00				PT_Normal					bqHeOTzXSuWS62neN1LbpQ				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	27	1	5436	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-27	Weather-Resistant Materials List				16	0	0	0	16	0	0	0				2025-07-07 17:00	2025-07-09 17:00	2025-07-09 17:00	2025-07-07 17:00	2025-07-09 17:00	2025-07-07 17:00	2025-07-09 17:00	2025-07-07 17:00	2025-07-09 17:00				PT_Normal					TsWtb3mMS1kuCrU3cv07AT				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	28	1	5437	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-28	Structural Components Specifications				120	0	0	0	120	0	0	0				2025-07-10 17:00	2025-07-31 17:00	2025-07-31 17:00	2025-07-10 17:00	2025-07-31 17:00	2025-07-10 17:00	2025-07-31 17:00	2025-07-10 17:00	2025-07-31 17:00				PT_Normal					DUpf9xEnQH4sMk1THV7WwD				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	29	1	5438	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-29	Anchoring System Requirements				40	0	0	0	40	0	0	0				2025-07-10 17:00	2025-07-17 17:00	2025-07-17 17:00	2025-07-10 17:00	2025-07-17 17:00	2025-07-10 17:00	2025-07-17 17:00	2025-07-10 17:00	2025-07-17 17:00				PT_Normal					IWPU23ftSOS6I2ERX0Cq9g				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	30	1	5439	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-30	Insulation Materials Schedule				24	0	0	0	24	0	0	0				2025-07-07 17:00	2025-07-10 17:00	2025-07-10 17:00	2025-07-07 17:00	2025-07-10 17:00	2025-07-07 17:00	2025-07-10 17:00	2025-07-07 17:00	2025-07-10 17:00				PT_Normal					2naIStmzTyPjqNep3oaRw2				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	31	1	5441	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-31	Helicopter Transport Contract				24	0	0	0	24	0	0	0				2025-07-10 17:00	2025-07-15 17:00	2025-07-15 17:00	2025-07-10 17:00	2025-07-15 17:00	2025-07-10 17:00	2025-07-15 17:00	2025-07-10 17:00	2025-07-15 17:00				PT_Normal					OktW9b5vRXmztaOVOuyacA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	32	1	5442	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-32	Materials Delivery Schedule				24	0	0	0	24	0	0	0				2025-07-15 17:00	2025-07-18 17:00	2025-07-18 17:00	2025-07-15 17:00	2025-07-18 17:00	2025-07-15 17:00	2025-07-18 17:00	2025-07-15 17:00	2025-07-18 17:00				PT_Normal					o6HOcK5ZTuGcoS9CjT5go6				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	33	1	5443	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-33	Personnel Transport Plan				16	0	0	0	16	0	0	0				2025-07-15 17:00	2025-07-17 17:00	2025-07-17 17:00	2025-07-15 17:00	2025-07-17 17:00	2025-07-15 17:00	2025-07-17 17:00	2025-07-15 17:00	2025-07-17 17:00				PT_Normal					0dx3xoHHR6qiqrFu6SG0cQ				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	34	1	5444	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-34	Carbon Offset Arrangements				24	0	0	0	24	0	0	0				2025-07-14 17:00	2025-07-17 17:00	2025-07-17 17:00	2025-07-14 17:00	2025-07-17 17:00	2025-07-14 17:00	2025-07-17 17:00	2025-07-14 17:00	2025-07-17 17:00				PT_Normal					8wXogQsRSiiSSVuESWu8xQ				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	35	1	5446	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-35	Materials Testing Protocol				56	0	0	0	56	0	0	0				2025-07-10 17:00	2025-07-21 17:00	2025-07-21 17:00	2025-07-10 17:00	2025-07-21 17:00	2025-07-10 17:00	2025-07-21 17:00	2025-07-10 17:00	2025-07-21 17:00				PT_Normal					XD6lMJpMSEutJP8DhoLYgX				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	36	1	5447	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-36	Fabrication Quality Guidelines				40	0	0	0	40	0	0	0				2025-07-21 17:00	2025-07-28 17:00	2025-07-28 17:00	2025-07-21 17:00	2025-07-28 17:00	2025-07-21 17:00	2025-07-28 17:00	2025-07-21 17:00	2025-07-28 17:00				PT_Normal					mzq4sBNzS1iDnLScCepxwA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	37	1	5448	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-37	Installation Quality Control Plan				16	0	0	0	16	0	0	0				2025-07-28 17:00	2025-07-30 17:00	2025-07-30 17:00	2025-07-28 17:00	2025-07-30 17:00	2025-07-28 17:00	2025-07-30 17:00	2025-07-28 17:00	2025-07-30 17:00				PT_Normal					H5S4Y4yBTQOiu646szxHLA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	38	1	5449	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-38	Environmental Compliance Verification				40	0	0	0	40	0	0	0				2025-07-16 17:00	2025-07-23 17:00	2025-07-23 17:00	2025-07-16 17:00	2025-07-23 17:00	2025-07-16 17:00	2025-07-23 17:00	2025-07-16 17:00	2025-07-23 17:00				PT_Normal					3U94pTzbSCi3aYHmhEKfw3				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	39	1	5452	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-39	Temporary Access Platform System				40	0	0	0	40	0	0	0				2025-07-07 17:00	2025-07-14 17:00	2025-07-14 17:00	2025-07-07 17:00	2025-07-14 17:00	2025-07-07 17:00	2025-07-14 17:00	2025-07-07 17:00	2025-07-14 17:00				PT_Normal					hJnm10hRL2X0IYiIZwKJgh				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	40	1	5453	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-40	Safety Line Installation Framework				24	0	0	0	24	0	0	0				2025-07-14 17:00	2025-07-17 17:00	2025-07-17 17:00	2025-07-14 17:00	2025-07-17 17:00	2025-07-14 17:00	2025-07-17 17:00	2025-07-14 17:00	2025-07-17 17:00				PT_Normal					bmJRJJ7QIOLK40xcaM0sAb				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	41	1	5454	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-41	Personnel Safety Equipment Requirements				32	0	0	0	32	0	0	0				2025-07-03 17:00	2025-07-09 17:00	2025-07-09 17:00	2025-07-03 17:00	2025-07-09 17:00	2025-07-03 17:00	2025-07-09 17:00	2025-07-03 17:00	2025-07-09 17:00				PT_Normal					4pWlFniQ6GJhCqXQ9uEA4p				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	42	1	5455	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-42	Staging Area Configuration				16	0	0	0	16	0	0	0				2025-07-18 17:00	2025-07-22 17:00	2025-07-22 17:00	2025-07-18 17:00	2025-07-22 17:00	2025-07-18 17:00	2025-07-22 17:00	2025-07-18 17:00	2025-07-22 17:00				PT_Normal					sHtwGUURUyKjJ0auq4WPgs				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	43	1	5456	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-43	Equipment Hoisting Points				40	0	0	0	40	0	0	0				2025-07-22 17:00	2025-07-29 17:00	2025-07-29 17:00	2025-07-22 17:00	2025-07-29 17:00	2025-07-22 17:00	2025-07-29 17:00	2025-07-22 17:00	2025-07-29 17:00				PT_Normal					R8tO5EC7QHCzcApLr0yHUw				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	44	1	5458	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-44	Rock Surface Preparation				192	0	0	0	192	0	0	0				2025-06-27 17:00	2025-07-31 17:00	2025-07-31 17:00	2025-06-27 17:00	2025-07-31 17:00	2025-06-27 17:00	2025-07-31 17:00	2025-06-27 17:00	2025-07-31 17:00				PT_Normal					qwonOuS0qkpWKDxIgApAqw				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	45	1	5459	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-45	Non-Invasive Anchoring Points				8	0	0	0	8	0	0	0				2025-07-31 17:00	2025-08-01 17:00	2025-08-01 17:00	2025-07-31 17:00	2025-08-01 17:00	2025-07-31 17:00	2025-08-01 17:00	2025-07-31 17:00	2025-08-01 17:00				PT_Normal					ZEk0IRy2REOQXxnK9FHswZ				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	46	1	5460	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-46	Leveling System Components				8	0	0	0	8	0	0	0				2025-07-31 17:00	2025-08-01 17:00	2025-08-01 17:00	2025-07-31 17:00	2025-08-01 17:00	2025-07-31 17:00	2025-08-01 17:00	2025-07-31 17:00	2025-08-01 17:00				PT_Normal					j2FeQfqORHqGgCTeY5Jrwj				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	47	1	5461	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-47	Load Distribution Mechanism				8	0	0	0	8	0	0	0				2025-08-01 17:00	2025-08-04 17:00	2025-08-04 17:00	2025-08-01 17:00	2025-08-04 17:00	2025-08-01 17:00	2025-08-04 17:00	2025-08-01 17:00	2025-08-04 17:00				PT_Normal					tpX94BU6SNCs0eNPcSj75Q				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	48	1	5462	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-48	Foundation Weather Sealing				8	0	0	0	8	0	0	0				2025-08-04 17:00	2025-08-05 17:00	2025-08-05 17:00	2025-08-04 17:00	2025-08-05 17:00	2025-08-04 17:00	2025-08-05 17:00	2025-08-04 17:00	2025-08-05 17:00				PT_Normal					BDqeEhyTqG3P8V7HabMBgB				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	49	1	5463	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-49	Environmental Protection Measures				40	0	0	0	40	0	0	0				2025-08-01 17:00	2025-08-08 17:00	2025-08-08 17:00	2025-08-01 17:00	2025-08-08 17:00	2025-08-01 17:00	2025-08-08 17:00	2025-08-01 17:00	2025-08-08 17:00				PT_Normal					VisrkjCRm2ubUNuPbkMwVi				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	50	1	5465	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-50	Primary Frame Components				80	0	0	0	80	0	0	0				2025-08-05 17:00	2025-08-19 17:00	2025-08-19 17:00	2025-08-05 17:00	2025-08-19 17:00	2025-08-05 17:00	2025-08-19 17:00	2025-08-05 17:00	2025-08-19 17:00				PT_Normal					EUjtmESQybkctUuwFetwEU				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	51	1	5466	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-51	Secondary Support Structure				120	0	0	0	120	0	0	0				2025-08-19 17:00	2025-09-09 17:00	2025-09-09 17:00	2025-08-19 17:00	2025-09-09 17:00	2025-08-19 17:00	2025-09-09 17:00	2025-08-19 17:00	2025-09-09 17:00				PT_Normal					FHOnkScLS6SSV3ML8G8S3Q				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	52	1	5467	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-52	Connection Systems Assembly				60	0	0	0	60	0	0	0				2025-08-19 17:00	2025-08-29 13:00	2025-08-29 13:00	2025-08-19 17:00	2025-08-29 13:00	2025-08-19 17:00	2025-08-29 13:00	2025-08-19 17:00	2025-08-29 13:00				PT_Normal					DpP7ynrQkaLWepFhY5jWQD				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	53	1	5468	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-53	Frame Bracing Elements				8	0	0	0	8	0	0	0				2025-09-09 17:00	2025-09-10 17:00	2025-09-10 17:00	2025-09-09 17:00	2025-09-10 17:00	2025-09-09 17:00	2025-09-10 17:00	2025-09-09 17:00	2025-09-10 17:00				PT_Normal					iuBh2TLbQMehBoaJ1M4rwi				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	54	1	5469	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-54	Wind Resistance Reinforcements				8	0	0	0	8	0	0	0				2025-09-10 17:00	2025-09-11 17:00	2025-09-11 17:00	2025-09-10 17:00	2025-09-11 17:00	2025-09-10 17:00	2025-09-11 17:00	2025-09-10 17:00	2025-09-11 17:00				PT_Normal					z9lyzCsJQbSDwPG4ReeUwz				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	55	1	5470	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-55	Thermal Break Components				120	0	0	0	120	0	0	0				2025-09-10 17:00	2025-10-01 17:00	2025-10-01 17:00	2025-09-10 17:00	2025-10-01 17:00	2025-09-10 17:00	2025-10-01 17:00	2025-09-10 17:00	2025-10-01 17:00				PT_Normal					yfxg5XySsk7QeFTh0AXwyf				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	56	1	5472	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-56	Wall Panel Installation				24	0	0	0	24	0	0	0				2025-10-01 17:00	2025-10-06 17:00	2025-10-06 17:00	2025-10-01 17:00	2025-10-06 17:00	2025-10-01 17:00	2025-10-06 17:00	2025-10-01 17:00	2025-10-06 17:00				PT_Normal					nmLIf9SNSCyjEbomOBz3wn				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	57	1	5473	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-57	Roof System Components				160	0	0	0	160	0	0	0				2025-10-06 17:00	2025-11-03 17:00	2025-11-03 17:00	2025-10-06 17:00	2025-11-03 17:00	2025-10-06 17:00	2025-11-03 17:00	2025-10-06 17:00	2025-11-03 17:00				PT_Normal					FpEV5f8wSR4j2i5CkaWQQF				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	58	1	5474	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-58	Weather Sealing Elements				40	0	0	0	40	0	0	0				2025-10-06 17:00	2025-10-13 17:00	2025-10-13 17:00	2025-10-06 17:00	2025-10-13 17:00	2025-10-06 17:00	2025-10-13 17:00	2025-10-06 17:00	2025-10-13 17:00				PT_Normal					MOMGJddRfu2fDXMAkZTnAM				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	59	1	5475	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-59	Water Runoff Management				48	0	0	0	48	0	0	0				2025-10-13 17:00	2025-10-21 17:00	2025-10-21 17:00	2025-10-13 17:00	2025-10-21 17:00	2025-10-13 17:00	2025-10-21 17:00	2025-10-13 17:00	2025-10-21 17:00				PT_Normal					e8rjdNTyTdmzOqHacVcjrg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	60	1	5476	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-60	Exterior Finish Application				24	0	0	0	24	0	0	0				2025-10-21 17:00	2025-10-24 17:00	2025-10-24 17:00	2025-10-21 17:00	2025-10-24 17:00	2025-10-21 17:00	2025-10-24 17:00	2025-10-21 17:00	2025-10-24 17:00				PT_Normal					BDDXsKx1Slz5JJ700LyTAB				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	61	1	5477	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-61	Natural Light Integration				24	0	0	0	24	0	0	0				2025-10-07 17:00	2025-10-10 17:00	2025-10-10 17:00	2025-10-07 17:00	2025-10-10 17:00	2025-10-07 17:00	2025-10-10 17:00	2025-10-07 17:00	2025-10-10 17:00				PT_Normal					jLakcuJwT569ItSzVKhoqw				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	62	1	5479	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-62	Interior Wall Lining				8	0	0	0	8	0	0	0				2025-10-06 17:00	2025-10-07 17:00	2025-10-07 17:00	2025-10-06 17:00	2025-10-07 17:00	2025-10-06 17:00	2025-10-07 17:00	2025-10-06 17:00	2025-10-07 17:00				PT_Normal					9Afsg5SRROK65fY1F8BaQ9				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	63	1	5480	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-63	Floor System Components				40	0	0	0	40	0	0	0				2025-10-06 17:00	2025-10-13 17:00	2025-10-13 17:00	2025-10-06 17:00	2025-10-13 17:00	2025-10-06 17:00	2025-10-13 17:00	2025-10-06 17:00	2025-10-13 17:00				PT_Normal					n9VsbbWjQFKMXMvOPAQPVg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	64	1	5481	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-64	Emergency Equipment Mounts				40	0	0	0	40	0	0	0				2025-10-13 17:00	2025-10-20 17:00	2025-10-20 17:00	2025-10-13 17:00	2025-10-20 17:00	2025-10-13 17:00	2025-10-20 17:00	2025-10-13 17:00	2025-10-20 17:00				PT_Normal					oWmBYeppR8qmDYBv2lJVTw				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	65	1	5482	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-65	Ventilation System				32	0	0	0	32	0	0	0				2025-10-13 17:00	2025-10-17 17:00	2025-10-17 17:00	2025-10-13 17:00	2025-10-17 17:00	2025-10-13 17:00	2025-10-17 17:00	2025-10-13 17:00	2025-10-17 17:00				PT_Normal					IbSlctdxQPqLfM9N6GzNDg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	66	1	5483	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-66	Condensation Management System				16	0	0	0	16	0	0	0				2025-10-13 17:00	2025-10-15 17:00	2025-10-15 17:00	2025-10-13 17:00	2025-10-15 17:00	2025-10-13 17:00	2025-10-15 17:00	2025-10-13 17:00	2025-10-15 17:00				PT_Normal					Y2X0laCUSHVDDvCPcpwY2X				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	67	1	5485	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-67	Sensitive Moss Temporary Relocation				16	0	0	0	16	0	0	0				2025-06-25 17:00	2025-06-27 17:00	2025-06-27 17:00	2025-06-25 17:00	2025-06-27 17:00	2025-06-25 17:00	2025-06-27 17:00	2025-06-25 17:00	2025-06-27 17:00				PT_Normal					LFsrzJ3Tqm5sAXwisoqFQL				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	68	1	5486	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-68	Ground Protection Measures				40	0	0	0	40	0	0	0				2025-06-18 17:00	2025-06-25 17:00	2025-06-25 17:00	2025-06-18 17:00	2025-06-25 17:00	2025-06-18 17:00	2025-06-25 17:00	2025-06-18 17:00	2025-06-25 17:00				PT_Normal					LNlcobD6T92AkPU481RrMA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	69	1	5487	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-69	Waste Management System				80	0	0	0	80	0	0	0				2025-06-27 17:00	2025-07-11 17:00	2025-07-11 17:00	2025-06-27 17:00	2025-07-11 17:00	2025-06-27 17:00	2025-07-11 17:00	2025-06-27 17:00	2025-07-11 17:00				PT_Normal					B3MyjY3MSqe3KnBFfa4Jyg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	70	1	5488	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-70	Environmental Monitoring Setup				16	0	0	0	16	0	0	0				2025-07-11 17:00	2025-07-15 17:00	2025-07-15 17:00	2025-07-11 17:00	2025-07-15 17:00	2025-07-11 17:00	2025-07-15 17:00	2025-07-11 17:00	2025-07-15 17:00				PT_Normal					g0TdFIXHQyyJUkni3ebX8Q				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	71	1	5489	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-71	Post-Construction Restoration Elements				40	0	0	0	40	0	0	0				2025-10-31 17:00	2025-11-07 17:00	2025-11-07 17:00	2025-10-31 17:00	2025-11-07 17:00	2025-10-31 17:00	2025-11-07 17:00	2025-10-31 17:00	2025-11-07 17:00				PT_Normal					BTpD0IHRka4zbNvEjZSgBT				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	72	1	5491	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-72	Lift Schedule Coordination				8	0	0	0	8	0	0	0				2025-07-17 17:00	2025-07-18 17:00	2025-07-18 17:00	2025-07-17 17:00	2025-07-18 17:00	2025-07-17 17:00	2025-07-18 17:00	2025-07-17 17:00	2025-07-18 17:00				PT_Normal					qWPlgrQpTRyVDmNuyKl44Q				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	73	1	5492	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-73	Load Configuration Documentation				16	0	0	0	16	0	0	0				2025-06-18 17:00	2025-06-20 17:00	2025-06-20 17:00	2025-06-18 17:00	2025-06-20 17:00	2025-06-18 17:00	2025-06-20 17:00	2025-06-18 17:00	2025-06-20 17:00				PT_Normal					GCTiiOaQwynsF9YBV6fQGC				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	74	1	5493	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-74	Weather Contingency Plan				24	0	0	0	24	0	0	0				2025-08-06 17:00	2025-08-11 17:00	2025-08-11 17:00	2025-08-06 17:00	2025-08-11 17:00	2025-08-06 17:00	2025-08-11 17:00	2025-08-06 17:00	2025-08-11 17:00				PT_Normal					JtXwo7foToqa9CbgSxAStg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	75	1	5494	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-75	Safety Protocol Framework				8	0	0	0	8	0	0	0				2025-08-06 17:00	2025-08-07 17:00	2025-08-07 17:00	2025-08-06 17:00	2025-08-07 17:00	2025-08-06 17:00	2025-08-07 17:00	2025-08-06 17:00	2025-08-07 17:00				PT_Normal					obkOPgbRrqu7m4j1UuXAgo				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	76	1	5495	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-76	Component Sequencing Strategy				8	0	0	0	8	0	0	0				2025-08-06 17:00	2025-08-07 17:00	2025-08-07 17:00	2025-08-06 17:00	2025-08-07 17:00	2025-08-06 17:00	2025-08-07 17:00	2025-08-06 17:00	2025-08-07 17:00				PT_Normal					rbatQmxnR3qa5WWH58ZAwr				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	77	1	5498	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-77	Wind Load Performance Assessment				8	0	0	0	8	0	0	0				2025-09-12 13:00	2025-09-15 13:00	2025-09-15 13:00	2025-09-12 13:00	2025-09-15 13:00	2025-09-12 13:00	2025-09-15 13:00	2025-09-12 13:00	2025-09-15 13:00				PT_Normal					jOkvUgLeQqW3iKl53UrhCw				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	78	1	5499	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-78	Thermal Resistance Verification				8	0	0	0	8	0	0	0				2025-10-13 17:00	2025-10-14 17:00	2025-10-14 17:00	2025-10-13 17:00	2025-10-14 17:00	2025-10-13 17:00	2025-10-14 17:00	2025-10-13 17:00	2025-10-14 17:00				PT_Normal					iqoz4YK0RoSNX2GAauargi				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	79	1	5500	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-79	Water Ingress Testing				8	0	0	0	8	0	0	0				2025-10-13 17:00	2025-10-14 17:00	2025-10-14 17:00	2025-10-13 17:00	2025-10-14 17:00	2025-10-13 17:00	2025-10-14 17:00	2025-10-13 17:00	2025-10-14 17:00				PT_Normal					5A0v7GToTceMeXql3eacKw				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	80	1	5501	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-80	Structural Stability Evaluation				80	0	0	0	80	0	0	0				2025-08-29 13:00	2025-09-12 13:00	2025-09-12 13:00	2025-08-29 13:00	2025-09-12 13:00	2025-08-29 13:00	2025-09-12 13:00	2025-08-29 13:00	2025-09-12 13:00				PT_Normal					bhuo63IxRUyL7hANrJBG1Q				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	81	1	5503	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-81	Emergency Access Verification				8	0	0	0	8	0	0	0				2025-10-20 17:00	2025-10-21 17:00	2025-10-21 17:00	2025-10-20 17:00	2025-10-21 17:00	2025-10-20 17:00	2025-10-21 17:00	2025-10-20 17:00	2025-10-21 17:00				PT_Normal					porkpbm2Rnyy0xDltrlQpo				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	82	1	5504	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-82	Interior Environment Monitoring				40	0	0	0	40	0	0	0				2025-10-15 17:00	2025-10-22 17:00	2025-10-22 17:00	2025-10-15 17:00	2025-10-22 17:00	2025-10-15 17:00	2025-10-22 17:00	2025-10-15 17:00	2025-10-22 17:00				PT_Normal					fscOmkFSRrOZn5DF6YEQfs				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	83	1	5505	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-83	Ventilation Performance Assessment				56	0	0	0	56	0	0	0				2025-10-17 17:00	2025-10-28 17:00	2025-10-28 17:00	2025-10-17 17:00	2025-10-28 17:00	2025-10-17 17:00	2025-10-28 17:00	2025-10-17 17:00	2025-10-28 17:00				PT_Normal					bA2fsUTQiVGi2jcdDdmgbA				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	84	1	5506	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-84	Shelter Capacity Validation				8	0	0	0	8	0	0	0				2025-10-07 17:00	2025-10-08 17:00	2025-10-08 17:00	2025-10-07 17:00	2025-10-08 17:00	2025-10-07 17:00	2025-10-08 17:00	2025-10-07 17:00	2025-10-08 17:00				PT_Normal					nvye3lPSy2zCmIABoPBwnv				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	85	1	5509	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-85	Shelter User Guidelines				24	0	0	0	24	0	0	0				2025-10-08 17:00	2025-10-13 17:00	2025-10-13 17:00	2025-10-08 17:00	2025-10-13 17:00	2025-10-08 17:00	2025-10-13 17:00	2025-10-08 17:00	2025-10-13 17:00				PT_Normal					gF2BogdSdakL5JlWCNJywg				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	86	1	5510	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-86	Maintenance Protocol Documentation				40	0	0	0	40	0	0	0				2025-09-12 13:00	2025-09-19 13:00	2025-09-19 13:00	2025-09-12 13:00	2025-09-19 13:00	2025-09-12 13:00	2025-09-19 13:00	2025-09-12 13:00	2025-09-19 13:00				PT_Normal					ifTNXyWPTeygcXfOUP0Sag				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	87	1	5511	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-87	Emergency Response Procedures				24	0	0	0	24	0	0	0				2025-10-21 17:00	2025-10-24 17:00	2025-10-24 17:00	2025-10-21 17:00	2025-10-24 17:00	2025-10-21 17:00	2025-10-24 17:00	2025-10-21 17:00	2025-10-24 17:00				PT_Normal					pR0Enl0AS9Cmfs35cvQrQQ				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	88	1	5512	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-88	Inspection Schedule Framework				40	0	0	0	40	0	0	0				2025-10-13 17:00	2025-10-20 17:00	2025-10-20 17:00	2025-10-13 17:00	2025-10-20 17:00	2025-10-13 17:00	2025-10-20 17:00	2025-10-13 17:00	2025-10-20 17:00				PT_Normal					hhwxnFuQ9WN2L8mAncnKwh				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	89	1	5514	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-89	Final Inspection Records				72	0	0	0	72	0	0	0				2025-10-20 17:00	2025-10-31 17:00	2025-10-31 17:00	2025-10-20 17:00	2025-10-31 17:00	2025-10-20 17:00	2025-10-31 17:00	2025-10-20 17:00	2025-10-31 17:00				PT_Normal					Rj2y7KMLRHSW3Oxk6eEMnQ				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	90	1	5515	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-90	Stakeholder Sign-off Collection				24	0	0	0	24	0	0	0				2025-11-07 17:00	2025-11-12 17:00	2025-11-12 17:00	2025-11-07 17:00	2025-11-12 17:00	2025-11-07 17:00	2025-11-12 17:00	2025-11-07 17:00	2025-11-12 17:00				PT_Normal					MPtIBc25TNVpMLs07ggvAM				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	91	1	5516	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-91	Environmental Compliance Report				16	0	0	0	16	0	0	0				2025-11-07 17:00	2025-11-11 17:00	2025-11-11 17:00	2025-11-07 17:00	2025-11-11 17:00	2025-11-07 17:00	2025-11-11 17:00	2025-11-07 17:00	2025-11-11 17:00				PT_Normal					x0Jr4KnPSz2MeW5rbQ0zwx				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	92	1	5517	1	0	N	1	N	N	CP_Drtn	TT_Task	DT_FixedDrtn	TK_NotStart	ACT-92	Project Completion Certificate				8	0	0	0	8	0	0	0				2025-11-12 17:00	2025-11-13 17:00	2025-11-13 17:00	2025-11-12 17:00	2025-11-13 17:00	2025-11-12 17:00	2025-11-13 17:00	2025-11-12 17:00	2025-11-13 17:00				PT_Normal					pw3Ht7lsTOioTlyWSaH4qQ				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%R	93	1	5517	1	0	N	1	N	N	CP_Drtn	TT_FinMile	DT_FixedDrtn	TK_NotStart	ACT-93	Project completion					0	0	0		0	0	0				2025-11-13 17:00	2025-11-13 17:00	2025-11-13 17:00	2025-11-13 17:00	2025-11-13 17:00	2025-11-13 17:00	2025-11-13 17:00	2025-11-13 17:00	2025-11-13 17:00				PT_Normal					1dKvK160QhCGxAKL6bKEZw				N	0	0			2025-05-13 20:32	2025-05-13 20:32	NotPrmUser	NotPrmUser	
+%T	TASKPRED
+%F	task_pred_id	task_id	pred_task_id	proj_id	pred_proj_id	pred_type	lag_hr_cnt	comments	float_path	aref	arls
+%R	0	2	1	1	1	PR_FS	0				
+%R	1	3	2	1	1	PR_FS	0				
+%R	2	4	1	1	1	PR_FS	0				
+%R	3	5	4	1	1	PR_FS	0				
+%R	4	6	1	1	1	PR_FS	0				
+%R	5	7	6	1	1	PR_FS	0				
+%R	6	8	7	1	1	PR_FS	0				
+%R	7	9	8	1	1	PR_FS	0				
+%R	8	10	19	1	1	PR_FS	0				
+%R	9	11	21	1	1	PR_FS	0				
+%R	10	11	20	1	1	PR_FS	0				
+%R	11	11	19	1	1	PR_FS	0				
+%R	12	12	3	1	1	PR_FS	0				
+%R	13	12	9	1	1	PR_FS	0				
+%R	14	13	10	1	1	PR_FS	0				
+%R	15	13	12	1	1	PR_FS	0				
+%R	16	13	11	1	1	PR_FS	0				
+%R	17	14	3	1	1	PR_FS	0				
+%R	18	14	5	1	1	PR_FS	0				
+%R	19	15	13	1	1	PR_FS	0				
+%R	20	16	13	1	1	PR_FS	0				
+%R	21	17	22	1	1	PR_FS	0				
+%R	22	17	23	1	1	PR_FS	0				
+%R	23	17	19	1	1	PR_FS	0				
+%R	24	17	20	1	1	PR_FS	0				
+%R	25	18	16	1	1	PR_FS	0				
+%R	26	18	15	1	1	PR_FS	0				
+%R	27	18	17	1	1	PR_FS	0				
+%R	28	22	14	1	1	PR_FS	0				
+%R	29	24	14	1	1	PR_FS	0				
+%R	30	25	14	1	1	PR_FS	0				
+%R	31	27	8	1	1	PR_FS	0				
+%R	32	27	2	1	1	PR_FS	0				
+%R	33	28	9	1	1	PR_FS	0				
+%R	34	29	20	1	1	PR_FS	0				
+%R	35	29	19	1	1	PR_FS	0				
+%R	36	29	9	1	1	PR_FS	0				
+%R	37	30	8	1	1	PR_FS	0				
+%R	38	30	2	1	1	PR_FS	0				
+%R	39	31	5	1	1	PR_FS	0				
+%R	40	31	30	1	1	PR_FS	0				
+%R	41	32	31	1	1	PR_FS	0				
+%R	42	33	31	1	1	PR_FS	0				
+%R	43	34	12	1	1	PR_FS	0				
+%R	44	35	30	1	1	PR_FS	0				
+%R	45	36	35	1	1	PR_FS	0				
+%R	46	37	36	1	1	PR_FS	0				
+%R	47	38	13	1	1	PR_FS	0				
+%R	48	39	8	1	1	PR_FS	0				
+%R	49	40	39	1	1	PR_FS	0				
+%R	50	41	14	1	1	PR_FS	0				
+%R	51	42	32	1	1	PR_FS	0				
+%R	52	43	42	1	1	PR_FS	0				
+%R	53	44	67	1	1	PR_FS	0				
+%R	54	45	29	1	1	PR_FS	0				
+%R	55	45	44	1	1	PR_FS	0				
+%R	56	46	44	1	1	PR_FS	0				
+%R	57	47	46	1	1	PR_FS	0				
+%R	58	47	45	1	1	PR_FS	0				
+%R	59	48	47	1	1	PR_FS	0				
+%R	60	49	46	1	1	PR_FS	0				
+%R	61	50	48	1	1	PR_FS	0				
+%R	62	51	50	1	1	PR_FS	0				
+%R	63	52	50	1	1	PR_FS	0				
+%R	64	53	51	1	1	PR_FS	0				
+%R	65	54	53	1	1	PR_FS	0				
+%R	66	55	53	1	1	PR_FS	0				
+%R	67	56	55	1	1	PR_FS	0				
+%R	68	57	56	1	1	PR_FS	0				
+%R	69	58	56	1	1	PR_FS	0				
+%R	70	59	58	1	1	PR_FS	0				
+%R	71	60	59	1	1	PR_FS	0				
+%R	72	61	62	1	1	PR_FS	0				
+%R	73	62	56	1	1	PR_FS	0				
+%R	74	63	56	1	1	PR_FS	0				
+%R	75	64	63	1	1	PR_FS	0				
+%R	76	65	63	1	1	PR_FS	0				
+%R	77	66	63	1	1	PR_FS	0				
+%R	78	67	68	1	1	PR_FS	0				
+%R	79	67	10	1	1	PR_FS	0				
+%R	80	68	11	1	1	PR_FS	0				
+%R	81	69	67	1	1	PR_FS	0				
+%R	82	70	69	1	1	PR_FS	0				
+%R	83	71	89	1	1	PR_FS	0				
+%R	84	72	33	1	1	PR_FS	0				
+%R	85	73	6	1	1	PR_FS	0				
+%R	86	74	18	1	1	PR_FS	0				
+%R	87	75	18	1	1	PR_FS	0				
+%R	88	76	18	1	1	PR_FS	0				
+%R	89	77	80	1	1	PR_FS	0				
+%R	90	78	63	1	1	PR_FS	0				
+%R	91	79	58	1	1	PR_FS	0				
+%R	92	80	52	1	1	PR_FS	0				
+%R	93	81	64	1	1	PR_FS	0				
+%R	94	82	66	1	1	PR_FS	0				
+%R	95	83	65	1	1	PR_FS	0				
+%R	96	84	62	1	1	PR_FS	0				
+%R	97	85	84	1	1	PR_FS	0				
+%R	98	85	25	1	1	PR_FS	0				
+%R	99	86	80	1	1	PR_FS	0				
+%R	100	87	86	1	1	PR_FS	0				
+%R	101	87	81	1	1	PR_FS	0				
+%R	102	88	85	1	1	PR_FS	0				
+%R	103	88	86	1	1	PR_FS	0				
+%R	104	89	88	1	1	PR_FS	0				
+%R	105	90	71	1	1	PR_FS	0				
+%R	106	91	82	1	1	PR_FS	0				
+%R	107	91	79	1	1	PR_FS	0				
+%R	108	91	71	1	1	PR_FS	0				
+%R	109	91	83	1	1	PR_FS	0				
+%R	110	92	90	1	1	PR_FS	0				
+%R	111	92	91	1	1	PR_FS	0				
+%R	112	93	24	1	1	PR_FS	0				
+%R	113	93	26	1	1	PR_FS	0				
+%R	114	93	27	1	1	PR_FS	0				
+%R	115	93	28	1	1	PR_FS	0				
+%R	116	93	34	1	1	PR_FS	0				
+%R	117	93	37	1	1	PR_FS	0				
+%R	118	93	38	1	1	PR_FS	0				
+%R	119	93	40	1	1	PR_FS	0				
+%R	120	93	41	1	1	PR_FS	0				
+%R	121	93	43	1	1	PR_FS	0				
+%R	122	93	49	1	1	PR_FS	0				
+%R	123	93	54	1	1	PR_FS	0				
+%R	124	93	57	1	1	PR_FS	0				
+%R	125	93	60	1	1	PR_FS	0				
+%R	126	93	61	1	1	PR_FS	0				
+%R	127	93	70	1	1	PR_FS	0				
+%R	128	93	72	1	1	PR_FS	0				
+%R	129	93	73	1	1	PR_FS	0				
+%R	130	93	74	1	1	PR_FS	0				
+%R	131	93	75	1	1	PR_FS	0				
+%R	132	93	76	1	1	PR_FS	0				
+%R	133	93	77	1	1	PR_FS	0				
+%R	134	93	78	1	1	PR_FS	0				
+%R	135	93	87	1	1	PR_FS	0				
+%R	136	93	92	1	1	PR_FS	0				
+%E

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})(window,document,"script","dataLayer","GTM-WXM2VXQH");</script>
+    <!-- End Google Tag Manager -->
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Spec — Petri Net → SMC → WBS Generator</title>
+<style>
+/* ----------  CRITICAL CSS  ---------- */
+:root{--bg:#f8fafc;--fg:#0f172a;--accent:#0ea5e9;--accent-fg:#f0f9ff;font-size:16px}
+html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg);}
+h1,h2,h3{font-weight:600;margin:0 0 .25em}
+h1{font-size:1.9rem}h2{font-size:1.3rem}h3{font-size:1.1rem}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+code,pre{font-family:ui-monospace,Menlo,Consolas,monospace}
+pre{background:#e2e8f0;border-radius:.25rem;padding:.75rem;overflow:auto}
+.container{max-width:1000px;margin:auto;padding:1rem}
+.min-h-64{min-height:16rem}
+.flex{display:flex}.gap{gap:.5rem}
+.badge{display:inline-block;background:var(--accent);color:var(--accent-fg);padding:.15rem .4rem;border-radius:.25rem;font-size:.7rem}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-fg);padding:.4rem .8rem;border:none;border-radius:.25rem;cursor:pointer}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.tabs{display:flex;flex-wrap:wrap;gap:.25rem;margin:.5rem 0}
+.tab{padding:.35rem .7rem;border:1px solid var(--accent);border-radius:.25rem;cursor:pointer}
+.tab.active{background:var(--accent);color:var(--accent-fg)}
+/* reserve space early to avoid CLS */
+#vis,#smcVis,#wbsVis{min-height:12rem;border:1px dashed #94a3b8;border-radius:.25rem;display:flex;align-items:center;justify-content:center}
+/* toast */
+.toast{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#334155;color:#f8fafc;padding:.6rem 1rem;border-radius:.3rem;font-size:.8rem;box-shadow:0 1px 4px rgba(0,0,0,.14);opacity:0;transition:opacity .2s ease}
+.toast.show{opacity:1}
+/* ----------  END CRITICAL ---------- */
+</style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WXM2VXQH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<p><a href="../project-examples.html">Back to Project Examples</a></p>
+<div class="container">
+<h1>Petri Net → SMC → WBS Generator<br><span class="badge">Toy Shed Build Example</span></h1>
+
+<noscript><p style="color:#b91c1c">Interactive visualisation requires JavaScript.</p></noscript>
+
+<p>This page demonstrates how a small shed building project can be modelled as a Petri net. Different token <em>markings</em> correspond to alternative scheduling options. Selecting a marking below generates a chain of SMC morphisms and a compatible work breakdown structure.</p>
+
+<!-- =========================================================
+     0. SMOKE-WATCH & FALLBACK
+========================================================= -->
+<div id="specRoot" class="min-h-64" data-timeout="3000">
+  Loading interactive spec…
+</div>
+
+</div> <!-- /container -->
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script>
+/* ==========================================================
+   BOOT
+========================================================== */
+(function(){
+  const root=document.getElementById('specRoot');
+  const toastEl=document.getElementById('toast');
+  root.dataset.smoke='pending';
+  const showToast=(msg)=>{toastEl.textContent=msg;toastEl.classList.add('show');setTimeout(()=>toastEl.classList.remove('show'),2600);};
+  function fallback(reason){
+    console.error('Fallback:',reason);
+    showToast('Interactive spec failed: '+reason);
+    root.innerHTML='<p style="padding:1rem">Interactive components failed to load. See console for details.</p>';
+    root.setAttribute('data-smoke','error');
+    root.dataset.smoke='error';
+    window.__canvasStatus='fallback';
+  }
+
+  /* watchdog */
+  const timeout=root.dataset.timeout?parseInt(root.dataset.timeout,10):3000;
+  let elapsed=0;
+  const iv=setInterval(()=>{
+    elapsed+=500;
+    if(root.dataset.smoke==='ok'){clearInterval(iv);}
+    if(elapsed>=timeout){clearInterval(iv);fallback('timeout');}
+  },500);
+
+  /* main init */
+  try{
+
+/* ----------  DATA MODEL ---------- */
+const dataModel={
+  schema:{
+    places:["Start","SiteCleared","FoundationReady","MaterialsReady","FloorBuilt","WallsBuilt","RoofOn","Inspected","ShedComplete"],
+    transitions:["clearSite","prepareFoundation","gatherMaterials","buildFloor","buildWalls","installRoof","inspect","finish"],
+    arcs:[
+      {from:"Start",to:"clearSite"},{from:"clearSite",to:"SiteCleared"},
+      {from:"SiteCleared",to:"prepareFoundation"},{from:"prepareFoundation",to:"FoundationReady"},
+      {from:"SiteCleared",to:"gatherMaterials"},{from:"gatherMaterials",to:"MaterialsReady"},
+      {from:"FoundationReady",to:"buildFloor"},{from:"MaterialsReady",to:"buildFloor"},{from:"buildFloor",to:"FloorBuilt"},
+      {from:"FloorBuilt",to:"buildWalls"},{from:"buildWalls",to:"WallsBuilt"},
+      {from:"WallsBuilt",to:"installRoof"},{from:"FloorBuilt",to:"installRoof"},{from:"installRoof",to:"RoofOn"},
+      {from:"RoofOn",to:"inspect"},{from:"inspect",to:"Inspected"},
+      {from:"Inspected",to:"finish"},{from:"finish",to:"ShedComplete"}
+    ]
+  },
+  markings:{
+    sequential:{Start:1},
+    parallel:{Start:2},
+    accelerated:{Start:2,MaterialsReady:1}
+  },
+  durations:{
+    clearSite:1,
+    prepareFoundation:2,
+    gatherMaterials:1,
+    buildFloor:3,
+    buildWalls:3,
+    installRoof:2,
+    inspect:1,
+    finish:1
+  }
+};
+
+/* ----------  HELPERS ---------- */
+function qs(s,ctx=document){return ctx.querySelector(s);} 
+const svgNS='http://www.w3.org/2000/svg';
+function elSVG(tag,attrs){const e=document.createElementNS(svgNS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
+function clear(node){while(node.firstChild)node.removeChild(node.firstChild);}
+
+function drawPetri(container,marking){
+  clear(container);
+  const {places,transitions,arcs}=dataModel.schema;
+  const W=800,H=200;container.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const pos={};
+  // simple layout line
+  places.forEach((p,i)=>{pos[p]={x:90*(i%9)+40,y:i<5?40:140};});
+  transitions.forEach((t,i)=>{pos[t]={x:90*i+40,y:90};});
+  // arcs
+  arcs.forEach(a=>{
+    const {from,to}=a;
+    const p1=pos[from],p2=pos[to];
+    container.appendChild(elSVG('line',{x1:p1.x,y1:p1.y,x2:p2.x,y2:p2.y,stroke:'#94a3b8','stroke-width':2,'marker-end':'url(#arrow)'}));
+  });
+  // nodes
+  places.forEach(p=>{
+    const g=elSVG('g',{});const {x,y}=pos[p];
+    g.appendChild(elSVG('circle',{cx:x,cy:y,r:18,fill:'#f1f5f9',stroke:'#0ea5e9','stroke-width':2}));
+    const tokens=marking[p]||0;
+    if(tokens)g.appendChild(elSVG('text',{x, y:y+4,'text-anchor':'middle',fill:'#0f172a','font-size':'12'})).textContent=tokens;
+    container.appendChild(g);
+  });
+  transitions.forEach(t=>{
+    const g=elSVG('g',{});const {x,y}=pos[t];
+    g.appendChild(elSVG('rect',{x:x-8,y:y-20,width:16,height:40,fill:'#0ea5e9'}));
+    container.appendChild(g);
+  });
+}
+
+function generateSMC(marking){
+  // compute sequence of reachable transitions via BFS
+  const {places,transitions,arcs}=dataModel.schema;
+  const inMap={},outMap={};
+  arcs.forEach(a=>{
+    if(transitions.includes(a.to)){
+      (inMap[a.to]||(inMap[a.to]=[])).push(a.from);
+    }else if(transitions.includes(a.from)){
+      (outMap[a.from]||(outMap[a.from]=[])).push(a.to);
+    }
+  });
+  const toKey=m=>places.map(p=>m[p]||0).join(',');
+  const visitedMarks=new Set();
+  const seenTrans=new Set();
+  const queue=[Object.assign({},marking)];
+  const seq=[];
+  while(queue.length){
+    const mark=queue.shift();
+    const k=toKey(mark);
+    if(visitedMarks.has(k))continue;
+    visitedMarks.add(k);
+    transitions.forEach(t=>{
+      if(seenTrans.has(t))return;
+      const ins=inMap[t]||[];
+      if(ins.every(p=>mark[p]>0)){
+        const outs=outMap[t]||[];
+        seq.push({step:t,from:ins.join('⊗'),to:outs.join('⊗')});
+        seenTrans.add(t);
+        const nm={...mark};
+        ins.forEach(p=>{nm[p]--;});
+        outs.forEach(p=>{nm[p]=(nm[p]||0)+1;});
+        queue.push(nm);
+      }
+    });
+  }
+  return seq;
+}
+function renderSMCTable(container,data){
+  clear(container);
+  const tbl=document.createElement('table');tbl.style.width='100%';tbl.style.borderCollapse='collapse';
+  tbl.innerHTML='<tr><th>Step</th><th>Domain</th><th>Codomain</th></tr>';
+  data.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${r.step}</td><td>${r.from}</td><td>${r.to}</td>`;
+    tbl.appendChild(tr);
+  });
+  container.appendChild(tbl);
+}
+function generateWBS(seq){
+  const tasks=[];
+  const produced={};
+  seq.forEach((tr,i)=>{
+    const id=String(i+1);
+    const inputs=tr.from?tr.from.split('⊗').filter(Boolean):[];
+    const parents=[...new Set(inputs.map(p=>produced[p]).filter(Boolean))];
+    tasks.push({id,label:tr.step,parent:parents.join(',')});
+    const outputs=tr.to?tr.to.split('⊗').filter(Boolean):[];
+    outputs.forEach(p=>{produced[p]=id;});
+  });
+  return tasks;
+}
+
+function renderWBS(container,list){
+  clear(container);
+  const ul=document.createElement('ul');ul.style.listStyle='none';
+  const map={};
+  list.forEach(item=>map[item.id]=item);
+  // build nesting
+  list.forEach(item=>{
+    if(!item.el){item.el=document.createElement('li');item.el.textContent=item.label;item.el.style.margin='.25rem 0';}
+    if(item.parent){
+      item.parent.split(',').forEach(pid=>{
+        const par=map[pid];
+        if(!par.sub){par.sub=document.createElement('ul');par.sub.style.listStyle='circle';par.el.appendChild(par.sub);}
+        par.sub.appendChild(item.el.cloneNode(true));
+      });
+    }
+  });
+  // attach top-level tasks
+  list.filter(i=>!i.parent).forEach(t=>ul.appendChild(t.el));
+  container.appendChild(ul);
+}
+
+function generateSchedule(tasks){
+  const start={},finish={},dur=dataModel.durations||{};
+  tasks.forEach(t=>{
+    const deps=t.parent?t.parent.split(','):[];
+    const st=Math.max(0,...deps.map(d=>finish[d]||0));
+    start[t.id]=st;
+    finish[t.id]=st+(dur[t.label]||1);
+  });
+  return tasks.map(t=>({label:t.label,start:start[t.id],finish:finish[t.id]}));
+}
+
+function renderSchedule(container,list){
+  clear(container);
+  const tbl=document.createElement('table');
+  tbl.style.width='100%';tbl.style.borderCollapse='collapse';
+  tbl.innerHTML='<tr><th>Task</th><th>Start</th><th>Finish</th></tr>';
+  list.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${r.label}</td><td>${r.start}</td><td>${r.finish}</td>`;
+    tbl.appendChild(tr);
+  });
+  container.appendChild(tbl);
+}
+
+/* ----------  UI RENDER ---------- */
+root.innerHTML=`
+<section>
+  <h2>1 · Interactive playground</h2>
+  <p>Select a <strong>marking</strong> to see how the same Petri net can generate distinct SMC morphism chains and WBS task structures.</p>
+  <div class="tabs" id="markTabs"></div>
+  <svg id="vis"></svg>
+  <h3>Generated SMC (Symmetric Monoidal Category) morphisms</h3>
+  <div id="smcVis"></div>
+  <h3>Derived WBS (Work Breakdown Structure)</h3>
+  <div id="wbsVis"></div>
+  <h3>Simple Schedule</h3>
+  <div id="schedVis"></div>
+</section>
+
+<section>
+  <h2>2 · Implementation spec</h2>
+  <details open><summary><strong>2.1 Data contracts (JSON)</strong></summary>
+  <pre>{
+  "schema": {
+    "places": ["P0","P1","P2", "..."],
+    "transitions": ["T1","T2", "..."],
+    "arcs":[{"from":"P0","to":"T1"}, {"from":"T1","to":"P1"}]
+  },
+  "markings":{
+    "scenarioName":{"P0":1,"P2":1}
+  }
+}</pre></details>
+
+  <details><summary><strong>2.2 Processing pipeline</strong></summary>
+  <ol>
+    <li><em>Marking selection</em> → token distribution map.</li>
+    <li>Run reachability firing sequence → JSON morphism chain.</li>
+    <li>Fold chain into SMC data structure (objects+morphisms).</li>
+    <li>Map morphisms to WBS tasks preserving dependencies.</li>
+    <li>Render Petri SVG, SMC table, WBS tree.</li>
+    <li>Calculate simple schedule from WBS and task durations.</li>
+  </ol></details>
+
+  <details><summary><strong>2.3 Algorithmic notes</strong></summary>
+    <ul>
+      <li>Reachability implemented via breadth-first search with marking multiset comparisons (bounded by user-defined max depth).</li>
+      <li>SMC objects cached to avoid duplication; morphisms typed.</li>
+      <li>WBS nodes inherit <code>parent</code> links from input places of a transition.</li>
+    </ul>
+  </details>
+
+  <details><summary><strong>2.4 Extensibility hooks</strong></summary>
+    <p>Provide ES modules <code>plugins/*.js</code> exposing <code>register({onMarking, onSMC, onWBS})</code> to augment rendering.</p>
+  </details>
+
+  <details><summary><strong>2.5 Build & runtime</strong></summary>
+  <ul>
+    <li>No external deps; pure ES2020.</li>
+    <li>To bundle, run <code>npm run build</code> (esbuild).</li>
+    <li>All diagrams rendered client-side; safe in static hosting.</li>
+  </ul></details>
+</section>
+
+<section>
+  <h2>3 · Glossary</h2>
+  <dl>
+    <dt>Petri net</dt><dd>Graphical model of concurrency with <em>places</em>, <em>tokens</em>, and <em>transitions</em>.</dd>
+    <dt>Marking</dt><dd>Distribution of tokens indicating a state.</dd>
+    <dt>SMC</dt><dd>Symmetric Monoidal Category capturing sequential &amp; parallel composition.</dd>
+    <dt>WBS</dt><dd>Hierarchical project task decomposition used in scheduling.</dd>
+    <dt>Schedule</dt><dd>Start and finish times computed from task durations and dependencies.</dd>
+  </dl>
+</section>
+`;
+  // tab UI
+  const tabBar=qs('#markTabs',root);
+  Object.keys(dataModel.markings).forEach((name,i)=>{
+    const t=document.createElement('div');t.textContent=name;t.className='tab'+(i==0?' active':'');
+    t.onclick=_=>{qsAll('.tab',tabBar).forEach(el=>el.classList.remove('active'));t.classList.add('active');update(name);};
+    tabBar.appendChild(t);
+  });
+  function qsAll(s,c=document){return Array.from(c.querySelectorAll(s));}
+
+  // draw arrow head
+  const svg=qs('#vis',root);
+  svg.appendChild(elSVG('defs',{})).innerHTML='<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>';
+
+  function update(markName){
+    const marking=dataModel.markings[markName];
+    drawPetri(svg,marking);
+    const seq=generateSMC(marking);
+    renderSMCTable(qs('#smcVis',root),seq);
+    const tasks=generateWBS(seq);
+    renderWBS(qs('#wbsVis',root),tasks);
+    renderSchedule(qs('#schedVis',root),generateSchedule(tasks));
+  }
+  update(Object.keys(dataModel.markings)[0]);
+
+  root.dataset.smoke='ok';
+  root.setAttribute('data-smoke','ok');
+  window.__canvasStatus='ready';
+
+  }catch(e){fallback(e);}
+})();
+</script>
+</body>
+</html>
