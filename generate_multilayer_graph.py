@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # Create a multilayer graph representation using a DiGraph
 G = nx.DiGraph()
@@ -76,8 +77,12 @@ def draw_multilayer_network(G, output_file="multilayer_graph.png"):
     plt.title("Multilayer Graph for Cliff Shed Project")
     plt.axis('off')
     plt.tight_layout()
-    plt.savefig(output_file)
-    print(f"Graph saved to {output_file}")
+    output_path = Path(output_file)
+    if not output_path.is_absolute():
+        output_path = Path(__file__).resolve().parent / output_path
+
+    plt.savefig(output_path)
+    print(f"Graph saved to {output_path}")
     print(f"Number of nodes: {G.number_of_nodes()}")
     print(f"Number of edges: {G.number_of_edges()}")
 
