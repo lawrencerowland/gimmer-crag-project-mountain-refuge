@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gimmer Crag Project Mountain Refuge</title>
+  <style>
+    :root {
+      --bg: #071013;
+      --panel: #102025;
+      --text: #eef6f4;
+      --muted: #a9bbb7;
+      --line: rgba(238, 246, 244, 0.16);
+      --accent: #7dd3c7;
+      --accent-strong: #f2c14e;
+      --shadow: rgba(0, 0, 0, 0.28);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    main {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: minmax(390px, 62vh) auto;
+    }
+
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: end;
+      padding: 28px;
+      isolation: isolate;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(7, 16, 19, 0.24), rgba(7, 16, 19, 0.92)),
+        url("input/processes%20to%20plans%20for%20Gimmer.PNG") center / cover;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(7, 16, 19, 0.92), rgba(7, 16, 19, 0.42), rgba(7, 16, 19, 0.85));
+      z-index: -1;
+    }
+
+    .hero-inner {
+      width: min(940px, 100%);
+      display: grid;
+      gap: 18px;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      color: #071013;
+      background: var(--accent-strong);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    h1 {
+      font-size: clamp(36px, 7vw, 74px);
+      line-height: 0.96;
+      margin: 0;
+      max-width: 820px;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      color: var(--muted);
+      max-width: 720px;
+      font-size: 18px;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: rgba(16, 32, 37, 0.82);
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 12px 30px var(--shadow);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #071013;
+      border-color: transparent;
+    }
+
+    .content {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .tile {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: var(--panel);
+      min-height: 152px;
+      display: grid;
+      align-content: space-between;
+      gap: 16px;
+    }
+
+    .tile h2 {
+      font-size: 18px;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+
+    .tile p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .tile a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 800px) {
+      main {
+        grid-template-rows: auto auto;
+      }
+
+      .hero {
+        min-height: 540px;
+        padding: 22px;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-label="Gimmer Crag mountain refuge project">
+      <div class="hero-inner">
+        <div class="eyebrow">Process-To-Plan Lab</div>
+        <h1>Gimmer Crag Project Mountain Refuge</h1>
+        <p class="lede">
+          A public workbench for making the route from process fragment to schedule witness to WBS
+          projection visible, caveated, and reusable.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="process-to-plan-lab/">Open the lab</a>
+          <a class="button" href="planning/process-to-plan-contract.md">Read the contract</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content" aria-label="Available views">
+      <article class="tile">
+        <div>
+          <h2>Mountain Refuge App</h2>
+          <p>Generate schedules, select candidates, and inspect the translation contract.</p>
+        </div>
+        <a href="apps/mountain-refuge-petri-wbs-demo/">Open app</a>
+      </article>
+      <article class="tile">
+        <div>
+          <h2>Graph View</h2>
+          <p>The earlier project-structure graph remains available as context.</p>
+        </div>
+        <a href="graph.html">Open graph</a>
+      </article>
+      <article class="tile">
+        <div>
+          <h2>Multilayer View</h2>
+          <p>The existing multilayer refuge view is kept alongside the lab.</p>
+        </div>
+        <a href="multilayer_graph.html">Open multilayer graph</a>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

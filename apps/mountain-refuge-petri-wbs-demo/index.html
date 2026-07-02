@@ -1,0 +1,1536 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Petri Net → SMC → WBS (Toy Project: Build a Mountain Refuge)</title>
+  <link rel="stylesheet" href="../../common.css" />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:#111827;
+      --panel2:#0f172a;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#38bdf8;
+      --accent2:#a78bfa;
+      --ok:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --line:#243244;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background:linear-gradient(180deg, #05070a, var(--bg));
+      color:var(--text);
+      font-family:var(--sans);
+      line-height:1.45;
+    }
+    a{color:var(--accent);}
+    .wrap{max-width:1200px;margin:0 auto;padding:28px 18px 60px;}
+    h1{font-size:28px;margin:0 0 10px;}
+    h2{font-size:20px;margin:28px 0 10px;}
+    h3{font-size:16px;margin:18px 0 8px;color:#e2e8f0;}
+    p{margin:8px 0;color:#e5e7eb;}
+    .muted{color:var(--muted);}
+    .pill{display:inline-block;padding:2px 10px;border-radius:999px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);color:#cfefff;font-size:12px;margin-right:8px;}
+    .grid{display:grid;gap:14px;}
+    .grid > *{min-width:0;}
+    .grid2{grid-template-columns: 1.25fr .75fr;}
+    @media (max-width: 980px){.grid2{grid-template-columns:1fr;}}
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(148,163,184,.15);
+      border-radius:14px;
+      padding:14px 14px 12px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      min-width:0;
+    }
+    .panel header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px;}
+    .panel header .title{font-weight:650;}
+    .panel header .subtitle{font-size:12px;color:var(--muted);}
+    .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+    .btn{
+      cursor:pointer;
+      user-select:none;
+      font-family:var(--sans);
+      font-size:13px;
+      color:var(--text);
+      background:rgba(56,189,248,.12);
+      border:1px solid rgba(56,189,248,.25);
+      padding:7px 10px;
+      border-radius:10px;
+      transition:.15s transform, .15s background;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(56,189,248,.18);}
+    .btn.secondary{background:rgba(167,139,250,.10);border-color:rgba(167,139,250,.25);}
+    .btn.secondary:hover{background:rgba(167,139,250,.16);}
+    .btn.ghost{background:transparent;border-color:rgba(148,163,184,.18);}
+    .btn.ghost:hover{background:rgba(148,163,184,.08);}
+    .btn.bad{background:rgba(251,113,133,.10);border-color:rgba(251,113,133,.25);}
+    .btn.bad:hover{background:rgba(251,113,133,.16);}
+    .btn.small{font-size:12px;padding:5px 8px;border-radius:9px;}
+    .kv{display:grid;grid-template-columns: 140px 1fr;gap:8px 12px;font-size:13px;margin-top:8px;}
+    .kv div:nth-child(odd){color:var(--muted);}
+    .code{
+      font-family:var(--mono);
+      font-size:12px;
+      background:rgba(0,0,0,.35);
+      border:1px solid rgba(148,163,184,.18);
+      border-radius:12px;
+      padding:10px;
+      overflow:auto;
+      overflow-wrap:anywhere;
+      white-space:pre;
+    }
+    .note{
+      font-size:12px;color:var(--muted);
+      border-left:3px solid rgba(56,189,248,.6);
+      padding:8px 10px;margin:10px 0;
+      background:rgba(56,189,248,.06);
+      border-radius:10px;
+    }
+    .badges{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 2px;}
+    .badge{
+      font-size:12px;border-radius:10px;padding:3px 8px;
+      border:1px solid rgba(148,163,184,.18);
+      color:#dbeafe;
+      background:rgba(148,163,184,.06);
+    }
+    .badge.ok{border-color:rgba(52,211,153,.25);background:rgba(52,211,153,.10);color:#d1fae5;}
+    .badge.warn{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.10);color:#fef3c7;}
+    .badge.bad{border-color:rgba(251,113,133,.25);background:rgba(251,113,133,.10);color:#ffe4e6;}
+    .twoCol{display:grid;grid-template-columns: 1fr 1fr;gap:14px;}
+    .twoCol > *{min-width:0;}
+    @media (max-width: 980px){.twoCol{grid-template-columns:1fr;}}
+    label{font-size:12px;color:var(--muted);}
+    input[type="number"], select{
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(148,163,184,.22);
+      color:var(--text);
+      padding:6px 8px;
+      border-radius:10px;
+      font-size:13px;
+      outline:none;
+      width:120px;
+    }
+    input[type="number"].small{width:84px;}
+    .list{
+      font-size:13px;
+      border:1px solid rgba(148,163,184,.15);
+      border-radius:12px;
+      overflow:hidden;
+    }
+    .list .item{
+      display:flex;justify-content:space-between;gap:10px;
+      padding:8px 10px;border-bottom:1px solid rgba(148,163,184,.10);
+      background:rgba(0,0,0,.20);
+    }
+    .list .item:last-child{border-bottom:none;}
+    .list .item .left{display:flex;gap:10px;align-items:center;}
+    .dot{width:10px;height:10px;border-radius:99px;background:rgba(148,163,184,.35);border:1px solid rgba(148,163,184,.35);}
+    .dot.ok{background:rgba(52,211,153,.65);border-color:rgba(52,211,153,.8);}
+    .dot.bad{background:rgba(251,113,133,.65);border-color:rgba(251,113,133,.8);}
+    .dot.warn{background:rgba(251,191,36,.65);border-color:rgba(251,191,36,.8);}
+    .svgWrap{border:1px solid rgba(148,163,184,.15);border-radius:14px;overflow:hidden;background:rgba(0,0,0,.25);}
+    svg text{font-family:var(--sans);}
+    .foot{
+      margin-top:22px;
+      border-top:1px solid rgba(148,163,184,.14);
+      padding-top:12px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .miniGrid{display:grid;grid-template-columns: 1fr 1fr;gap:10px;}
+    @media (max-width: 980px){.miniGrid{grid-template-columns:1fr;}}
+    .table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:12px;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,.15);
+    }
+    .table th, .table td{
+      padding:8px 10px;
+      border-bottom:1px solid rgba(148,163,184,.10);
+      text-align:left;
+    }
+    .table th{color:#cbd5e1;background:rgba(148,163,184,.06);font-weight:650;}
+    .table tr:last-child td{border-bottom:none;}
+    .split{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+    .spacer{flex:1;}
+    .smalltxt{font-size:12px;color:var(--muted);}
+    .kbd{font-family:var(--mono);font-size:11px;padding:1px 6px;border-radius:8px;border:1px solid rgba(148,163,184,.20);background:rgba(0,0,0,.28);color:#cbd5e1;}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.2s;}
+    .modal.open{opacity:1;pointer-events:auto;}
+    .modal .content{background:var(--panel2);border:1px solid rgba(148,163,184,.25);border-radius:14px;max-width:740px;width:92%;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.55);}
+    .modal .content .hd{padding:12px 16px;border-bottom:1px solid rgba(148,163,184,.15);display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .modal .content .hd h3{font-size:16px;font-weight:650;margin:0;}
+    .modal .content .bd{padding:16px;}
+    .modal .close{border:none;background:transparent;color:var(--accent);font-size:20px;font-weight:700;cursor:pointer;line-height:1;}
+    .contractTrace{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+    @media (max-width: 980px){.contractTrace{grid-template-columns:1fr;}}
+    .contractStep{
+      border:1px solid rgba(148,163,184,.15);
+      border-radius:12px;
+      padding:10px;
+      background:rgba(0,0,0,.18);
+      min-width:0;
+    }
+    .contractStep.wide{grid-column:1 / -1;}
+    .contractStep h4{margin:0 0 6px;font-size:13px;color:#e2e8f0;}
+    .contractStep p{font-size:12px;color:var(--muted);margin:4px 0;overflow-wrap:anywhere;}
+    .contractStep ul{margin:6px 0 0 18px;padding:0;color:var(--muted);font-size:12px;overflow-wrap:anywhere;}
+    .contractStep code{font-family:var(--mono);font-size:11px;color:#dbeafe;word-break:break-word;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p><a href="../../index.html">Back to app index</a></p>
+    <h1>Petri Net → SMC → WBS: a “tiny artifact” workflow (toy project: build a mountain refuge halfway up a mountain)</h1>
+    <p class="muted">
+      This page is a single-file, shareable demo: it contains (i) a Petri net that encodes the <em>physical logic</em> of a mountain-refuge build,
+      (ii) a timed simulator that turns <em>different markings / choices</em> into different schedules, and (iii) an “elementary WBS” view
+      derived from those schedules.
+    </p>
+
+    <div class="badges">
+      <span class="badge ok">1 file • runs offline</span>
+      <span class="badge">Petri net = “what’s allowed”</span>
+      <span class="badge">SMC term = “how it composes”</span>
+      <span class="badge">WBS = “how you package it”</span>
+    </div>
+    <div class="row" style="margin:10px 0 4px;">
+      <button class="btn secondary" data-explain="notes">Notes</button>
+      <span class="muted smalltxt">Quick explainer for the Petri net → SMC → WBS framing.</span>
+    </div>
+
+    <div class="panel">
+      <header>
+        <div>
+          <div class="title">How to use this affordance in <em>your</em> project</div>
+          <div class="subtitle">Make the Petri net the single source of truth; generate many WBS/schedules as views.</div>
+        </div>
+      </header>
+
+      <div class="miniGrid">
+        <div>
+          <h3>Step A — Write the project’s physical logic as a Petri net</h3>
+          <p class="muted">
+            Places represent “states/resources”; transitions represent “work”.
+            Tokens are your <em>marking</em> (what’s currently true / available).
+          </p>
+          <ul class="muted" style="margin:8px 0 0 18px;">
+            <li>Inputs to a transition = prerequisites/resources it needs.</li>
+            <li>Outputs = what becomes true when that work finishes.</li>
+            <li>Parallelism is <em>not an extra feature</em>—it’s just “multiple enabled transitions”.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Step B — Treat schedules as “executions” of that net</h3>
+          <p class="muted">
+            A schedule is a particular way of firing transitions over time:
+            different priorities, different resource tokens, different durations ⇒ different schedules,
+            all still compliant with the same physical logic.
+          </p>
+          <div class="note">
+            In the theory view, a Petri net presents a (commutative) symmetric monoidal category: markings behave like objects, firing sequences like morphisms.
+            That’s why “schedule alternatives” naturally show up as different composites / string diagrams.
+          </div>
+        </div>
+      </div>
+
+      <div class="miniGrid" style="margin-top:6px;">
+        <div>
+          <h3>Step C — Export and share as a runnable artifact</h3>
+          <p class="muted">
+            Two practical routes:
+          </p>
+          <ol class="muted" style="margin:8px 0 0 18px;">
+            <li><b>Julia route:</b> author the net in <span class="kbd">AlgebraicPetri.jl</span>, explore/compose/simulate, export a self-contained HTML from a notebook.</li>
+            <li><b>Browser route:</b> keep a tiny JSON net spec + a tiny JS viewer (like this file), publish on GitHub Pages or attach to tickets.</li>
+          </ol>
+        </div>
+        <div>
+          <h3>Step D — Make WBS a view, not the source</h3>
+          <p class="muted">
+            WBS becomes one <em>projection</em> of the same underlying process:
+            group the same transitions into phases/work packages,
+            and let each schedule produce a “time-respecting” WBS instance.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h2>1) The toy Petri net: build a mountain refuge halfway up a mountain</h2>
+
+    <div class="grid grid2">
+      <div class="panel">
+        <header>
+          <div>
+            <div class="title">Interactive Petri net</div>
+            <div class="subtitle">Click an enabled transition to fire it (instant / untimed).</div>
+          </div>
+          <div class="row">
+            <button class="btn ghost small" id="btnReset">Reset marking</button>
+            <button class="btn small" id="btnStepAuto">Auto-step (random)</button>
+            <button class="btn secondary small" id="btnAutoRoute" title="Run a known-good sequence from kickoff to open.">Auto-run example route</button>
+            <button class="btn bad small" id="btnResetAll">Reset + defaults</button>
+            <span class="muted smalltxt" id="autoRouteStatus"></span>
+          </div>
+        </header>
+
+        <div class="svgWrap">
+          <svg id="netSvg" viewBox="0 0 1360 520" width="100%" height="520" role="img" aria-label="Petri net diagram"></svg>
+        </div>
+
+        <div class="note">
+          Tip: The untimed firing view is about <b>reachability</b> (what markings are possible). The schedule generator below adds <b>durations</b> + <b>resource tokens</b>.
+        </div>
+      </div>
+
+      <div class="panel">
+        <header>
+          <div>
+            <div class="title">Marking + enabled work</div>
+            <div class="subtitle">The Petri net tells you what’s allowed <em>right now</em>.</div>
+          </div>
+        </header>
+
+        <div class="kv" id="markingKv"></div>
+
+        <h3 style="margin-top:14px;">Enabled transitions</h3>
+        <div class="list" id="enabledList"></div>
+
+        <h3 style="margin-top:14px;">What this encodes</h3>
+        <ul class="muted" style="margin:6px 0 0 18px;">
+          <li>Permitting/logistics/access work can proceed in parallel after kickoff.</li>
+          <li>Foundation requires: permits + materials at site + site prepared + crew + tools.</li>
+          <li>Walls & roof can be parallel <em>if</em> you have enough crew/tools/lift tokens.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>2) Generate schedule options from the same net</h2>
+
+    <div class="grid grid2">
+      <div class="panel">
+        <header>
+          <div>
+            <div class="title">Timed schedule generator</div>
+            <div class="subtitle">Different tokens/durations/priority ⇒ different schedules, same logic.</div>
+          </div>
+        </header>
+
+        <div class="twoCol">
+          <div>
+            <h3>Resources</h3>
+            <div class="row">
+              <div>
+                <label for="crewInput">Crew tokens</label><br/>
+                <input class="small" id="crewInput" type="number" min="1" max="6" step="1" value="1"/>
+              </div>
+              <div>
+                <label for="toolsInput">Tools tokens</label><br/>
+                <input class="small" id="toolsInput" type="number" min="1" max="6" step="1" value="1"/>
+              </div>
+              <div>
+                <label for="liftInput">Lift tokens</label><br/>
+                <input class="small" id="liftInput" type="number" min="1" max="6" step="1" value="1"/>
+              </div>
+              <div class="spacer"></div>
+              <button class="btn secondary" id="btnApplyResources">Apply to marking</button>
+            </div>
+
+            <h3 style="margin-top:12px;">Priority policy</h3>
+            <div class="row">
+              <div>
+                <label for="policySelect">When multiple work items are enabled…</label><br/>
+                <select id="policySelect" style="width:240px;">
+                  <option value="default">Default order</option>
+                  <option value="wallsFirst">Prefer wall shell before roof (if constrained)</option>
+                  <option value="roofFirst">Prefer roof before wall shell (weather)</option>
+                  <option value="random">Random choice (if constrained)</option>
+                </select>
+              </div>
+            </div>
+
+            <h3 style="margin-top:12px;">Durations (days)</h3>
+            <div id="durationEditor" class="list"></div>
+          </div>
+
+          <div>
+            <h3>Generate schedules</h3>
+            <div class="row">
+              <div>
+                <label for="numSchedules">How many candidates?</label><br/>
+                <input class="small" id="numSchedules" type="number" min="1" max="30" step="1" value="5"/>
+              </div>
+              <div>
+                <label for="maxSteps">Max simulation steps</label><br/>
+                <input class="small" id="maxSteps" type="number" min="10" max="200" step="1" value="80"/>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+              <button class="btn" id="btnGenerate">Generate</button>
+              <button class="btn ghost" id="btnClearSchedules">Clear</button>
+              <div class="spacer"></div>
+              <span class="smalltxt" id="genStatus">—</span>
+            </div>
+
+            <div class="note">
+              Each candidate is a <b>timed execution</b> of the same Petri net.
+              If you keep the net fixed, any schedule produced is automatically “physically compliant” by construction.
+            </div>
+
+            <h3 style="margin-top:12px;">Candidate list</h3>
+            <div class="list" id="scheduleList"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <header>
+          <div>
+            <div class="title">Selected schedule → Gantt + SMC term + WBS</div>
+            <div class="subtitle">Pick a candidate on the left.</div>
+          </div>
+        </header>
+
+        <div class="kv" id="scheduleSummaryKv"></div>
+
+        <h3>Gantt (simple)</h3>
+        <div class="svgWrap" style="margin-top:6px;">
+          <svg id="ganttSvg" viewBox="0 0 1000 340" width="100%" height="340" role="img" aria-label="Gantt chart"></svg>
+        </div>
+
+        <div class="twoCol" style="margin-top:10px;">
+          <div>
+            <h3>SMC expression (one view)</h3>
+            <p class="muted">Parallel blocks are joined with ⊗, sequential blocks with “;”.</p>
+            <div class="code" id="smcExpr"></div>
+          </div>
+          <div>
+            <h3>Elementary WBS (schedule-derived)</h3>
+            <p class="muted">A simple hierarchical packaging of the same tasks.</p>
+            <div class="code" id="wbsView"></div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:12px;">Task table</h3>
+        <table class="table" id="taskTable">
+          <thead>
+            <tr>
+              <th>Task</th><th>Start</th><th>Finish</th><th>Duration</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <h3 style="margin-top:12px;">Translation contract</h3>
+        <div class="note">
+          A compact trace from the process fragment to the selected execution, its SMC/WBS views, and
+          the information the projection deliberately forgets.
+        </div>
+        <div id="translationContract" class="contractTrace"></div>
+
+      </div>
+    </div>
+
+    <h2>3) Reuse this pattern for your real project</h2>
+
+    <div class="panel">
+      <header>
+        <div>
+          <div class="title">A concrete workflow that stays “tiny”</div>
+          <div class="subtitle">Net spec → analysis → publishable demo. Repeat as the project evolves.</div>
+        </div>
+      </header>
+
+      <div class="twoCol">
+        <div>
+          <h3>Version-controlled net as your “physics”</h3>
+          <ul class="muted" style="margin:8px 0 0 18px;">
+            <li>Keep a <b>JSON</b> net spec in the repo (places, transitions, arcs, default marking).</li>
+            <li>Review changes like code: “Did we add a dependency? a resource? a rework loop?”</li>
+            <li>Compose subnets when useful (foundation module, framing module, etc.).</li>
+          </ul>
+
+          <div class="note">
+            Open Petri nets (nets with explicit input/output interfaces) are designed to be <b>glued</b> compositionally,
+            which is a clean way to model “WBS modules” as composable components.
+          </div>
+        </div>
+
+        <div>
+          <h3>Many WBS + schedules as projections</h3>
+          <ul class="muted" style="margin:8px 0 0 18px;">
+            <li>Different <b>markings</b> correspond to different “what’s done / what’s available” states.</li>
+            <li>Different <b>executions</b> (choices + timing) correspond to different schedules.</li>
+            <li>Different <b>groupings</b> of the same transitions correspond to different WBS views.</li>
+          </ul>
+          <p class="muted" style="margin-top:10px;">
+            The key benefit is organizational: you stop arguing about precedence rules inside the Gantt chart,
+            because precedence is already encoded in the Petri net.
+          </p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:14px;">Exportable net spec used by this page</h3>
+      <div class="row" style="margin-bottom:8px;">
+        <button class="btn ghost small" id="btnCopyJson">Copy JSON to clipboard</button>
+        <span class="smalltxt" id="copyStatus">—</span>
+      </div>
+      <div class="code" id="netJson"></div>
+
+      <div class="foot">
+        You can open this file locally (double click) or host it anywhere static. Replace the JSON with your real project net and keep the rest of the UI.
+      </div>
+    </div>
+
+  </div>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="content">
+      <div class="hd">
+        <h3 id="modalTitle">Notes</h3>
+        <button class="close" aria-label="Close">×</button>
+      </div>
+      <div class="bd" id="modalBody" style="white-space:pre-wrap"></div>
+    </div>
+  </div>
+
+<script>
+
+/**
+ * ============================================================
+ * Petri Net → SMC → WBS demo
+ * Single-file, dependency-free.
+ * ============================================================
+ */
+
+/* ---------- Net spec (toy mountain refuge project) ---------- */
+
+const net = {
+  meta: {
+    title: "Build a Mountain Refuge (Mid-Mountain)",
+    units: "days",
+    description: "Toy project net capturing prerequisite + resource + logistics constraints for a mid-mountain refuge. Durations used only for timed schedule generation."
+  },
+  places: [
+    // Control / workstream splitting
+    {id:"authorized", label:"Authorized", x:60,  y:260, tokens:1, initial:1, kind:"state"},
+    {id:"adminReady", label:"PermittingReady", x:220, y:120, tokens:0, initial:0, kind:"state"},
+    {id:"logisticsReady",  label:"LogisticsReady",  x:220, y:260, tokens:0, initial:0, kind:"state"},
+    {id:"accessReady",  label:"AccessReady",  x:220, y:400, tokens:0, initial:0, kind:"state"},
+
+    // Permits / approvals
+    {id:"permits", label:"Permits", x:420, y:120, tokens:0, initial:0, kind:"state"},
+
+    // Materials as separate tokens (think: “arrived at site”)
+    {id:"mFnd",    label:"Mat:Fnd",    x:420, y:200, tokens:0, initial:0, kind:"state"},
+    {id:"mStruct", label:"Mat:Struct", x:420, y:235, tokens:0, initial:0, kind:"state"},
+    {id:"mWalls",  label:"Mat:Walls",  x:420, y:270, tokens:0, initial:0, kind:"state"},
+    {id:"mRoof",   label:"Mat:Roof",   x:420, y:305, tokens:0, initial:0, kind:"state"},
+    {id:"mUtil",   label:"Mat:Util",   x:420, y:340, tokens:0, initial:0, kind:"state"},
+    {id:"mInt",    label:"Mat:Int",    x:420, y:375, tokens:0, initial:0, kind:"state"},
+    {id:"mSafety", label:"Mat:Safety", x:420, y:410, tokens:0, initial:0, kind:"state"},
+
+    // Access + site prep (halfway up a mountain)
+    {id:"accessEstablished", label:"Access",       x:560, y:400, tokens:0, initial:0, kind:"state"},
+    {id:"sitePrepared",      label:"SitePrepared", x:680, y:400, tokens:0, initial:0, kind:"state"},
+
+    // Build states
+    {id:"foundationDone", label:"Foundation",  x:680, y:260, tokens:0, initial:0, kind:"state"},
+    {id:"wallsReady",     label:"Frame→Walls", x:820, y:200, tokens:0, initial:0, kind:"state"},
+    {id:"roofReady",      label:"Frame→Roof",  x:820, y:320, tokens:0, initial:0, kind:"state"},
+    {id:"wallsDone",      label:"WallsDone",   x:980, y:200, tokens:0, initial:0, kind:"state"},
+    {id:"roofDone",       label:"RoofDone",    x:980, y:320, tokens:0, initial:0, kind:"state"},
+    {id:"utilDone",       label:"Utilities",   x:1120,y:260, tokens:0, initial:0, kind:"state"},
+    {id:"interiorDone",   label:"Interior",    x:1120,y:200, tokens:0, initial:0, kind:"state"},
+    {id:"safeDone",       label:"Safety",      x:1120,y:320, tokens:0, initial:0, kind:"state"},
+    {id:"inspected",      label:"Inspected",   x:1260,y:260, tokens:0, initial:0, kind:"state"},
+    {id:"complete",       label:"Open",        x:1325,y:260, tokens:0, initial:0, kind:"state"},
+
+    // Resources (tokens limit parallelism)
+    {id:"crew",  label:"Crew",  x:560, y:70, tokens:1, initial:1, kind:"resource"},
+    {id:"tools", label:"Tools", x:680, y:70, tokens:1, initial:1, kind:"resource"},
+    {id:"lift",  label:"Lift",  x:800, y:70, tokens:1, initial:1, kind:"resource"},
+  ],
+  transitions: [
+    {id:"kickoff", label:"Kickoff", x:130, y:260, duration:0,
+      pre:{authorized:1}, post:{adminReady:1, logisticsReady:1, accessReady:1}},
+
+    {id:"permits", label:"Permits & Env Review", x:320, y:120, duration:10,
+      pre:{adminReady:1}, post:{permits:1}},
+
+    {id:"liftMaterials", label:"Lift Materials to Site", x:320, y:260, duration:4,
+      pre:{logisticsReady:1, lift:1},
+      post:{mFnd:1,mStruct:1,mWalls:1,mRoof:1,mUtil:1,mInt:1,mSafety:1, lift:1}},
+
+    {id:"access", label:"Establish Access/Pad", x:320, y:400, duration:3,
+      pre:{accessReady:1, crew:1, tools:1}, post:{accessEstablished:1, crew:1, tools:1}},
+
+    {id:"siteprep", label:"Prep Site/Anchors", x:500, y:400, duration:2,
+      pre:{accessEstablished:1, crew:1, tools:1}, post:{sitePrepared:1, crew:1, tools:1}},
+
+    {id:"foundation", label:"Build Foundation", x:560, y:260, duration:4,
+      pre:{sitePrepared:1, mFnd:1, permits:1, crew:1, tools:1},
+      post:{foundationDone:1, permits:1, crew:1, tools:1}},
+
+    {id:"frame", label:"Assemble Structural Frame", x:740, y:260, duration:5,
+      pre:{foundationDone:1, mStruct:1, crew:1, tools:1, lift:1},
+      post:{wallsReady:1, roofReady:1, crew:1, tools:1, lift:1}},
+
+    {id:"walls", label:"Build Wall Shell", x:900, y:200, duration:4,
+      pre:{wallsReady:1, mWalls:1, crew:1, tools:1, lift:1},
+      post:{wallsDone:1, crew:1, tools:1, lift:1}},
+
+    {id:"roof", label:"Install Roof", x:900, y:320, duration:3,
+      pre:{roofReady:1, mRoof:1, crew:1, tools:1, lift:1},
+      post:{roofDone:1, crew:1, tools:1, lift:1}},
+
+    {id:"utilities", label:"Install Utilities", x:1040, y:260, duration:3,
+     pre:{wallsDone:1, roofDone:1, mUtil:1, crew:1, tools:1},
+     post:{utilDone:2, crew:1, tools:1}},
+
+    {id:"interior", label:"Interior Fit-Out", x:1040, y:200, duration:4,
+      pre:{utilDone:1, mInt:1, crew:1},
+      post:{interiorDone:1, crew:1}},
+
+    {id:"safety", label:"Safety Systems", x:1040, y:320, duration:2,
+      pre:{utilDone:1, mSafety:1, crew:1},
+      post:{safeDone:1, crew:1}},
+
+    {id:"inspect", label:"Inspection/Commission", x:1200, y:260, duration:1,
+      pre:{interiorDone:1, safeDone:1, permits:1},
+      post:{inspected:1, permits:1}},
+
+    {id:"open", label:"Open Refuge", x:1310, y:260, duration:0,
+      pre:{inspected:1}, post:{complete:1}},
+  ]
+};
+
+
+/* ---------- Utilities ---------- */
+
+const byId = (arr) => Object.fromEntries(arr.map(x=>[x.id,x]));
+const P = byId(net.places);
+const T = byId(net.transitions);
+
+function deepCopy(obj){ return JSON.parse(JSON.stringify(obj)); }
+
+function currentMarking(){
+  const m = {};
+  net.places.forEach(p=>m[p.id]=p.tokens);
+  return m;
+}
+function setMarking(m){
+  net.places.forEach(p=>{ if(m[p.id]!==undefined) p.tokens = m[p.id]; });
+}
+
+function resetMarking(toDefaults=false){
+  net.places.forEach(p=>{
+    p.tokens = p.initial;
+  });
+  if(toDefaults){
+    document.getElementById("crewInput").value = 1;
+    document.getElementById("toolsInput").value = 1;
+    document.getElementById("liftInput").value = 1;
+    // Reset resource defaults too
+    P["crew"].tokens = 1;  P["crew"].initial = 1;
+    P["tools"].tokens = 1; P["tools"].initial = 1;
+    P["lift"].tokens = 1;  P["lift"].initial = 1;
+    durations = deepCopy(defaultDurations);
+    renderDurationEditor();
+  }
+  renderAll();
+}
+
+function enabledTransitions(m){
+  const enabled = [];
+  for(const tr of net.transitions){
+    let ok = true;
+    for(const [pid,w] of Object.entries(tr.pre)){
+      if((m[pid]||0) < w){ ok=false; break; }
+    }
+    if(ok) enabled.push(tr);
+  }
+  return enabled;
+}
+
+function fireTransition(trId){
+  const tr = T[trId];
+  const m = currentMarking();
+  const enabled = enabledTransitions(m).some(x=>x.id===trId);
+  if(!enabled) return false;
+
+  for(const [pid,w] of Object.entries(tr.pre)){
+    P[pid].tokens -= w;
+  }
+  for(const [pid,w] of Object.entries(tr.post)){
+    P[pid].tokens += w;
+  }
+  renderAll();
+  return true;
+}
+
+/* ---------- SVG rendering ---------- */
+
+const svg = document.getElementById("netSvg");
+
+function clearSvg(el){
+  while(el.firstChild) el.removeChild(el.firstChild);
+}
+
+function svgEl(tag, attrs={}, children=[]){
+  const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for(const [k,v] of Object.entries(attrs)){
+    el.setAttribute(k, v);
+  }
+  for(const c of children){
+    el.appendChild(c);
+  }
+  return el;
+}
+
+function renderNet(){
+  clearSvg(svg);
+
+  const defs = svgEl("defs",{},[
+    svgEl("marker",{id:"arrow", viewBox:"0 0 10 10", refX:"9", refY:"5", markerWidth:"7", markerHeight:"7", orient:"auto-start-reverse"},[
+      svgEl("path",{d:"M 0 0 L 10 5 L 0 10 z", fill:"rgba(203,213,225,.85)"})
+    ])
+  ]);
+  svg.appendChild(defs);
+
+  const m = currentMarking();
+  const enabled = new Set(enabledTransitions(m).map(t=>t.id));
+
+  function arc(x1,y1,x2,y2){
+    const path = svgEl("path",{
+      d:`M ${x1} ${y1} L ${x2} ${y2}`,
+      stroke:"rgba(203,213,225,.65)",
+      "stroke-width":"2",
+      fill:"none",
+      "marker-end":"url(#arrow)"
+    });
+    svg.appendChild(path);
+  }
+
+  for(const tr of net.transitions){
+    for(const pid of Object.keys(tr.pre)){
+      const p = P[pid];
+      arc(p.x, p.y, tr.x-26, tr.y);
+    }
+    for(const pid of Object.keys(tr.post)){
+      const p = P[pid];
+      arc(tr.x+26, tr.y, p.x, p.y);
+    }
+  }
+
+  for(const p of net.places){
+    const isRes = p.kind === "resource";
+    const stroke = isRes ? "rgba(167,139,250,.55)" : "rgba(56,189,248,.55)";
+    const fill = "rgba(0,0,0,.15)";
+    const g = svgEl("g", {class:"place", "data-id":p.id},[
+      svgEl("circle",{cx:p.x, cy:p.y, r:18, fill, stroke, "stroke-width":"2"}),
+      svgEl("text",{x:p.x, y:p.y-24, "text-anchor":"middle", "font-size":"11", fill:"rgba(226,232,240,.95)"},[
+        document.createTextNode(p.label)
+      ]),
+      svgEl("text",{x:p.x, y:p.y+5, "text-anchor":"middle", "font-size":"12", fill:"rgba(226,232,240,.95)"},[
+        document.createTextNode(String(p.tokens))
+      ]),
+    ]);
+    svg.appendChild(g);
+  }
+
+  for(const tr of net.transitions){
+    const isEnabled = enabled.has(tr.id);
+    const g = svgEl("g",{class:"transition", "data-id":tr.id, style:"cursor:pointer;"});
+    const rect = svgEl("rect",{
+      x: tr.x-26, y: tr.y-12, width:52, height:24, rx:6,
+      fill: isEnabled ? "rgba(52,211,153,.22)" : "rgba(148,163,184,.08)",
+      stroke: isEnabled ? "rgba(52,211,153,.75)" : "rgba(148,163,184,.25)",
+      "stroke-width":"2"
+    });
+    const txt = svgEl("text",{x:tr.x, y:tr.y+4, "text-anchor":"middle", "font-size":"11", fill:"rgba(226,232,240,.95)"},[
+      document.createTextNode(tr.label)
+    ]);
+    g.appendChild(rect);
+    g.appendChild(txt);
+
+    g.addEventListener("click", ()=>{
+      fireTransition(tr.id);
+    });
+
+    svg.appendChild(g);
+  }
+}
+
+/* ---------- Marking / enabled list UI ---------- */
+
+const markingKv = document.getElementById("markingKv");
+const enabledList = document.getElementById("enabledList");
+
+function renderMarking(){
+  const m = currentMarking();
+  markingKv.innerHTML = "";
+  const interesting = [
+    "authorized","adminReady","logisticsReady","accessReady",
+    "permits",
+    "mFnd","mStruct","mWalls","mRoof","mUtil","mInt","mSafety",
+    "accessEstablished","sitePrepared",
+    "foundationDone","wallsReady","roofReady",
+    "wallsDone","roofDone","utilDone","interiorDone","safeDone",
+    "inspected","complete",
+    "crew","tools","lift"
+  ];
+  for(const pid of interesting){
+    const p = P[pid];
+    const k = document.createElement("div"); k.textContent = p.label;
+    const v = document.createElement("div"); v.textContent = String(m[pid]||0);
+    markingKv.appendChild(k); markingKv.appendChild(v);
+  }
+}
+
+function renderEnabled(){
+  const m = currentMarking();
+  const enabled = enabledTransitions(m);
+  enabledList.innerHTML = "";
+  if(enabled.length===0){
+    const empty = document.createElement("div");
+    empty.className = "item";
+    empty.innerHTML = `<div class="left"><span class="dot bad"></span><b>None</b></div><div class="muted">Deadlock or done</div>`;
+    enabledList.appendChild(empty);
+    return;
+  }
+  for(const tr of enabled){
+    const item = document.createElement("div");
+    item.className = "item";
+    item.innerHTML = `
+      <div class="left">
+        <span class="dot ok"></span>
+        <b>${tr.label}</b>
+      </div>
+      <button class="btn small" data-fire="${tr.id}">Fire</button>
+    `;
+    item.querySelector("button").addEventListener("click", ()=>fireTransition(tr.id));
+    enabledList.appendChild(item);
+  }
+}
+
+/* ---------- Duration editor ---------- */
+
+let durations = {};
+const defaultDurations = {};
+for(const tr of net.transitions){
+  durations[tr.id] = tr.duration;
+  defaultDurations[tr.id] = tr.duration;
+}
+
+const durationEditor = document.getElementById("durationEditor");
+function renderDurationEditor(){
+  durationEditor.innerHTML = "";
+  for(const tr of net.transitions){
+    const item = document.createElement("div");
+    item.className = "item";
+    item.innerHTML = `
+      <div class="left">
+        <span class="dot"></span>
+        <b>${tr.label}</b>
+      </div>
+      <div class="row" style="gap:8px;">
+        <input class="small" type="number" min="0" max="30" step="1" value="${durations[tr.id]}" data-dur="${tr.id}">
+        <span class="muted" style="font-size:12px;">days</span>
+      </div>
+    `;
+    const inp = item.querySelector("input");
+    inp.addEventListener("input", ()=>{
+      const v = parseInt(inp.value||"0",10);
+      durations[tr.id] = isNaN(v)?0:v;
+    });
+    durationEditor.appendChild(item);
+  }
+}
+
+/* ---------- Timed simulation ---------- */
+
+function policyOrder(policy){
+  const ids = net.transitions.map(t=>t.id);
+  if(policy==="default"){
+    return ["kickoff","permits","liftMaterials","access","siteprep","foundation","frame","walls","roof","utilities","interior","safety","inspect","open"];
+  }
+  if(policy==="wallsFirst"){
+    return ["kickoff","permits","liftMaterials","access","siteprep","foundation","frame","walls","roof","utilities","interior","safety","inspect","open"];
+  }
+  if(policy==="roofFirst"){
+    return ["kickoff","permits","liftMaterials","access","siteprep","foundation","frame","roof","walls","utilities","interior","safety","inspect","open"];
+  }
+  return ids; // random handled separately
+}
+
+function simulateTimed({crewTokens, toolsTokens, liftTokens, policy, maxSteps}){
+  const m = {};
+  net.places.forEach(p=>m[p.id]=p.initial);
+
+  m["crew"] = crewTokens;
+  m["tools"] = toolsTokens;
+  m["lift"] = liftTokens;
+
+  let time = 0;
+  let steps = 0;
+
+  const inProg = []; // {id, end, start}
+  const schedule = []; // {id,label,start,end,duration}
+
+  function isDone(){ return (m["complete"]||0) >= 1; }
+
+  function startIfPossible(){
+    const order = policyOrder(policy);
+
+    let candidates = enabledTransitions(m);
+    if(policy==="random"){
+      candidates = candidates.slice().sort(()=>Math.random()-0.5);
+    } else {
+      const idx = Object.fromEntries(order.map((id,i)=>[id,i]));
+      candidates.sort((a,b)=>(idx[a.id]??999)-(idx[b.id]??999));
+    }
+
+    let startedAny = false;
+    for(const tr of candidates){
+      let ok = true;
+      for(const [pid,w] of Object.entries(tr.pre)){
+        if((m[pid]||0) < w){ ok=false; break; }
+      }
+      if(!ok) continue;
+
+      for(const [pid,w] of Object.entries(tr.pre)){
+        m[pid] -= w;
+      }
+      const dur = durations[tr.id] ?? tr.duration ?? 0;
+      const end = time + dur;
+
+      schedule.push({id:tr.id,label:tr.label,start:time,end:null,duration:dur});
+
+      if(dur===0){
+        for(const [pid,w] of Object.entries(tr.post)){
+          m[pid] = (m[pid]||0) + w;
+        }
+        schedule[schedule.length-1].end = time;
+      } else {
+        inProg.push({id:tr.id, end, start:time});
+      }
+      startedAny = true;
+      steps += 1;
+      if(steps>=maxSteps) break;
+    }
+    return startedAny;
+  }
+
+  while(!isDone() && steps < maxSteps){
+    const started = startIfPossible();
+    if(isDone()) break;
+
+    if(inProg.length===0){
+      if(!started){
+        return {ok:false, reason:"Deadlock: no enabled work and nothing running.", schedule, makespan: time, marking:m};
+      }
+      continue;
+    }
+
+    const next = Math.min(...inProg.map(e=>e.end));
+    time = next;
+
+    const ending = inProg.filter(e=>e.end===next);
+    for(const e of ending){
+      const tr = T[e.id];
+      for(const [pid,w] of Object.entries(tr.post)){
+        m[pid] = (m[pid]||0) + w;
+      }
+      const row = schedule.find(s=>s.id===e.id && s.end===null && s.start===e.start);
+      if(row) row.end = next;
+    }
+    for(let i=inProg.length-1;i>=0;i--){
+      if(inProg[i].end===next) inProg.splice(i,1);
+    }
+  }
+
+  if((m["complete"]||0) >= 1){
+    const makespan = Math.max(...schedule.map(s=>s.end ?? 0), 0);
+    return {ok:true, schedule, makespan, marking:m};
+  }
+  return {ok:false, reason:"Stopped (max steps).", schedule, makespan: time, marking:m};
+}
+
+/* ---------- Candidate generation + selection ---------- */
+
+let candidates = [];
+let selectedIdx = -1;
+
+const scheduleList = document.getElementById("scheduleList");
+const genStatus = document.getElementById("genStatus");
+
+function renderCandidates(){
+  scheduleList.innerHTML = "";
+  if(candidates.length===0){
+    scheduleList.innerHTML = `<div class="item"><div class="left"><span class="dot"></span><b>—</b></div><div class="muted">No schedules yet.</div></div>`;
+    return;
+  }
+  candidates.forEach((c,idx)=>{
+    const dotClass = c.ok ? "ok" : "bad";
+    const item = document.createElement("div");
+    item.className = "item";
+    item.style.cursor = "pointer";
+    item.innerHTML = `
+      <div class="left">
+        <span class="dot ${dotClass}"></span>
+        <b>Candidate ${idx+1}</b>
+      </div>
+      <div class="muted">${c.ok ? ("makespan " + c.makespan + " days") : c.reason}</div>
+    `;
+    item.addEventListener("click", ()=>{
+      selectedIdx = idx;
+      renderSelected();
+      [...scheduleList.children].forEach((el,i)=>{ el.style.outline = (i===idx) ? "2px solid rgba(56,189,248,.45)" : "none"; el.style.outlineOffset="2px"; });
+    });
+    scheduleList.appendChild(item);
+  });
+}
+
+function generateSchedules(){
+  const crewTokens = parseInt(document.getElementById("crewInput").value||"1",10);
+  const toolsTokens = parseInt(document.getElementById("toolsInput").value||"1",10);
+  const liftTokens = parseInt(document.getElementById("liftInput").value||"1",10);
+  const policy = document.getElementById("policySelect").value;
+  const n = parseInt(document.getElementById("numSchedules").value||"5",10);
+  const maxSteps = parseInt(document.getElementById("maxSteps").value||"80",10);
+
+  candidates = [];
+  selectedIdx = -1;
+
+  const t0 = performance.now();
+  for(let i=0;i<n;i++){
+    const pol = (policy==="random") ? "random" : policy;
+    const res = simulateTimed({crewTokens, toolsTokens, liftTokens, policy: pol, maxSteps});
+    candidates.push(res);
+  }
+  const t1 = performance.now();
+  genStatus.textContent = `Generated ${n} candidate(s) in ${Math.round(t1-t0)} ms. Click one to inspect.`;
+  renderCandidates();
+  renderSelected();
+}
+
+/* ---------- Selected schedule rendering ---------- */
+
+const scheduleSummaryKv = document.getElementById("scheduleSummaryKv");
+const ganttSvg = document.getElementById("ganttSvg");
+const smcExprEl = document.getElementById("smcExpr");
+const wbsViewEl = document.getElementById("wbsView");
+const taskTableBody = document.querySelector("#taskTable tbody");
+const translationContractEl = document.getElementById("translationContract");
+
+function formatNumber(x){ return (Math.round(x*100)/100).toString(); }
+
+function escapeHtml(value){
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function groupByStart(schedule){
+  const map = new Map();
+  for(const s of schedule){
+    if(!map.has(s.start)) map.set(s.start, []);
+    map.get(s.start).push(s.label);
+  }
+  const times = Array.from(map.keys()).sort((a,b)=>a-b);
+  return times.map(t=>({t, tasks: map.get(t)}));
+}
+
+function buildSmcExpression(schedule){
+  const groups = groupByStart(schedule).filter(g=>g.tasks.length>0);
+  const parts = groups.map(g=>{
+    if(g.tasks.length===1) return g.tasks[0];
+    return "(" + g.tasks.join(" ⊗ ") + ")";
+  });
+  return parts.join(" ; ");
+}
+
+function buildScheduleWbs(schedule){
+  const groups = groupByStart(schedule).filter(g=>g.tasks.length>0);
+  const lines = [];
+  lines.push("Build Mountain Refuge");
+  groups.forEach((g,i)=>{
+    lines.push(`  Stage ${i+1} (start t=${g.t})`);
+    g.tasks.forEach(t=>{
+      lines.push(`    - ${t}`);
+    });
+  });
+  return lines.join("\n");
+}
+
+function buildTranslationTrace(schedule, candidate){
+  const crewTokens = parseInt(document.getElementById("crewInput").value||"1",10);
+  const toolsTokens = parseInt(document.getElementById("toolsInput").value||"1",10);
+  const liftTokens = parseInt(document.getElementById("liftInput").value||"1",10);
+  const policy = document.getElementById("policySelect").value;
+  const selectedTransitions = schedule.map(s=>s.id);
+  const smcExpression = buildSmcExpression(schedule);
+  const wbsText = buildScheduleWbs(schedule);
+  const stageBlocks = groupByStart(schedule).filter(g=>g.tasks.length>0);
+  const parallelBlocks = stageBlocks.filter(g=>g.tasks.length>1);
+  const firstProjectionLine = wbsText.split("\n").find(line=>line.trim().startsWith("Stage"))
+    || wbsText.split("\n")[0]
+    || "(empty projection)";
+
+  return {
+    processFragment: {
+      title: net.meta.title,
+      placeCount: net.places.length,
+      transitionCount: net.transitions.length,
+      selectedTransitionCount: selectedTransitions.length,
+      selectedTransitions,
+      rule: "The Petri/process net is the invariant constraint skeleton: transitions can only fire when their input places hold enough tokens."
+    },
+    executionWitness: {
+      policy,
+      resources: {crew: crewTokens, tools: toolsTokens, lift: liftTokens},
+      steps: schedule.length,
+      makespan: candidate?.makespan ?? 0,
+      rule: "This schedule is one timed execution witness under the selected resource-token and priority-policy settings."
+    },
+    projection: {
+      smcExpression,
+      wbsText,
+      rule: "Tasks with the same start time become parallel blocks in the SMC expression; ordered blocks become stages in the schedule-derived WBS."
+    },
+    preservedStructure: [
+      `${selectedTransitions.length} selected transition IDs and their execution order.`,
+      `${stageBlocks.length} schedule-derived stage block(s).`,
+      `${parallelBlocks.length} same-start parallel block(s).`,
+      `Resource snapshot: crew ${crewTokens}, tools ${toolsTokens}, lift ${liftTokens}.`,
+      `Makespan ${candidate?.makespan ?? 0} ${net.meta.units} under policy "${policy}".`
+    ],
+    forgottenStructure: [
+      "Unchosen enabled alternatives and why the selected policy skipped them.",
+      "Guard rationale and token/resource provenance beyond the current numeric snapshot.",
+      "Whether a WBS stage boundary is semantically meaningful or only a projection artifact.",
+      "Risk, uncertainty, weather, access, procurement, cost, and failure modes not represented in the toy net."
+    ],
+    nonInvertibilityWitness: {
+      title: "A plan view is too thin to recover the process",
+      visibleProjection: firstProjectionLine.trim(),
+      rule: "The visible WBS/schedule can be produced by more than one process interpretation. Reading it backward would require extra assumptions about guards, resources, policies, and unchosen alternatives."
+    },
+    candidateLiftRequires: [
+      "a chosen process vocabulary for states, places, resources, and transitions;",
+      "guard and enabling rules for every task/dependency;",
+      "resource-consumption or resource-reservation semantics;",
+      "a policy for alternatives, rework, risk, and uncertainty;",
+      "a provenance claim explaining where those added assumptions came from."
+    ],
+    caveats: [
+      "Durations are toy values, not calibrated estimates.",
+      "WBS grouping is schedule-derived and not unique.",
+      "The SMC expression is one textual view, not proof of full formal correctness.",
+      "Weather, access risk, cost, procurement, and uncertainty are not yet modeled."
+    ],
+    localReceiptRequired: "Record-level source provenance stays in the local Portfolio Wave working directory. Public repo artifacts should name only cluster-level anchors."
+  };
+}
+
+function renderTranslationTrace(schedule, candidate){
+  if(!translationContractEl) return;
+  if(!candidate || !candidate.ok || schedule.length===0){
+    translationContractEl.innerHTML = `
+      <div class="contractStep wide">
+        <h4>No valid execution selected</h4>
+        <p>Generate schedules and select a valid candidate to see the process-to-plan translation contract.</p>
+      </div>`;
+    return;
+  }
+
+  const trace = buildTranslationTrace(schedule, candidate);
+  const transitionList = trace.processFragment.selectedTransitions
+    .map(id=>`<li><code>${escapeHtml(id)}</code></li>`)
+    .join("");
+  const preserved = trace.preservedStructure.map(item=>`<li>${escapeHtml(item)}</li>`).join("");
+  const forgotten = trace.forgottenStructure.map(item=>`<li>${escapeHtml(item)}</li>`).join("");
+  const liftRequires = trace.candidateLiftRequires.map(item=>`<li>${escapeHtml(item)}</li>`).join("");
+  const caveats = trace.caveats.map(c=>`<li>${escapeHtml(c)}</li>`).join("");
+
+  translationContractEl.innerHTML = `
+    <div class="contractStep">
+      <h4>processFragment</h4>
+      <p><b>${escapeHtml(trace.processFragment.title)}</b></p>
+      <p>${trace.processFragment.placeCount} places/resources; ${trace.processFragment.transitionCount} transitions; ${trace.processFragment.selectedTransitionCount} transitions in this execution.</p>
+      <p>${escapeHtml(trace.processFragment.rule)}</p>
+      <ul>${transitionList}</ul>
+    </div>
+    <div class="contractStep">
+      <h4>executionWitness</h4>
+      <p>Policy: <code>${escapeHtml(trace.executionWitness.policy)}</code></p>
+      <p>Resources: crew ${trace.executionWitness.resources.crew}, tools ${trace.executionWitness.resources.tools}, lift ${trace.executionWitness.resources.lift}</p>
+      <p>Steps: ${trace.executionWitness.steps}; makespan: ${trace.executionWitness.makespan} ${escapeHtml(net.meta.units)}</p>
+      <p>${escapeHtml(trace.executionWitness.rule)}</p>
+    </div>
+    <div class="contractStep">
+      <h4>projection</h4>
+      <p>${escapeHtml(trace.projection.rule)}</p>
+      <p><b>SMC:</b> <code>${escapeHtml(trace.projection.smcExpression || "(empty)")}</code></p>
+      <p><b>WBS first line:</b> <code>${escapeHtml(trace.projection.wbsText.split("\\n")[0] || "(empty)")}</code></p>
+    </div>
+    <div class="contractStep">
+      <h4>preservedStructure</h4>
+      <p><code>process -> plan</code> keeps the plan-useful part of the process execution.</p>
+      <ul>${preserved}</ul>
+    </div>
+    <div class="contractStep">
+      <h4>forgottenStructure</h4>
+      <p>The projection is useful because it deliberately drops structure the plan view does not need.</p>
+      <ul>${forgotten}</ul>
+    </div>
+    <div class="contractStep wide">
+      <h4>nonInvertibilityWitness</h4>
+      <p><b>${escapeHtml(trace.nonInvertibilityWitness.title)}</b></p>
+      <p>Visible projection: <code>${escapeHtml(trace.nonInvertibilityWitness.visibleProjection)}</code></p>
+      <p>${escapeHtml(trace.nonInvertibilityWitness.rule)}</p>
+    </div>
+    <div class="contractStep wide">
+      <h4>candidateLiftRequires</h4>
+      <p><code>plan -> process</code> is a lift or reconstruction hypothesis, not an inverse.</p>
+      <ul>${liftRequires}</ul>
+    </div>
+    <div class="contractStep">
+      <h4>caveats</h4>
+      <ul>${caveats}</ul>
+    </div>
+    <div class="contractStep wide">
+      <h4>localReceiptRequired</h4>
+      <p>${escapeHtml(trace.localReceiptRequired)}</p>
+    </div>`;
+}
+
+function renderGantt(schedule){
+  while(ganttSvg.firstChild) ganttSvg.removeChild(ganttSvg.firstChild);
+
+  const fontFamily = getComputedStyle(document.body).fontFamily || "sans-serif";
+  const measureCanvas = document.createElement("canvas");
+  const measureCtx = measureCanvas.getContext("2d");
+  measureCtx.font = `12px ${fontFamily}`;
+  const maxLabelWidth = schedule.reduce((max, s)=>Math.max(max, measureCtx.measureText(s.label).width), 0);
+  const containerWidth = ganttSvg.clientWidth
+    || (ganttSvg.parentElement ? ganttSvg.parentElement.clientWidth : 0)
+    || 1000;
+  const width = Math.max(360, containerWidth);
+  const marginLeft = Math.min(
+    Math.round(width * 0.35),
+    Math.max(90, Math.ceil(maxLabelWidth) + 16)
+  );
+  const top = 20;
+  const rowH = 24;
+  const barH = 14;
+  const maxEnd = Math.max(...schedule.map(s=>s.end??0), 0);
+  const height = Math.max(340, top + rowH*schedule.length + 40);
+
+  ganttSvg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  ganttSvg.setAttribute("height", height);
+
+  const usable = width - marginLeft - 20;
+  const scale = maxEnd===0 ? 1 : (usable / maxEnd);
+
+  const ticks = Math.max(2, Math.min(12, Math.ceil(maxEnd)));
+  for(let i=0;i<=ticks;i++){
+    const t = (maxEnd/ticks)*i;
+    const x = marginLeft + t*scale;
+    const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+    line.setAttribute("x1",x); line.setAttribute("x2",x);
+    line.setAttribute("y1",top-8); line.setAttribute("y2",height-20);
+    line.setAttribute("stroke","rgba(148,163,184,.18)");
+    line.setAttribute("stroke-width","1");
+    ganttSvg.appendChild(line);
+
+    const txt = document.createElementNS("http://www.w3.org/2000/svg","text");
+    txt.setAttribute("x",x); txt.setAttribute("y",top-12);
+    txt.setAttribute("text-anchor","middle");
+    txt.setAttribute("font-size","11");
+    txt.setAttribute("fill","rgba(226,232,240,.75)");
+    txt.textContent = formatNumber(t);
+    ganttSvg.appendChild(txt);
+  }
+
+  schedule.forEach((s,idx)=>{
+    const y = top + idx*rowH;
+
+    const label = document.createElementNS("http://www.w3.org/2000/svg","text");
+    label.setAttribute("x", 10);
+    label.setAttribute("y", y+12);
+    label.setAttribute("font-size","12");
+    label.setAttribute("fill","rgba(226,232,240,.95)");
+    label.textContent = s.label;
+    ganttSvg.appendChild(label);
+
+    const x = marginLeft + (s.start*scale);
+    const w = Math.max(1, (s.duration*scale));
+
+    const rect = document.createElementNS("http://www.w3.org/2000/svg","rect");
+    rect.setAttribute("x", x);
+    rect.setAttribute("y", y);
+    rect.setAttribute("width", w);
+    rect.setAttribute("height", barH);
+    rect.setAttribute("rx", 6);
+    rect.setAttribute("fill", "rgba(56,189,248,.25)");
+    rect.setAttribute("stroke", "rgba(56,189,248,.65)");
+    rect.setAttribute("stroke-width", "1.5");
+    ganttSvg.appendChild(rect);
+
+    const timeTxt = document.createElementNS("http://www.w3.org/2000/svg","text");
+    timeTxt.setAttribute("x", x+w+6);
+    timeTxt.setAttribute("y", y+12);
+    timeTxt.setAttribute("font-size","11");
+    timeTxt.setAttribute("fill","rgba(226,232,240,.70)");
+    timeTxt.textContent = `${s.start}→${s.end}`;
+    ganttSvg.appendChild(timeTxt);
+  });
+}
+
+function renderTaskTable(schedule){
+  taskTableBody.innerHTML = "";
+  schedule.forEach(s=>{
+    const tr = document.createElement("tr");
+    const dur = (s.end??0) - s.start;
+    tr.innerHTML = `<td>${s.label}</td><td>${s.start}</td><td>${s.end}</td><td>${dur}</td>`;
+    taskTableBody.appendChild(tr);
+  });
+}
+
+function renderSelected(){
+  scheduleSummaryKv.innerHTML = "";
+  smcExprEl.textContent = "";
+  wbsViewEl.textContent = "";
+  renderGantt([]);
+  renderTaskTable([]);
+
+  if(selectedIdx<0 || !candidates[selectedIdx]){
+    const k = document.createElement("div"); k.textContent = "Selected";
+    const v = document.createElement("div"); v.textContent = "—";
+    scheduleSummaryKv.appendChild(k); scheduleSummaryKv.appendChild(v);
+    renderTranslationTrace([], null);
+    return;
+  }
+  const c = candidates[selectedIdx];
+
+  const crewTokens = parseInt(document.getElementById("crewInput").value||"1",10);
+  const toolsTokens = parseInt(document.getElementById("toolsInput").value||"1",10);
+  const liftTokens = parseInt(document.getElementById("liftInput").value||"1",10);
+  const policy = document.getElementById("policySelect").value;
+
+  const summary = [
+    ["Candidate", String(selectedIdx+1)],
+    ["Status", c.ok ? "OK" : ("Failed: " + c.reason)],
+    ["Makespan (days)", c.ok ? String(c.makespan) : "—"],
+    ["Crew tokens", String(crewTokens)],
+    ["Tools tokens", String(toolsTokens)],
+    ["Lift tokens", String(liftTokens)],
+    ["Policy", policy],
+  ];
+  for(const [kk,vv] of summary){
+    const k = document.createElement("div"); k.textContent = kk;
+    const v = document.createElement("div"); v.textContent = vv;
+    scheduleSummaryKv.appendChild(k); scheduleSummaryKv.appendChild(v);
+  }
+
+  if(!c.ok){
+    smcExprEl.textContent = "(no valid schedule)";
+    wbsViewEl.textContent = "(no WBS)";
+    renderTranslationTrace([], c);
+    return;
+  }
+
+  const schedule = c.schedule.slice().sort((a,b)=> (a.start-b.start) || a.label.localeCompare(b.label));
+
+  renderGantt(schedule);
+  renderTaskTable(schedule);
+
+  const expr = buildSmcExpression(schedule);
+  smcExprEl.textContent = expr || "(empty)";
+
+  const wbs = buildScheduleWbs(schedule);
+  wbsViewEl.textContent = wbs || "(empty)";
+  renderTranslationTrace(schedule, c);
+}
+
+/* ---------- Copy net JSON ---------- */
+
+const netJsonEl = document.getElementById("netJson");
+const btnCopyJson = document.getElementById("btnCopyJson");
+const copyStatus = document.getElementById("copyStatus");
+const EXPLAIN = {
+  notes: [
+    "• The Petri net is the source of truth for physical logic (what depends on what; what resources gate parallelism).",
+    "• Schedules are generated as executions of that same net (different priorities, resource-token counts, and durations ⇒ different valid schedules).",
+    "• WBS is treated as a view/projection of the same underlying process: one schedule ⇒ one “schedule-derived elementary WBS”, plus an SMC-style expression that exposes ⊗ (parallel) vs ; (sequential).",
+    "",
+    "Petri net (fundamentals): places/tokens = project state & resource availability; transitions = work. This captures the “physics” of what is possible independent of any particular schedule.",
+    "• SMC (compositional schedule syntax): the same plan can be written as different string diagrams / compositions—vertical composition for sequencing and horizontal composition for parallelism—which is exactly the lens you want for “different schedules as different (but equivalent) composites.”",
+    "• Elementary WBS (hierarchical): when you have an SMC expression / execution trace, an operad-style decomposition viewpoint tells you how to “break down and reconstitute the whole” while keeping correctness under substitution—this is a good mathematical fit for WBS factoring choices."
+  ].join("\n")
+};
+
+function netAsJson(){
+  const spec = deepCopy(net);
+  for(const tr of spec.transitions){
+    tr.duration = durations[tr.id] ?? tr.duration;
+  }
+  spec.places.forEach(p=>{
+    p.initial = P[p.id].initial;
+  });
+  return JSON.stringify(spec, null, 2);
+}
+
+function renderJson(){
+  netJsonEl.textContent = netAsJson();
+}
+
+btnCopyJson.addEventListener("click", async ()=>{
+  try{
+    await navigator.clipboard.writeText(netAsJson());
+    copyStatus.textContent = "Copied.";
+  }catch(e){
+    copyStatus.textContent = "Copy failed (browser permissions).";
+  }
+});
+
+/* ---------- Modal explainers ---------- */
+
+function openModal(title, body){
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modalBody").textContent = body;
+  document.getElementById("modal").classList.add("open");
+}
+function closeModal(){
+  document.getElementById("modal").classList.remove("open");
+}
+
+document.querySelector("#modal .close").addEventListener("click", closeModal);
+window.addEventListener("click",(e)=>{ if(e.target && e.target.id==="modal") closeModal(); });
+window.addEventListener("keydown",(e)=>{ if(e.key==="Escape") closeModal(); });
+
+Array.from(document.querySelectorAll("[data-explain]")).forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const key = btn.dataset.explain;
+    const txt = EXPLAIN[key] || "No explainer found.";
+    const title = btn.textContent || key;
+    openModal(title, txt);
+  });
+});
+
+/* ---------- Buttons / event wiring ---------- */
+
+document.getElementById("btnReset").addEventListener("click", ()=>resetMarking(false));
+document.getElementById("btnResetAll").addEventListener("click", ()=>resetMarking(true));
+
+document.getElementById("btnStepAuto").addEventListener("click", ()=>{
+  const enabled = enabledTransitions(currentMarking());
+  if(enabled.length===0) return;
+  const tr = enabled[Math.floor(Math.random()*enabled.length)];
+  fireTransition(tr.id);
+});
+
+const autoRouteBtn = document.getElementById("btnAutoRoute");
+const autoRouteStatus = document.getElementById("autoRouteStatus");
+const exampleRoute = [
+  "kickoff",
+  "permits",
+  "liftMaterials",
+  "access",
+  "siteprep",
+  "foundation",
+  "frame",
+  "walls",
+  "roof",
+  "utilities",
+  "interior",
+  "safety",
+  "inspect",
+  "open"
+];
+let autoRouteRunning = false;
+
+function sleep(ms){ return new Promise(resolve=>setTimeout(resolve, ms)); }
+
+autoRouteBtn.addEventListener("click", async ()=>{
+  if(autoRouteRunning) return;
+  autoRouteRunning = true;
+  autoRouteBtn.disabled = true;
+  autoRouteStatus.textContent = "Running example route…";
+  resetMarking(true);
+
+  for(const step of exampleRoute){
+    await sleep(350);
+    const ok = fireTransition(step);
+    if(!ok){
+      autoRouteStatus.textContent = "Stopped: transition not enabled.";
+      autoRouteBtn.disabled = false;
+      autoRouteRunning = false;
+      return;
+    }
+  }
+
+  autoRouteStatus.textContent = "Completed example route.";
+  autoRouteBtn.disabled = false;
+  autoRouteRunning = false;
+});
+
+document.getElementById("btnApplyResources").addEventListener("click", ()=>{
+  const crewTokens = parseInt(document.getElementById("crewInput").value||"1",10);
+  const toolsTokens = parseInt(document.getElementById("toolsInput").value||"1",10);
+  const liftTokens = parseInt(document.getElementById("liftInput").value||"1",10);
+  P["crew"].tokens = crewTokens;
+  P["crew"].initial = crewTokens;
+  P["tools"].tokens = toolsTokens;
+  P["tools"].initial = toolsTokens;
+  P["lift"].tokens = liftTokens;
+  P["lift"].initial = liftTokens;
+  renderAll();
+});
+
+document.getElementById("btnGenerate").addEventListener("click", ()=>{
+  generateSchedules();
+  renderJson();
+});
+
+document.getElementById("btnClearSchedules").addEventListener("click", ()=>{
+  candidates = [];
+  selectedIdx = -1;
+  genStatus.textContent = "Cleared.";
+  renderCandidates();
+  renderSelected();
+});
+
+/* ---------- Render everything ---------- */
+
+function renderAll(){
+  renderNet();
+  renderMarking();
+  renderEnabled();
+  renderJson();
+}
+
+renderDurationEditor();
+renderAll();
+renderCandidates();
+renderSelected();
+</script>
+</body>
+</html>
