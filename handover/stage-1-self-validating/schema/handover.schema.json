@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/mountain-refuge-handover.schema.json",
+  "title": "Mountain refuge stage handover",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "handover_id",
+    "project",
+    "owner",
+    "prepared_at",
+    "decision",
+    "signoff",
+    "acceptance_gates",
+    "evidence",
+    "residual_risks",
+    "open_items",
+    "provenance",
+    "release_note"
+  ],
+  "properties": {
+    "handover_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "asset",
+        "location",
+        "stage",
+        "description"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 3
+        },
+        "asset": {
+          "type": "string",
+          "minLength": 3
+        },
+        "location": {
+          "type": "string",
+          "minLength": 3
+        },
+        "stage": {
+          "type": "string",
+          "enum": [
+            "stage_1_design",
+            "stage_2_detailed_design",
+            "stage_3_build_readiness"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10
+        }
+      }
+    },
+    "owner": {
+      "type": "string",
+      "format": "email"
+    },
+    "prepared_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "decision": {
+      "type": "string",
+      "minLength": 3
+    },
+    "signoff": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "by",
+          "at"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "minLength": 3
+          },
+          "by": {
+            "type": "string",
+            "format": "email"
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "acceptance_gates": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "owner",
+          "outcome",
+          "evidence_refs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 2
+          },
+          "title": {
+            "type": "string",
+            "minLength": 5
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 3
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "conditional_pass",
+              "fail"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "evidence_type",
+          "path",
+          "digest_ref",
+          "status",
+          "decision_use"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 3
+          },
+          "name": {
+            "type": "string",
+            "minLength": 3
+          },
+          "evidence_type": {
+            "type": "string",
+            "enum": [
+              "site_context",
+              "access_logistics",
+              "concept_design",
+              "structural_safety",
+              "environment_planning",
+              "cost_schedule",
+              "risk_register",
+              "handover_notes"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "minLength": 3
+          },
+          "digest_ref": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]+\\.sha256$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "accepted_for_stage_1",
+              "superseded"
+            ]
+          },
+          "decision_use": {
+            "type": "string",
+            "minLength": 10
+          }
+        }
+      }
+    },
+    "residual_risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "severity",
+          "disposition",
+          "owner"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "green",
+              "amber",
+              "red"
+            ]
+          },
+          "disposition": {
+            "type": "string",
+            "enum": [
+              "accepted",
+              "carried_to_stage_2",
+              "blocked"
+            ]
+          },
+          "owner": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "open_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "severity",
+          "owner",
+          "due"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "watch",
+              "action",
+              "blocker"
+            ]
+          },
+          "owner": {
+            "type": "string"
+          },
+          "due": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "attestation_type",
+        "predicateType",
+        "attestation_path"
+      ],
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "attestation_type": {
+          "type": "string"
+        },
+        "predicateType": {
+          "type": "string"
+        },
+        "attestation_path": {
+          "type": "string"
+        }
+      }
+    },
+    "release_note": {
+      "type": "string",
+      "minLength": 5
+    }
+  }
+}
+

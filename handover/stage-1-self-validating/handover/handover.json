@@ -1,0 +1,176 @@
+{
+  "handover_id": "gimmer-refuge-stage1-001",
+  "project": {
+    "name": "Gimmer Crag Mountain Refuge",
+    "asset": "single-room mountain refuge on a high ledge",
+    "location": "Gimmer Crag fictional training scenario",
+    "stage": "stage_1_design",
+    "description": "First stage design pack for a lightweight refuge reached by foot, rope-access survey, and staged material lifts."
+  },
+  "owner": "morgan.patel@example.org",
+  "prepared_at": "2026-07-04T12:00:00Z",
+  "decision": "stage_1_design_ready_for_gateway_review",
+  "signoff": [
+    {
+      "role": "Project Sponsor",
+      "by": "sponsor@example.org",
+      "at": "2026-07-04T12:10:00Z"
+    },
+    {
+      "role": "Design Lead",
+      "by": "design.lead@example.org",
+      "at": "2026-07-04T12:15:00Z"
+    },
+    {
+      "role": "Safety Lead",
+      "by": "safety.lead@example.org",
+      "at": "2026-07-04T12:20:00Z"
+    },
+    {
+      "role": "Client/Operator",
+      "by": "operator@example.org",
+      "at": "2026-07-04T12:25:00Z"
+    }
+  ],
+  "acceptance_gates": [
+    {
+      "id": "G1",
+      "title": "Site and constraints understood for Stage 1",
+      "owner": "Design Lead",
+      "outcome": "pass",
+      "evidence_refs": [
+        "EV-SITE-001",
+        "EV-ACCESS-001"
+      ]
+    },
+    {
+      "id": "G2",
+      "title": "Concept design is safe enough for Stage 2 development",
+      "owner": "Safety Lead",
+      "outcome": "pass",
+      "evidence_refs": [
+        "EV-CONCEPT-001",
+        "EV-STRUCT-001",
+        "EV-RISK-001"
+      ]
+    },
+    {
+      "id": "G3",
+      "title": "Planning, environment, cost, and schedule are bounded",
+      "owner": "Project Sponsor",
+      "outcome": "conditional_pass",
+      "evidence_refs": [
+        "EV-ENV-001",
+        "EV-COST-001",
+        "EV-HANDOVER-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EV-SITE-001",
+      "name": "site-context-and-constraints.md",
+      "evidence_type": "site_context",
+      "path": "handover/evidence/site-context-and-constraints.md",
+      "digest_ref": "site-context-and-constraints.md.sha256",
+      "status": "accepted_for_stage_1",
+      "decision_use": "Defines terrain, weather, access assumptions, and non-negotiable constraints."
+    },
+    {
+      "id": "EV-ACCESS-001",
+      "name": "access-logistics-and-rescue.md",
+      "evidence_type": "access_logistics",
+      "path": "handover/evidence/access-logistics-and-rescue.md",
+      "digest_ref": "access-logistics-and-rescue.md.sha256",
+      "status": "accepted_for_stage_1",
+      "decision_use": "Shows how people, materials, emergency response, and inspections can reach the ledge."
+    },
+    {
+      "id": "EV-CONCEPT-001",
+      "name": "stage-1-concept-design.md",
+      "evidence_type": "concept_design",
+      "path": "handover/evidence/stage-1-concept-design.md",
+      "digest_ref": "stage-1-concept-design.md.sha256",
+      "status": "accepted_for_stage_1",
+      "decision_use": "Captures the preferred refuge option and alternatives rejected at Stage 1."
+    },
+    {
+      "id": "EV-STRUCT-001",
+      "name": "structural-safety-basis.md",
+      "evidence_type": "structural_safety",
+      "path": "handover/evidence/structural-safety-basis.md",
+      "digest_ref": "structural-safety-basis.md.sha256",
+      "status": "accepted_for_stage_1",
+      "decision_use": "Records the load, anchoring, and inspection basis for progressing design."
+    },
+    {
+      "id": "EV-ENV-001",
+      "name": "environment-planning-note.md",
+      "evidence_type": "environment_planning",
+      "path": "handover/evidence/environment-planning-note.md",
+      "digest_ref": "environment-planning-note.md.sha256",
+      "status": "accepted_for_stage_1",
+      "decision_use": "Lists planning, land, ecology, and visual-impact assumptions."
+    },
+    {
+      "id": "EV-COST-001",
+      "name": "cost-schedule-baseline.md",
+      "evidence_type": "cost_schedule",
+      "path": "handover/evidence/cost-schedule-baseline.md",
+      "digest_ref": "cost-schedule-baseline.md.sha256",
+      "status": "accepted_for_stage_1",
+      "decision_use": "Gives a bounded Stage 2 budget and schedule envelope."
+    },
+    {
+      "id": "EV-RISK-001",
+      "name": "risk-register.md",
+      "evidence_type": "risk_register",
+      "path": "handover/evidence/risk-register.md",
+      "digest_ref": "risk-register.md.sha256",
+      "status": "accepted_for_stage_1",
+      "decision_use": "Makes safety, weather, planning, and delivery risks visible before handover."
+    },
+    {
+      "id": "EV-HANDOVER-001",
+      "name": "handover-operating-notes.md",
+      "evidence_type": "handover_notes",
+      "path": "handover/evidence/handover-operating-notes.md",
+      "digest_ref": "handover-operating-notes.md.sha256",
+      "status": "accepted_for_stage_1",
+      "decision_use": "Explains what the next team inherits, owns, and must not assume."
+    }
+  ],
+  "residual_risks": [
+    {
+      "id": "RR-001",
+      "title": "Final rock anchor pull-out testing is not complete",
+      "severity": "amber",
+      "disposition": "carried_to_stage_2",
+      "owner": "Safety Lead"
+    },
+    {
+      "id": "RR-002",
+      "title": "Helicopter lift window remains weather dependent",
+      "severity": "amber",
+      "disposition": "carried_to_stage_2",
+      "owner": "Project Sponsor"
+    }
+  ],
+  "open_items": [
+    {
+      "id": "OI-001",
+      "title": "Confirm final landowner consent wording before detailed design freeze",
+      "severity": "watch",
+      "owner": "Client/Operator",
+      "due": "2026-07-31"
+    }
+  ],
+  "provenance": {
+    "subject": "handover/handover.json",
+    "attestation_type": "local-intoto-slsa-provenance",
+    "predicateType": "https://slsa.dev/provenance/v1",
+    "attestation_path": "handover/attestations/handover.intoto.json"
+  },
+  "release_note": "Stage 1 mountain refuge handover is acceptable only when validation writes PASS."
+}
+

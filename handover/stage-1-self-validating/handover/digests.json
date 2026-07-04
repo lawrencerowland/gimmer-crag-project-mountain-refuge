@@ -1,0 +1,15 @@
+{
+  "digests": {
+    "access-logistics-and-rescue.md.sha256": "4ee464355550fdb16dca93c2810ca014b5ff43ef0b51668b5d9f8efddef3de88",
+    "cost-schedule-baseline.md.sha256": "8e96176c9b6ef4bf06529a8022d37537460113bdc1a0bd6b699d31af44bca634",
+    "environment-planning-note.md.sha256": "38f671ddff6a62de874d441363782612b8884e239aaa8e9d4082315e0a1fac74",
+    "handover-operating-notes.md.sha256": "0c3dc0c1ebdc13660d3a300b924d0bbb09ee353328f6b178c7a28403a3ef403f",
+    "risk-register.md.sha256": "3b2729cfbd1a7d49811c3248b7d765534ca90e7232c831d1fffe250e50bae086",
+    "site-context-and-constraints.md.sha256": "5f1d7134401a396cd317581333fc9264c585cbeb0ed58e155c59d67afcd1a9bd",
+    "stage-1-concept-design.md.sha256": "b497ef5f544420ffcd719436b5a6e2cc3aeb68392f05974defec9930d5839dc2",
+    "structural-safety-basis.md.sha256": "3b3143b3bab6823738f1097e30a5d2b5e200aa7651d425d33af91a4b3d5c42a8"
+  },
+  "evidence_dir": "handover/evidence",
+  "generated_at": "2026-07-04T21:29:35Z",
+  "schema": "https://example.org/schemas/handover-digests.schema.json"
+}
