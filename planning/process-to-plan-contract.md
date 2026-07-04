@@ -6,6 +6,18 @@ Created: 2026-07-02
 This contract names the minimal shape a Gimmer Crag process-to-plan slice should expose. It is not a
 full schema yet; it is a reviewable agreement about what the app must make visible.
 
+## Route Boundary
+
+This contract applies to the Gimmer Petri/process -> schedule -> SMC/WBS route.
+
+- Primary foray: `FORAY-WBS-PATHS`
+- Parent context: `FORAY-PROCESSES-TO-PLANS`
+- Adjacent/deferred foray: `FORAY-DYNAMIC-PROJECT-STATES`
+
+The broader process-to-plan foray may use richer private scenarios, including hill/travel planning,
+but this public mirror should only claim the subset route made visible here. Dynamic-state labels are
+deferred until a state grammar has been tested outside this slice.
+
 ## Contract Fields
 
 ### `processFragment`
