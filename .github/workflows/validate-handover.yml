@@ -12,27 +12,34 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      attestations: read
-      id-token: write
+    env:
+      OPA_VERSION: v1.19.0
+      OPA_SHA256: 1dd5c5591ff856f5e20a1d66bafae9511ddf3c5552ed3b5070c70b2b6580ee3f
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
       - name: Validate local pack
         working-directory: handover/stage-1-self-validating
         run: make refresh
-      - name: Install OPA
+      - name: Install pinned OPA
         run: |
-          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
-          chmod +x opa
-          sudo mv opa /usr/local/bin/opa
+          set -euo pipefail
+          opa_bin="$RUNNER_TEMP/opa-bin"
+          mkdir -p "$opa_bin"
+          curl --fail --location --retry 3 --proto '=https' --tlsv1.2 \
+            "https://github.com/open-policy-agent/opa/releases/download/${OPA_VERSION}/opa_linux_amd64_static" \
+            --output "$opa_bin/opa"
+          printf '%s  %s\n' "$OPA_SHA256" "$opa_bin/opa" | sha256sum --check -
+          chmod 0755 "$opa_bin/opa"
+          echo "$opa_bin" >> "$GITHUB_PATH"
       - name: Evaluate Rego policy
         working-directory: handover/stage-1-self-validating
         run: make validate-opa
       - name: Upload handover status
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: handover-status
           path: |
@@ -41,4 +48,5 @@ jobs:
       - name: Release note line
         if: always()
         working-directory: handover/stage-1-self-validating
-        run: echo "Handover validation: $(cat handover.status 2>/dev/null || echo FAIL)"
+        run: |
+          echo "Handover validation: $(cat handover.status 2>/dev/null || echo FAIL)"
