@@ -6,14 +6,14 @@
   <title>Gimmer Crag Project Mountain Refuge</title>
   <style>
     :root {
-      --bg: #071013;
-      --panel: #102025;
-      --text: #eef6f4;
-      --muted: #a9bbb7;
-      --line: rgba(238, 246, 244, 0.16);
-      --accent: #7dd3c7;
-      --accent-strong: #f2c14e;
-      --shadow: rgba(0, 0, 0, 0.28);
+      --bg: #f7f5ef;
+      --panel: #fffefa;
+      --text: #17332f;
+      --muted: #566a60;
+      --line: #d7ded5;
+      --accent: #146c58;
+      --accent-strong: #dcedde;
+      --shadow: rgba(23, 51, 47, 0.04);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -31,14 +31,14 @@
     main {
       min-height: 100vh;
       display: grid;
-      grid-template-rows: minmax(390px, 62vh) auto;
+      grid-template-rows: auto auto;
     }
 
     .hero {
       position: relative;
       display: flex;
       align-items: end;
-      padding: 28px;
+      padding: 76px 44px 60px;
       isolation: isolate;
       overflow: hidden;
       border-bottom: 1px solid var(--line);
@@ -48,9 +48,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(180deg, rgba(7, 16, 19, 0.24), rgba(7, 16, 19, 0.92)),
-        url("input/processes%20to%20plans%20for%20Gimmer.PNG") center / cover;
+      background: var(--bg);
       z-index: -2;
     }
 
@@ -58,12 +56,13 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(7, 16, 19, 0.92), rgba(7, 16, 19, 0.42), rgba(7, 16, 19, 0.85));
+      background: none;
       z-index: -1;
     }
 
     .hero-inner {
-      width: min(940px, 100%);
+      width: min(1064px, 100%);
+      margin: 0 auto;
       display: grid;
       gap: 18px;
     }
@@ -79,8 +78,10 @@
     }
 
     h1 {
-      font-size: clamp(36px, 7vw, 74px);
-      line-height: 0.96;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 400;
+      font-size: clamp(40px, 5.5vw, 70px);
+      line-height: 1.05;
       margin: 0;
       max-width: 820px;
       letter-spacing: 0;
@@ -111,7 +112,7 @@
       padding: 10px 14px;
       border-radius: 8px;
       border: 1px solid var(--line);
-      background: rgba(16, 32, 37, 0.82);
+      background: var(--panel);
       text-decoration: none;
       font-weight: 700;
       box-shadow: 0 12px 30px var(--shadow);
@@ -119,7 +120,7 @@
 
     .button.primary {
       background: var(--accent);
-      color: #071013;
+      color: #fffefa;
       border-color: transparent;
     }
 
@@ -162,14 +163,18 @@
       text-decoration: none;
     }
 
+    a:focus-visible { outline: 3px solid #aa6025; outline-offset: 5px; }
+    .button:hover { background: #dcedde; color: #17332f; }
+    .button.primary:hover { background: #0e5344; color: #fffefa; }
+
     @media (max-width: 800px) {
       main {
         grid-template-rows: auto auto;
       }
 
       .hero {
-        min-height: 540px;
-        padding: 22px;
+        min-height: 420px;
+        padding: 45px 22px;
       }
 
       .content {
@@ -183,14 +188,14 @@
   <main>
     <section class="hero" aria-label="Gimmer Crag mountain refuge project">
       <div class="hero-inner">
-        <div class="eyebrow">Process-To-Plan Lab</div>
+        <div class="eyebrow">Process-to-Plan Experiments</div>
         <h1>Gimmer Crag Project Mountain Refuge</h1>
         <p class="lede">
-          Explore how a project's process becomes a plan: generate a legal execution, inspect its
-          causal dependencies, and test what a sequence/parallel task tree preserves or adds.
+          Explore the valid histories behind a selected execution, preserve their alternative task
+          orders, and build process fragments through typed input and output wires.
         </p>
         <div class="actions">
-          <a class="button primary" href="apps/causal-plan-lab/">Build a causal plan</a>
+          <a class="button primary" href="apps/process-contract-lab/">Open the Process Contract Lab</a>
           <a class="button" href="process-to-plan-lab/">Explore the lab</a>
           <a class="button" href="planning/process-to-plan-route-boundary.md">Read the boundary</a>
         </div>
@@ -198,6 +203,13 @@
     </section>
 
     <section class="content" aria-label="Available views">
+      <article class="tile">
+        <div>
+          <h2>Process Contract Lab</h2>
+          <p>Explore a selected trace's ancestry family, test its alternative sequential orders, and compose typed process fragments.</p>
+        </div>
+        <a href="apps/process-contract-lab/">Open the newest experiment</a>
+      </article>
       <article class="tile">
         <div>
           <h2>Causal Plan Lab</h2>
