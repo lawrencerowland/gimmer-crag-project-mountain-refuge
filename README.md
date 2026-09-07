@@ -7,6 +7,10 @@ inspectable. The public lab uses fictional refuge scenarios.
 
 Start at [the Process-to-Plan Lab](process-to-plan-lab/).
 
+- [Process Contract Lab](apps/process-contract-lab/) explores the producer-count ancestry families
+  compatible with a selected complete trace, preserves their alternative sequential event orders,
+  and tests whether one dependency graph can express that language. It also compiles typed
+  process fragments through selective input/output wires and generates their complete executions.
 - [Causal Plan Lab](apps/causal-plan-lab/) constructs a chosen token-flow execution witness,
   derives its causal dependency DAG and schedule, and checks whether an elementary sequence/parallel
   task tree preserves exactly the same order. An obstruction leaves the exact DAG available.
@@ -14,16 +18,20 @@ Start at [the Process-to-Plan Lab](process-to-plan-lab/).
   is the retained comparison: different process assumptions can generate the same complete baseline
   plan while responding differently to a change in resources or priority.
 - [Causal method and limits](planning/causal-plan-method.md) and
-  [autonomous run record](planning/autonomous-run-2026-09-07.md) state the new construction, counterexamples and evidence.
+  [earlier autonomous run record](planning/autonomous-run-2026-09-07.md) state the single-witness construction, counterexamples and evidence.
+- [Process contract method](planning/process-contract-method.md) and
+  [process contract run record](planning/process-contract-run-2026-09-07.md) describe the ancestry-family and typed-composition increment.
 - [Witness method note](planning/two-process-same-plan-witness.md) states the earlier comparison's
   model, projection, expected outcomes and tests.
 - [Earlier translation contract](planning/process-to-plan-contract.md) and
   [route boundary](planning/process-to-plan-route-boundary.md) describe the original Petri/WBS slice.
 
-The causal lab's claims concern its explicit finite models and chosen token ancestry. A failure of
-the restricted task/sequence/parallel grammar does not show that general symmetric monoidal
-diagrams cannot represent the process. The scenarios and durations are illustrative assumptions,
-not verified construction methods.
+The experiments progress from two processes sharing one plan, through a single causal witness,
+to alternatives across a selected trace's ancestry family and composition through typed wires.
+Exactness is always tied to the declared object and completed enumeration. An exact sequential-order
+language does not establish concurrent-step or timed equivalence. Computation limits remain visible.
+A failure of the restricted task/sequence/parallel tree grammar does not rule out a richer typed
+wire construction. Scenarios and durations are illustrative, not verified construction methods.
 
 ## Source lineage
 
@@ -46,7 +54,13 @@ python3 -m http.server 8000
 Open `http://localhost:8000/process-to-plan-lab/`. Pull requests run the test suite.
 Pushes to `main` also run it before the existing Jekyll Pages build and deployment.
 
-The optional ordinary-browser regression script requires Playwright and a Chromium installation:
+The optional ordinary-browser regression scripts require Playwright and a Chromium installation:
+
+```sh
+LAB_BASE_URL=http://localhost:8000 node scripts/process-contract-browser.mjs
+```
+
+The contract script covers alternative languages, typed wires, joint starts, correction, persistence, portable results, cancellation and mobile navigation. Its evidence defaults to `/tmp/process-contract-browser-evidence`. The earlier causal lab retains its own browser journey:
 
 ```sh
 LAB_BASE_URL=http://localhost:8000 node scripts/browser-check.mjs
