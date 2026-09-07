@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Petri Net → SMC → WBS (Toy Project: Build a Mountain Refuge)</title>
+  <title>One plan. Two possible projects. · Gimmer</title>
   <link rel="stylesheet" href="../../common.css" />
   <style>
     :root{
@@ -186,138 +186,199 @@
     .contractStep p{font-size:12px;color:var(--muted);margin:4px 0;overflow-wrap:anywhere;}
     .contractStep ul{margin:6px 0 0 18px;padding:0;color:var(--muted);font-size:12px;overflow-wrap:anywhere;}
     .contractStep code{font-family:var(--mono);font-size:11px;color:#dbeafe;word-break:break-word;}
+
+    #same-plan-witness{margin:24px 0;border-color:rgba(56,189,248,.45);padding:20px;}
+    #same-plan-witness h2{margin:0 0 8px;}
+    #same-plan-witness .witnessIntro{max-width:78ch;}
+    .witnessChoices{border:0;padding:0;margin:18px 0;min-width:0;}
+    .witnessChoices legend{margin-bottom:8px;font-weight:600;}
+    .witnessChoices .btn{min-height:44px;}
+    .witnessChoices .btn[aria-pressed="true"]{background:#174558;border-color:#7dd3fc;color:#fff;}
+    #same-plan-witness :focus-visible{outline:3px solid #fbbf24;outline-offset:4px;}
+    .witnessModels{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .witnessModels > *{min-width:0;}
+    .witnessModel{border:1px solid var(--line);padding:14px;border-radius:12px;background:rgba(0,0,0,.16);}
+    .witnessModel h3{margin-top:0;}
+    .witnessFlow{font-size:15px;color:#bae6fd;line-height:1.8;}
+    .witnessResult{font-size:18px;font-weight:600;margin:18px 0 8px;}
+    .witnessMetrics{margin:12px 0 0;display:grid;grid-template-columns:1fr auto;gap:6px;font-size:14px;}
+    .witnessMetrics dt{color:#cbd5e1;}
+    .witnessMetrics dd{margin:0;font-variant-numeric:tabular-nums;}
+    #same-plan-witness summary{cursor:pointer;padding:12px 0;font-weight:600;}
+    #same-plan-witness .table{table-layout:fixed;}
+    #same-plan-witness .table th:first-child{width:43%;}
+    #same-plan-witness .table th,#same-plan-witness .table td{overflow-wrap:anywhere;padding:7px 5px;}
+    #same-plan-witness .code{white-space:pre-wrap;word-break:break-word;max-height:340px;overflow:auto;}
+    #same-plan-witness .note{font-size:14px;}
+    @media(max-width:700px){
+      .witnessModels{grid-template-columns:1fr;}
+      #same-plan-witness{padding:14px;}
+      .witnessChoices .row{align-items:stretch;}
+      .witnessChoices .btn{flex:1 1 100%;}
+    }
+
+    [hidden]{display:none!important;}
+    .srOnly{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
+    :focus-visible{outline:3px solid #fbbf24!important;outline-offset:4px;}
+    html{scroll-padding-top:20px;}
+    body{background:#0a111b;color:#e8eef6;}
+    .wrap{max-width:1140px;padding-top:22px;}
+    .pageNav,.pageFooter{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;}
+    .pageNav a,.pageFooter a,.toolNav a{text-decoration:none;}
+    .pageNav a:hover,.pageFooter a:hover,.toolNav a:hover{text-decoration:underline;}
+    .journeyHero{padding:34px 0 24px;max-width:840px;}
+    .eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#93a9c0;}
+    .journeyHero h1{font-size:clamp(38px,5vw,62px);line-height:1.04;letter-spacing:-.045em;font-weight:650;border:0;display:block;padding:0;margin:14px 0 20px;}
+    .journeyHero h1 span{color:#81d7f1;}
+    .heroCopy{font-size:19px;max-width:650px;line-height:1.5;color:#c0ccda;}
+    .heroCopy strong{color:#fff;}
+    .heroMeta{font-size:12px;color:#91a3b7;margin-top:16px;}
+    #same-plan-witness{margin:0 0 28px;padding:24px;background:#111d2b;border-color:#294257;box-shadow:none;}
+    .witnessChoices{margin:0 0 24px;}
+    .journeySteps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+    .journeySteps .btn{text-align:left;background:transparent;color:#a8bacb;border-color:#2a3d50;font-size:14px;padding:11px 14px;min-height:48px;}
+    .journeySteps .btn span{color:#89aec1;margin-right:9px;font-size:11px;}
+    .journeySteps .btn[aria-pressed=true]{background:#173949;border-color:#69c9e6;}
+    .sceneTop{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;}
+    #same-plan-witness h2{font-size:27px;line-height:1.15;letter-spacing:-.02em;margin:7px 0 10px;}
+    #sceneIntro{color:#b6c5d5;max-width:660px;font-size:15px;}
+    .btn.primaryAction{background:#89ddf2;color:#061722;border-color:#89ddf2;min-height:50px;padding:12px 17px;font-weight:700;font-size:14px;white-space:normal;max-width:240px;}
+    .btn.primaryAction:hover{background:#b2edfa;transform:none;}
+    #witnessSettings{margin:18px 0 12px;color:#a4b8c9;}
+    .witnessModels{gap:16px;}
+    .witnessModel{background:#0c1622;border-color:#2c4053;padding:18px;}
+    .witnessModel h3{font-size:18px;color:#f1f5f9;display:flex;gap:10px;align-items:center;}
+    .modelLetter{display:inline-grid;place-items:center;width:26px;height:26px;border:1px solid #48637a;border-radius:6px;color:#9bdcef;font-size:13px;}
+    .witnessModel>p{font-size:13px;color:#aebdcd;min-height:38px;}
+    .miniTimeline{margin:16px 0;}
+    .timelineAxis{display:flex;justify-content:space-between;margin-left:52px;color:#8499ad;font-size:10px;}
+    .timelineRow{display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:center;margin-top:9px;font-size:12px;}
+    .timelineTrack{height:27px;position:relative;border-left:1px solid #425669;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(33.333% - 1px),#223447 calc(33.333% - 1px),#223447 33.333%);}
+    .timelineBar{position:absolute;top:0;height:27px;border-radius:4px;background:#75cce3;color:#06202b;display:grid;place-items:center;font-size:11px;font-weight:700;}
+    .timelineBar.roof{background:#baabec;color:#23173b;}
+    .finishLine{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;border-top:1px solid #233b4d;padding-top:14px;font-size:12px;color:#99adc0;}
+    .finishLine strong{font-size:28px;letter-spacing:-.04em;color:#f3f7fa;}
+    .finishLine span:last-child{margin-left:auto;color:#96dbc8;}
+    .excerptNote{font-size:11px;color:#91a7ba;margin-top:10px;}
+    #witnessStatus{font-size:17px;margin:20px 0 5px;color:#ecf5fb;}
+    #same-plan-witness .note{font-size:14px;background:transparent;border-left-color:#7ebace;color:#bccddd;}
+    .takeaway{padding:16px 20px;border:1px solid #427261;border-radius:10px;background:#102b26;margin:18px 0;}
+    .takeaway h3{font-size:23px;margin:5px 0 9px;}
+    .takeaway p{color:#c1dbd1;}
+    .journeyFooter{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:20px 0;}
+    .journeyFooter>a{margin-left:auto;font-size:13px;}
+    button:disabled{opacity:.35;cursor:default;transform:none!important;}
+    #witnessDetails{border-top:1px solid #2b4356;margin-top:18px;}
+    #witnessDetails>summary{font-size:13px;color:#b9cddb;}
+    .workbench{border:1px solid #294055;border-radius:14px;background:#101a27;}
+    .workbench>summary{padding:22px 24px;cursor:pointer;font-size:21px;font-weight:600;}
+    .workbench>summary>span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#90abc1;display:block;margin-bottom:6px;}
+    .workbench>summary small{display:block;font-size:12px;color:#9baec0;font-weight:400;margin-top:8px;}
+    .workbenchBody{padding:0 22px 22px;}
+    .workbenchIntro{max-width:850px;color:#b1c3d4;font-size:14px;}
+    .toolNav{display:flex;flex-wrap:wrap;gap:12px 22px;padding:18px 0;border-bottom:1px solid #2a3d50;font-size:13px;}
+    .toolDisclosure{margin:18px 0;border-top:1px solid #2b3e50;padding-top:14px;}
+    .toolDisclosure>summary{cursor:pointer;font-weight:600;padding:10px 0;color:#cad9e5;}
+    .list button.item{width:100%;border:0;border-bottom:1px solid #243649;text-align:left;color:inherit;font:inherit;}
+    .list button.item[aria-pressed=true]{background:#1b3648;box-shadow:inset 3px 0 #80d5ef;}
+    .list button.item:focus-visible{outline-offset:-3px;}
+    .pageFooter{border-top:1px solid #22374a;padding-top:20px;margin-top:28px;color:#7f97ad;font-size:12px;}
+    @media(max-width:700px){
+      .wrap{padding:16px 16px 32px;}
+      .pageNav{font-size:12px;gap:8px;}
+      .journeyHero{padding:25px 0 20px;}
+      .heroCopy{font-size:17px;}
+      #same-plan-witness{padding:16px;}
+      .journeySteps{gap:5px;}
+      .journeySteps .btn{padding:9px 7px;font-size:11px;line-height:1.4;}
+      .journeySteps .btn span{display:block;margin-bottom:4px;}
+      .sceneTop{grid-template-columns:1fr;gap:10px;}
+      #same-plan-witness h2{font-size:24px;}
+      .btn.primaryAction{width:100%;max-width:none;}
+      .witnessModel>p{min-height:0;}
+      .journeyFooter>a{margin-left:0;width:100%;margin-top:6px;}
+      .workbench>summary{padding:18px;font-size:19px;}
+      .workbenchBody{padding:0 12px 18px;}
+      .finishLine strong{font-size:27px;}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important;}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <p><a href="../../index.html">Back to app index</a></p>
-    <h1>Petri Net → SMC → WBS: a “tiny artifact” workflow (toy project: build a mountain refuge halfway up a mountain)</h1>
-    <p class="muted">
-      This page is a single-file, shareable demo: it contains (i) a Petri net that encodes the <em>physical logic</em> of a mountain-refuge build,
-      (ii) a timed simulator that turns <em>different markings / choices</em> into different schedules, and (iii) an “elementary WBS” view
-      derived from those schedules.
-    </p>
+    <nav class="pageNav" aria-label="Page navigation"><a href="../../process-to-plan-lab/">← Gimmer apps</a><a href="#schedule-lab" data-open-workbench>Open the editable model ↗</a></nav>
+    <header class="journeyHero">
+      <p class="eyebrow">Gimmer · a process-to-plan experiment</p>
+      <h1>One plan.<br><span>Two possible projects.</span></h1>
+      <p class="heroCopy">You’re asked to finish a mountain refuge sooner. Two teams show the same <strong>36-day plan</strong>. Would extra resources help them equally?</p>
+      <p class="heroMeta">Three short comparisons · a fictional build · no setup</p>
+    </header>
 
-    <div class="badges">
-      <span class="badge ok">1 file • runs offline</span>
-      <span class="badge">Petri net = “what’s allowed”</span>
-      <span class="badge">SMC term = “how it composes”</span>
-      <span class="badge">WBS = “how you package it”</span>
-    </div>
-    <div class="row" style="margin:10px 0 4px;">
-      <button class="btn secondary" data-explain="notes">Notes</button>
-      <span class="muted smalltxt">Quick explainer for the Petri net → SMC → WBS framing.</span>
-    </div>
-
-    <div class="panel">
-      <header>
-        <div>
-          <div class="title">How to use this affordance in <em>your</em> project</div>
-          <div class="subtitle">Make the Petri net the single source of truth; generate many WBS/schedules as views.</div>
+    <section class="panel journey" id="same-plan-witness" aria-labelledby="witnessTitle">
+      <fieldset class="witnessChoices">
+        <legend class="srOnly">Choose a step in the comparison</legend>
+        <div class="journeySteps">
+          <button type="button" class="btn" data-witness="baseline" aria-pressed="true"><span>01</span> Same plan</button>
+          <button type="button" class="btn" data-witness="capacity" aria-pressed="false"><span>02</span> More resources</button>
+          <button type="button" class="btn" data-witness="preference" aria-pressed="false"><span>03</span> Different order</button>
         </div>
-      </header>
-
-      <div class="miniGrid">
-        <div>
-          <h3>Step A — Write the project’s physical logic as a Petri net</h3>
-          <p class="muted">
-            Places represent “states/resources”; transitions represent “work”.
-            Tokens are your <em>marking</em> (what’s currently true / available).
-          </p>
-          <ul class="muted" style="margin:8px 0 0 18px;">
-            <li>Inputs to a transition = prerequisites/resources it needs.</li>
-            <li>Outputs = what becomes true when that work finishes.</li>
-            <li>Parallelism is <em>not an extra feature</em>—it’s just “multiple enabled transitions”.</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3>Step B — Treat schedules as “executions” of that net</h3>
-          <p class="muted">
-            A schedule is a particular way of firing transitions over time:
-            different priorities, different resource tokens, different durations ⇒ different schedules,
-            all still compliant with the same physical logic.
-          </p>
-          <div class="note">
-            In the theory view, a Petri net presents a (commutative) symmetric monoidal category: markings behave like objects, firing sequences like morphisms.
-            That’s why “schedule alternatives” naturally show up as different composites / string diagrams.
-          </div>
-        </div>
+      </fieldset>
+      <div class="sceneTop">
+        <div><p class="eyebrow" id="journeyPosition"></p><h2 id="witnessTitle" tabindex="-1"></h2><p id="sceneIntro"></p></div>
+        <button type="button" class="btn primaryAction" id="journeyNext">Double the resources →</button>
       </div>
-
-      <div class="miniGrid" style="margin-top:6px;">
-        <div>
-          <h3>Step C — Export and share as a runnable artifact</h3>
-          <p class="muted">
-            Two practical routes:
-          </p>
-          <ol class="muted" style="margin:8px 0 0 18px;">
-            <li><b>Julia route:</b> author the net in <span class="kbd">AlgebraicPetri.jl</span>, explore/compose/simulate, export a self-contained HTML from a notebook.</li>
-            <li><b>Browser route:</b> keep a tiny JSON net spec + a tiny JS viewer (like this file), publish on GitHub Pages or attach to tickets.</li>
-          </ol>
-        </div>
-        <div>
-          <h3>Step D — Make WBS a view, not the source</h3>
-          <p class="muted">
-            WBS becomes one <em>projection</em> of the same underlying process:
-            group the same transitions into phases/work packages,
-            and let each schedule produce a “time-respecting” WBS instance.
-          </p>
-        </div>
+      <p id="witnessSettings" class="smalltxt"></p>
+      <div class="witnessModels">
+        <article class="witnessModel">
+          <h3><span class="modelLetter">A</span> Shared resources</h3>
+          <p>Walls and roof can overlap when crew, tools and lift are available.</p>
+          <div id="witnessTimelineA" class="miniTimeline"></div>
+          <div class="finishLine"><span>Project finish</span><strong id="witnessFinishA"></strong><span id="witnessSavingA"></span></div>
+          <dl class="witnessMetrics srOnly" id="witnessMetricsA"></dl>
+        </article>
+        <article class="witnessModel">
+          <h3><span class="modelLetter">B</span> Required order</h3>
+          <p>The method also requires walls to finish before roof work can start.</p>
+          <div id="witnessTimelineB" class="miniTimeline"></div>
+          <div class="finishLine"><span>Project finish</span><strong id="witnessFinishB"></strong><span id="witnessSavingB"></span></div>
+          <dl class="witnessMetrics srOnly" id="witnessMetricsB"></dl>
+        </article>
       </div>
-    </div>
-
-    <h2>1) The toy Petri net: build a mountain refuge halfway up a mountain</h2>
-
-    <div class="grid grid2">
-      <div class="panel">
-        <header>
-          <div>
-            <div class="title">Interactive Petri net</div>
-            <div class="subtitle">Click an enabled transition to fire it (instant / untimed).</div>
-          </div>
-          <div class="row">
-            <button class="btn ghost small" id="btnReset">Reset marking</button>
-            <button class="btn small" id="btnStepAuto">Auto-step (random)</button>
-            <button class="btn secondary small" id="btnAutoRoute" title="Run a known-good sequence from kickoff to open.">Auto-run example route</button>
-            <button class="btn bad small" id="btnResetAll">Reset + defaults</button>
-            <span class="muted smalltxt" id="autoRouteStatus"></span>
-          </div>
-        </header>
-
-        <div class="svgWrap">
-          <svg id="netSvg" viewBox="0 0 1360 520" width="100%" height="520" role="img" aria-label="Petri net diagram"></svg>
-        </div>
-
-        <div class="note">
-          Tip: The untimed firing view is about <b>reachability</b> (what markings are possible). The schedule generator below adds <b>durations</b> + <b>resource tokens</b>.
-        </div>
+      <p class="excerptNote">Wall and roof excerpt · same day 18–27 scale in both views. The comparison below checks all 14 tasks.</p>
+      <p id="witnessStatus" class="witnessResult" role="status" aria-live="polite" aria-atomic="true"></p>
+      <p id="witnessMeaning" class="note"></p>
+      <div id="journeyTakeaway" class="takeaway" hidden>
+        <p class="eyebrow">Take this into the next planning conversation</p>
+        <h3>A plan shows when. Ask why.</h3>
+        <p>Before promising an earlier finish, establish whether the wait comes from shared resources or a required handoff. The plan alone cannot settle that question.</p>
       </div>
+      <div class="journeyFooter"><button type="button" class="btn ghost" id="journeyBack" disabled>← Previous</button><button type="button" class="btn ghost" id="journeyRestart">Start again</button><a href="#schedule-lab" data-open-workbench>Try the editable model ↗</a></div>
+      <p class="smalltxt">Fixed toy durations. Each step sets its own resources and priority. Temporary results; reload returns to step 1. Nothing is saved or approved.</p>
+      <details id="witnessDetails">
+        <summary>Inspect both complete plans and the hidden rule</summary>
+        <p>Each model runs separately. Equality checks every task ID, label, start, finish and duration;
+          resources, priority, units and makespan; and the full stage/WBS and same-start expression.
+          The process arcs and their rationale are deliberately outside this plan projection.</p>
+        <div class="witnessModels">
+          <div><h3>Plan A</h3><div id="witnessPlanA"></div></div>
+          <div><h3>Plan B</h3><div id="witnessPlanB"></div></div>
+        </div>
+        <h3>Actual roof-transition difference</h3>
+        <pre class="code" id="witnessRule" tabindex="0" aria-label="Roof transition inputs and outputs"></pre>
+        <details><summary>Exact computed plan data</summary>
+          <pre class="code" id="witnessJson" tabindex="0" aria-label="Both computed plan projections"></pre>
+        </details>
+      </details>
+      <p class="smalltxt">This demonstrates information loss in a chosen-execution projection.
+        It does not prove a mathematical functor or validate real construction sequencing, resource estimates or safety.</p>
+    </section>
 
-      <div class="panel">
-        <header>
-          <div>
-            <div class="title">Marking + enabled work</div>
-            <div class="subtitle">The Petri net tells you what’s allowed <em>right now</em>.</div>
-          </div>
-        </header>
-
-        <div class="kv" id="markingKv"></div>
-
-        <h3 style="margin-top:14px;">Enabled transitions</h3>
-        <div class="list" id="enabledList"></div>
-
-        <h3 style="margin-top:14px;">What this encodes</h3>
-        <ul class="muted" style="margin:6px 0 0 18px;">
-          <li>Permitting/logistics/access work can proceed in parallel after kickoff.</li>
-          <li>Foundation requires: permits + materials at site + site prepared + crew + tools.</li>
-          <li>Walls & roof can be parallel <em>if</em> you have enough crew/tools/lift tokens.</li>
-        </ul>
-      </div>
-    </div>
-
-    <h2>2) Generate schedule options from the same net</h2>
-
+    <details id="workbench" class="workbench">
+      <summary><span>Go further</span> Open the editable model <small>Resources · durations · schedules · WBS · manual Petri net</small></summary>
+      <div class="workbenchBody">
+        <h2 id="schedule-lab" tabindex="-1">Try your own assumptions</h2>
+        <p class="workbenchIntro"><strong>Your sandbox is model A.</strong> Change its resources, durations and priority, generate schedules, then inspect a candidate’s Gantt, task list and WBS. This is independent of the fixed A/B comparison above. Results are temporary; changing settings clears earlier candidates and reload resets the page.</p>
+        <nav class="toolNav" aria-label="Modelling tools"><a href="#schedule-lab">Schedules & WBS</a><a href="#process-lab">Manual Petri net</a><a href="#netJson">Model JSON</a><a href="#model-notes">How the method works</a></nav>
     <div class="grid grid2">
       <div class="panel">
         <header>
@@ -344,7 +405,9 @@
                 <input class="small" id="liftInput" type="number" min="1" max="6" step="1" value="1"/>
               </div>
               <div class="spacer"></div>
-              <button class="btn secondary" id="btnApplyResources">Apply to marking</button>
+              <button class="btn secondary" id="btnApplyResources">Apply to manual model</button>
+              <a href="#process-lab" class="smalltxt">View manual model</a>
+              <span id="manualApplyStatus" class="smalltxt" role="status" aria-live="polite"></span>
             </div>
 
             <h3 style="margin-top:12px;">Priority policy</h3>
@@ -360,8 +423,7 @@
               </div>
             </div>
 
-            <h3 style="margin-top:12px;">Durations (days)</h3>
-            <div id="durationEditor" class="list"></div>
+            <details class="toolDisclosure"><summary>Change task durations · 14 tasks</summary><div id="durationEditor" class="list"></div></details>
           </div>
 
           <div>
@@ -378,15 +440,15 @@
             </div>
 
             <div class="row" style="margin-top:10px;">
-              <button class="btn" id="btnGenerate">Generate</button>
+              <button class="btn" id="btnGenerate">Generate schedules</button>
               <button class="btn ghost" id="btnClearSchedules">Clear</button>
               <div class="spacer"></div>
-              <span class="smalltxt" id="genStatus">—</span>
+              <span class="smalltxt" id="genStatus" role="status" aria-live="polite">Generate a starting plan, then change an assumption.</span>
             </div>
 
             <div class="note">
               Each candidate is a <b>timed execution</b> of the same Petri net.
-              If you keep the net fixed, any schedule produced is automatically “physically compliant” by construction.
+              A completed schedule follows the encoded toy rules. Those rules do not establish real-world physical or safety compliance.
             </div>
 
             <h3 style="margin-top:12px;">Candidate list</h3>
@@ -443,7 +505,120 @@
       </div>
     </div>
 
-    <h2>3) Reuse this pattern for your real project</h2>
+        <details id="manual-model" class="toolDisclosure"><summary>Explore which work is allowed · manual Petri net</summary>
+    <h2 id="process-lab" tabindex="-1">Explore which work is allowed</h2><p class="muted">This is the untimed token view of model A. Fire enabled work, reset it, or follow the example route. Schedule generation above starts from the configured initial state, independently of this manual walk.</p>
+
+    <div class="grid grid2">
+      <div class="panel">
+        <header>
+          <div>
+            <div class="title">Interactive Petri net</div>
+            <div class="subtitle">Click an enabled transition to fire it (instant / untimed).</div>
+          </div>
+          <div class="row">
+            <button class="btn ghost small" id="btnReset">Reset marking</button>
+            <button class="btn small" id="btnStepAuto">Auto-step (random)</button>
+            <button class="btn secondary small" id="btnAutoRoute" title="Run a known-good sequence from kickoff to open.">Auto-run example route</button>
+            <button class="btn bad small" id="btnResetAll">Reset + defaults</button>
+            <span class="muted smalltxt" id="autoRouteStatus"></span>
+          </div>
+        </header>
+
+        <div class="svgWrap">
+          <svg id="netSvg" viewBox="0 0 1360 520" width="100%" height="520" role="img" aria-label="Petri net diagram"></svg>
+        </div>
+
+        <div class="note">
+          Tip: The untimed firing view is about <b>reachability</b> (what markings are possible). The schedule generator above adds <b>durations</b> + <b>resource tokens</b>.
+        </div>
+      </div>
+
+      <div class="panel">
+        <header>
+          <div>
+            <div class="title">Marking + enabled work</div>
+            <div class="subtitle">The Petri net tells you what’s allowed <em>right now</em>.</div>
+          </div>
+        </header>
+
+        <div class="kv" id="markingKv"></div>
+
+        <h3 style="margin-top:14px;">Enabled transitions</h3>
+        <div class="list" id="enabledList"></div>
+
+        <h3 style="margin-top:14px;">What this encodes</h3>
+        <ul class="muted" style="margin:6px 0 0 18px;">
+          <li>Permitting/logistics/access work can proceed in parallel after kickoff.</li>
+          <li>Foundation requires: permits + materials at site + site prepared + crew + tools.</li>
+          <li>Walls & roof can be parallel <em>if</em> you have enough crew/tools/lift tokens.</li>
+        </ul>
+      </div>
+    </div>
+
+        </details>
+        <details id="model-notes" class="toolDisclosure"><summary>How the method works · process, execution and WBS</summary>
+<div id="methodNotes" class="note" style="white-space:pre-line"></div>
+    <div class="panel">
+      <header>
+        <div>
+          <div class="title">How to use this affordance in <em>your</em> project</div>
+          <div class="subtitle">Encode a set of process assumptions; generate WBS and schedule views from it.</div>
+        </div>
+      </header>
+
+      <div class="miniGrid">
+        <div>
+          <h3>Step A — Write the project’s assumed logic as a Petri net</h3>
+          <p class="muted">
+            Places represent “states/resources”; transitions represent “work”.
+            Tokens are your <em>marking</em> (what’s currently true / available).
+          </p>
+          <ul class="muted" style="margin:8px 0 0 18px;">
+            <li>Inputs to a transition = prerequisites/resources it needs.</li>
+            <li>Outputs = what becomes true when that work finishes.</li>
+            <li>Parallelism is <em>not an extra feature</em>—it’s just “multiple enabled transitions”.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Step B — Treat schedules as “executions” of that net</h3>
+          <p class="muted">
+            A schedule is a particular way of firing transitions over time:
+            different priorities, different resource tokens, different durations ⇒ different schedules,
+            all still subject to the same encoded toy rules.
+          </p>
+          <div class="note">
+            In the theory view, a Petri net presents a (commutative) symmetric monoidal category: markings behave like objects, firing sequences like morphisms.
+            That’s why “schedule alternatives” naturally show up as different composites / string diagrams.
+          </div>
+        </div>
+      </div>
+
+      <div class="miniGrid" style="margin-top:6px;">
+        <div>
+          <h3>Step C — Export and share as a runnable artifact</h3>
+          <p class="muted">
+            Two practical routes:
+          </p>
+          <ol class="muted" style="margin:8px 0 0 18px;">
+            <li><b>Julia route:</b> author the net in <span class="kbd">AlgebraicPetri.jl</span>, explore/compose/simulate, export a self-contained HTML from a notebook.</li>
+            <li><b>Browser route:</b> keep a tiny JSON net spec + a tiny JS viewer (like this file), publish on GitHub Pages or attach to tickets.</li>
+          </ol>
+        </div>
+        <div>
+          <h3>Step D — Make WBS a view, not the source</h3>
+          <p class="muted">
+            WBS becomes one <em>projection</em> of the same underlying process:
+            group the same transitions into phases/work packages,
+            and let each schedule produce a “time-respecting” WBS instance.
+          </p>
+        </div>
+      </div>
+    </div>
+
+        </details>
+        <details id="reuse-model" class="toolDisclosure"><summary>Copy model JSON & reuse notes</summary>
+    <h2>Copy the model and explore the method</h2>
 
     <div class="panel">
       <header>
@@ -455,7 +630,7 @@
 
       <div class="twoCol">
         <div>
-          <h3>Version-controlled net as your “physics”</h3>
+          <h3>Version-controlled net as your explicit assumptions</h3>
           <ul class="muted" style="margin:8px 0 0 18px;">
             <li>Keep a <b>JSON</b> net spec in the repo (places, transitions, arcs, default marking).</li>
             <li>Review changes like code: “Did we add a dependency? a resource? a rework loop?”</li>
@@ -477,7 +652,7 @@
           </ul>
           <p class="muted" style="margin-top:10px;">
             The key benefit is organizational: you stop arguing about precedence rules inside the Gantt chart,
-            because precedence is already encoded in the Petri net.
+            because the assumed precedence is explicit and open to challenge in the Petri net.
           </p>
         </div>
       </div>
@@ -493,19 +668,212 @@
         You can open this file locally (double click) or host it anywhere static. Replace the JSON with your real project net and keep the rest of the UI.
       </div>
     </div>
-
-  </div>
-
-  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="content">
-      <div class="hd">
-        <h3 id="modalTitle">Notes</h3>
-        <button class="close" aria-label="Close">×</button>
+        </details>
       </div>
-      <div class="bd" id="modalBody" style="white-space:pre-wrap"></div>
-    </div>
+    </details>
+    <footer class="pageFooter"><a href="../../process-to-plan-lab/">← Back to Gimmer apps</a><span>One plan. Two possible projects. · Experiment 20</span></footer>
+
   </div>
 
+<script id="petri-core">
+function enabledTransitions(m, processNet=net){
+  const enabled = [];
+  for(const tr of processNet.transitions){
+    let ok = true;
+    for(const [pid,w] of Object.entries(tr.pre)){
+      if((m[pid]||0) < w){ ok=false; break; }
+    }
+    if(ok) enabled.push(tr);
+  }
+  return enabled;
+}
+
+
+function policyOrder(policy, processNet=net){
+  const ids = processNet.transitions.map(t=>t.id);
+  if(policy==="default"){
+    return ["kickoff","permits","liftMaterials","access","siteprep","foundation","frame","walls","roof","utilities","interior","safety","inspect","open"];
+  }
+  if(policy==="wallsFirst"){
+    return ["kickoff","permits","liftMaterials","access","siteprep","foundation","frame","walls","roof","utilities","interior","safety","inspect","open"];
+  }
+  if(policy==="roofFirst"){
+    return ["kickoff","permits","liftMaterials","access","siteprep","foundation","frame","roof","walls","utilities","interior","safety","inspect","open"];
+  }
+  return ids; // random handled separately
+}
+
+function simulateTimed({crewTokens, toolsTokens, liftTokens, policy, maxSteps}, processNet=net, durationValues=durations){
+  const transitionsById = Object.fromEntries(processNet.transitions.map(tr=>[tr.id, tr]));
+  const m = {};
+  processNet.places.forEach(p=>m[p.id]=p.initial);
+
+  m["crew"] = crewTokens;
+  m["tools"] = toolsTokens;
+  m["lift"] = liftTokens;
+
+  let time = 0;
+  let steps = 0;
+
+  const inProg = []; // {id, end, start}
+  const schedule = []; // {id,label,start,end,duration}
+
+  function isDone(){ return (m["complete"]||0) >= 1; }
+
+  function startIfPossible(){
+    const order = policyOrder(policy, processNet);
+
+    let candidates = enabledTransitions(m, processNet);
+    if(policy==="random"){
+      candidates = candidates.slice().sort(()=>Math.random()-0.5);
+    } else {
+      const idx = Object.fromEntries(order.map((id,i)=>[id,i]));
+      candidates.sort((a,b)=>(idx[a.id]??999)-(idx[b.id]??999));
+    }
+
+    let startedAny = false;
+    for(const tr of candidates){
+      let ok = true;
+      for(const [pid,w] of Object.entries(tr.pre)){
+        if((m[pid]||0) < w){ ok=false; break; }
+      }
+      if(!ok) continue;
+
+      for(const [pid,w] of Object.entries(tr.pre)){
+        m[pid] -= w;
+      }
+      const dur = durationValues[tr.id] ?? tr.duration ?? 0;
+      const end = time + dur;
+
+      schedule.push({id:tr.id,label:tr.label,start:time,end:null,duration:dur});
+
+      if(dur===0){
+        for(const [pid,w] of Object.entries(tr.post)){
+          m[pid] = (m[pid]||0) + w;
+        }
+        schedule[schedule.length-1].end = time;
+      } else {
+        inProg.push({id:tr.id, end, start:time});
+      }
+      startedAny = true;
+      steps += 1;
+      if(steps>=maxSteps) break;
+    }
+    return startedAny;
+  }
+
+  while(!isDone() && steps < maxSteps){
+    const started = startIfPossible();
+    if(isDone()) break;
+
+    if(inProg.length===0){
+      if(!started){
+        return {ok:false, reason:"Deadlock: no enabled work and nothing running.", schedule, makespan: time, marking:m};
+      }
+      continue;
+    }
+
+    const next = Math.min(...inProg.map(e=>e.end));
+    time = next;
+
+    const ending = inProg.filter(e=>e.end===next);
+    for(const e of ending){
+      const tr = transitionsById[e.id];
+      for(const [pid,w] of Object.entries(tr.post)){
+        m[pid] = (m[pid]||0) + w;
+      }
+      const row = schedule.find(s=>s.id===e.id && s.end===null && s.start===e.start);
+      if(row) row.end = next;
+    }
+    for(let i=inProg.length-1;i>=0;i--){
+      if(inProg[i].end===next) inProg.splice(i,1);
+    }
+  }
+
+  if((m["complete"]||0) >= 1){
+    const makespan = Math.max(...schedule.map(s=>s.end ?? 0), 0);
+    return {ok:true, schedule, makespan, marking:m};
+  }
+  return {ok:false, reason:"Stopped (max steps).", schedule, makespan: time, marking:m};
+}
+
+
+function groupByStart(schedule){
+  const map = new Map();
+  for(const s of schedule){
+    if(!map.has(s.start)) map.set(s.start, []);
+    map.get(s.start).push(s.label);
+  }
+  const times = Array.from(map.keys()).sort((a,b)=>a-b);
+  return times.map(t=>({t, tasks: map.get(t)}));
+}
+
+function buildSmcExpression(schedule){
+  const groups = groupByStart(schedule).filter(g=>g.tasks.length>0);
+  const parts = groups.map(g=>{
+    if(g.tasks.length===1) return g.tasks[0];
+    return "(" + g.tasks.join(" ⊗ ") + ")";
+  });
+  return parts.join(" ; ");
+}
+
+function buildScheduleWbs(schedule){
+  const groups = groupByStart(schedule).filter(g=>g.tasks.length>0);
+  const lines = [];
+  lines.push("Build Mountain Refuge");
+  groups.forEach((g,i)=>{
+    lines.push(`  Stage ${i+1} (start t=${g.t})`);
+    g.tasks.forEach(t=>{
+      lines.push(`    - ${t}`);
+    });
+  });
+  return lines.join("\n");
+}
+
+
+/* Two process definitions, independently simulated through the same engine.
+ * The added timed self-loop requires wallsDone and returns it when roof finishes.
+ * These are fictional alternatives, not engineering-approved construction methods.
+ */
+function createWitnessModels(baseNet){
+  const independent = JSON.parse(JSON.stringify(baseNet));
+  const sequenced = JSON.parse(JSON.stringify(baseNet));
+  const roof = sequenced.transitions.find(tr=>tr.id==="roof");
+  roof.pre.wallsDone = 1;
+  roof.post.wallsDone = 1;
+  return {independent, sequenced};
+}
+
+function projectWitnessPlan(run, settings){
+  if(!run.ok || run.schedule.some(row=>!Number.isFinite(row.end))) return null;
+  const tasks = run.schedule.slice()
+    .sort((a,b)=>(a.start-b.start) || a.label.localeCompare(b.label))
+    .map(({id,label,start,end,duration})=>({id,label,start,end,duration}));
+  return {
+    schema:"chosen-execution-plan-v1",
+    units:"days",
+    resources:{crew:settings.crewTokens,tools:settings.toolsTokens,lift:settings.liftTokens},
+    policy:settings.policy,
+    tasks,
+    makespan:run.makespan,
+    smcExpression:buildSmcExpression(tasks),
+    wbsText:buildScheduleWbs(tasks)
+  };
+}
+
+function compareProcessWitness(baseNet, settings, durationValues){
+  const models = createWitnessModels(baseNet);
+  const runA = simulateTimed(settings, models.independent, durationValues);
+  const runB = simulateTimed(settings, models.sequenced, durationValues);
+  const planA = projectWitnessPlan(runA, settings);
+  const planB = projectWitnessPlan(runB, settings);
+  return {
+    models, runA, runB, planA, planB,
+    samePlan:planA!==null && planB!==null && JSON.stringify(planA)===JSON.stringify(planB)
+  };
+}
+
+</script>
 <script>
 
 /**
@@ -625,6 +993,7 @@ const P = byId(net.places);
 const T = byId(net.transitions);
 
 function deepCopy(obj){ return JSON.parse(JSON.stringify(obj)); }
+const witnessBaseNet = deepCopy(net);
 
 function currentMarking(){
   const m = {};
@@ -636,6 +1005,7 @@ function setMarking(m){
 }
 
 function resetMarking(toDefaults=false){
+  if(toDefaults)invalidateSchedules();
   net.places.forEach(p=>{
     p.tokens = p.initial;
   });
@@ -647,22 +1017,11 @@ function resetMarking(toDefaults=false){
     P["crew"].tokens = 1;  P["crew"].initial = 1;
     P["tools"].tokens = 1; P["tools"].initial = 1;
     P["lift"].tokens = 1;  P["lift"].initial = 1;
+    document.getElementById("manualApplyStatus").textContent = "Manual resource defaults restored: 1 crew, 1 tools, 1 lift.";
     durations = deepCopy(defaultDurations);
     renderDurationEditor();
   }
   renderAll();
-}
-
-function enabledTransitions(m){
-  const enabled = [];
-  for(const tr of net.transitions){
-    let ok = true;
-    for(const [pid,w] of Object.entries(tr.pre)){
-      if((m[pid]||0) < w){ ok=false; break; }
-    }
-    if(ok) enabled.push(tr);
-  }
-  return enabled;
 }
 
 function fireTransition(trId){
@@ -847,7 +1206,7 @@ function renderDurationEditor(){
         <b>${tr.label}</b>
       </div>
       <div class="row" style="gap:8px;">
-        <input class="small" type="number" min="0" max="30" step="1" value="${durations[tr.id]}" data-dur="${tr.id}">
+        <input class="small" type="number" min="0" max="30" step="1" value="${durations[tr.id]}" data-dur="${tr.id}" aria-label="${tr.label} duration in days">
         <span class="muted" style="font-size:12px;">days</span>
       </div>
     `;
@@ -855,119 +1214,14 @@ function renderDurationEditor(){
     inp.addEventListener("input", ()=>{
       const v = parseInt(inp.value||"0",10);
       durations[tr.id] = isNaN(v)?0:v;
+      invalidateSchedules();
+      renderJson();
     });
     durationEditor.appendChild(item);
   }
 }
 
 /* ---------- Timed simulation ---------- */
-
-function policyOrder(policy){
-  const ids = net.transitions.map(t=>t.id);
-  if(policy==="default"){
-    return ["kickoff","permits","liftMaterials","access","siteprep","foundation","frame","walls","roof","utilities","interior","safety","inspect","open"];
-  }
-  if(policy==="wallsFirst"){
-    return ["kickoff","permits","liftMaterials","access","siteprep","foundation","frame","walls","roof","utilities","interior","safety","inspect","open"];
-  }
-  if(policy==="roofFirst"){
-    return ["kickoff","permits","liftMaterials","access","siteprep","foundation","frame","roof","walls","utilities","interior","safety","inspect","open"];
-  }
-  return ids; // random handled separately
-}
-
-function simulateTimed({crewTokens, toolsTokens, liftTokens, policy, maxSteps}){
-  const m = {};
-  net.places.forEach(p=>m[p.id]=p.initial);
-
-  m["crew"] = crewTokens;
-  m["tools"] = toolsTokens;
-  m["lift"] = liftTokens;
-
-  let time = 0;
-  let steps = 0;
-
-  const inProg = []; // {id, end, start}
-  const schedule = []; // {id,label,start,end,duration}
-
-  function isDone(){ return (m["complete"]||0) >= 1; }
-
-  function startIfPossible(){
-    const order = policyOrder(policy);
-
-    let candidates = enabledTransitions(m);
-    if(policy==="random"){
-      candidates = candidates.slice().sort(()=>Math.random()-0.5);
-    } else {
-      const idx = Object.fromEntries(order.map((id,i)=>[id,i]));
-      candidates.sort((a,b)=>(idx[a.id]??999)-(idx[b.id]??999));
-    }
-
-    let startedAny = false;
-    for(const tr of candidates){
-      let ok = true;
-      for(const [pid,w] of Object.entries(tr.pre)){
-        if((m[pid]||0) < w){ ok=false; break; }
-      }
-      if(!ok) continue;
-
-      for(const [pid,w] of Object.entries(tr.pre)){
-        m[pid] -= w;
-      }
-      const dur = durations[tr.id] ?? tr.duration ?? 0;
-      const end = time + dur;
-
-      schedule.push({id:tr.id,label:tr.label,start:time,end:null,duration:dur});
-
-      if(dur===0){
-        for(const [pid,w] of Object.entries(tr.post)){
-          m[pid] = (m[pid]||0) + w;
-        }
-        schedule[schedule.length-1].end = time;
-      } else {
-        inProg.push({id:tr.id, end, start:time});
-      }
-      startedAny = true;
-      steps += 1;
-      if(steps>=maxSteps) break;
-    }
-    return startedAny;
-  }
-
-  while(!isDone() && steps < maxSteps){
-    const started = startIfPossible();
-    if(isDone()) break;
-
-    if(inProg.length===0){
-      if(!started){
-        return {ok:false, reason:"Deadlock: no enabled work and nothing running.", schedule, makespan: time, marking:m};
-      }
-      continue;
-    }
-
-    const next = Math.min(...inProg.map(e=>e.end));
-    time = next;
-
-    const ending = inProg.filter(e=>e.end===next);
-    for(const e of ending){
-      const tr = T[e.id];
-      for(const [pid,w] of Object.entries(tr.post)){
-        m[pid] = (m[pid]||0) + w;
-      }
-      const row = schedule.find(s=>s.id===e.id && s.end===null && s.start===e.start);
-      if(row) row.end = next;
-    }
-    for(let i=inProg.length-1;i>=0;i--){
-      if(inProg[i].end===next) inProg.splice(i,1);
-    }
-  }
-
-  if((m["complete"]||0) >= 1){
-    const makespan = Math.max(...schedule.map(s=>s.end ?? 0), 0);
-    return {ok:true, schedule, makespan, marking:m};
-  }
-  return {ok:false, reason:"Stopped (max steps).", schedule, makespan: time, marking:m};
-}
 
 /* ---------- Candidate generation + selection ---------- */
 
@@ -985,24 +1239,36 @@ function renderCandidates(){
   }
   candidates.forEach((c,idx)=>{
     const dotClass = c.ok ? "ok" : "bad";
-    const item = document.createElement("div");
+    const item = document.createElement("button");
+    item.type = "button";
     item.className = "item";
-    item.style.cursor = "pointer";
+    item.setAttribute("aria-pressed",String(idx===selectedIdx));
     item.innerHTML = `
-      <div class="left">
+      <span class="left">
         <span class="dot ${dotClass}"></span>
         <b>Candidate ${idx+1}</b>
-      </div>
-      <div class="muted">${c.ok ? ("makespan " + c.makespan + " days") : c.reason}</div>
+      </span>
+      <span class="muted">${c.ok ? ("makespan " + c.makespan + " days") : c.reason}</span>
     `;
     item.addEventListener("click", ()=>{
       selectedIdx = idx;
       renderSelected();
-      [...scheduleList.children].forEach((el,i)=>{ el.style.outline = (i===idx) ? "2px solid rgba(56,189,248,.45)" : "none"; el.style.outlineOffset="2px"; });
+      [...scheduleList.children].forEach((el,i)=>{ el.setAttribute("aria-pressed",String(i===idx)); });
     });
     scheduleList.appendChild(item);
   });
 }
+
+function invalidateSchedules(){
+  if(!candidates.length)return;
+  candidates=[];selectedIdx=-1;
+  genStatus.textContent="Settings changed. Generate schedules to see the new result.";
+  renderCandidates();renderSelected();
+}
+["crewInput","toolsInput","liftInput","policySelect","numSchedules","maxSteps"].forEach(id=>{
+  document.getElementById(id).addEventListener("input",invalidateSchedules);
+  document.getElementById(id).addEventListener("change",invalidateSchedules);
+});
 
 function generateSchedules(){
   const crewTokens = parseInt(document.getElementById("crewInput").value||"1",10);
@@ -1045,38 +1311,6 @@ function escapeHtml(value){
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
-}
-
-function groupByStart(schedule){
-  const map = new Map();
-  for(const s of schedule){
-    if(!map.has(s.start)) map.set(s.start, []);
-    map.get(s.start).push(s.label);
-  }
-  const times = Array.from(map.keys()).sort((a,b)=>a-b);
-  return times.map(t=>({t, tasks: map.get(t)}));
-}
-
-function buildSmcExpression(schedule){
-  const groups = groupByStart(schedule).filter(g=>g.tasks.length>0);
-  const parts = groups.map(g=>{
-    if(g.tasks.length===1) return g.tasks[0];
-    return "(" + g.tasks.join(" ⊗ ") + ")";
-  });
-  return parts.join(" ; ");
-}
-
-function buildScheduleWbs(schedule){
-  const groups = groupByStart(schedule).filter(g=>g.tasks.length>0);
-  const lines = [];
-  lines.push("Build Mountain Refuge");
-  groups.forEach((g,i)=>{
-    lines.push(`  Stage ${i+1} (start t=${g.t})`);
-    g.tasks.forEach(t=>{
-      lines.push(`    - ${t}`);
-    });
-  });
-  return lines.join("\n");
 }
 
 function buildTranslationTrace(schedule, candidate){
@@ -1130,7 +1364,7 @@ function buildTranslationTrace(schedule, candidate){
     nonInvertibilityWitness: {
       title: "A plan view is too thin to recover the process",
       visibleProjection: firstProjectionLine.trim(),
-      rule: "The visible WBS/schedule can be produced by more than one process interpretation. Reading it backward would require extra assumptions about guards, resources, policies, and unchosen alternatives."
+      rule: "A plan projection need not identify its source process. This fragment alone is not a comparison of two processes; reverse reconstruction would require assumptions about guards, resources, policies, and unchosen alternatives."
     },
     candidateLiftRequires: [
       "a chosen process vocabulary for states, places, resources, and transitions;",
@@ -1188,7 +1422,7 @@ function renderTranslationTrace(schedule, candidate){
       <h4>projection</h4>
       <p>${escapeHtml(trace.projection.rule)}</p>
       <p><b>SMC:</b> <code>${escapeHtml(trace.projection.smcExpression || "(empty)")}</code></p>
-      <p><b>WBS first line:</b> <code>${escapeHtml(trace.projection.wbsText.split("\\n")[0] || "(empty)")}</code></p>
+      <p><b>WBS first line:</b> <code>${escapeHtml(trace.projection.wbsText.split("\n")[0] || "(empty)")}</code></p>
     </div>
     <div class="contractStep">
       <h4>preservedStructure</h4>
@@ -1205,6 +1439,7 @@ function renderTranslationTrace(schedule, candidate){
       <p><b>${escapeHtml(trace.nonInvertibilityWitness.title)}</b></p>
       <p>Visible projection: <code>${escapeHtml(trace.nonInvertibilityWitness.visibleProjection)}</code></p>
       <p>${escapeHtml(trace.nonInvertibilityWitness.rule)}</p>
+      <p><a href="#same-plan-witness">Inspect a computed two-process, full-plan comparison</a>. That built-in example uses fixed settings independently of this selected candidate.</p>
     </div>
     <div class="contractStep wide">
       <h4>candidateLiftRequires</h4>
@@ -1370,6 +1605,127 @@ function renderSelected(){
   renderTranslationTrace(schedule, c);
 }
 
+
+/* ---------- Built-in two-process witness (ephemeral, independent controls) ---------- */
+
+let journeyCase = "baseline";
+const journeyOrder = ["baseline","capacity","preference"];
+const witnessCases = {
+  baseline:{crewTokens:1,toolsTokens:1,liftTokens:1,policy:"wallsFirst",maxSteps:80},
+  capacity:{crewTokens:2,toolsTokens:2,liftTokens:2,policy:"wallsFirst",maxSteps:80},
+  preference:{crewTokens:1,toolsTokens:1,liftTokens:1,policy:"roofFirst",maxSteps:80}
+};
+
+function renderWitnessPlan(plan, target){
+  const el = document.getElementById(target);
+  if(!plan){el.textContent="No completed plan. Equality is not established.";return;}
+  el.innerHTML = `<table class="table"><caption>${plan.tasks.length} tasks · days from start</caption>
+    <thead><tr><th scope="col">Task</th><th scope="col">Start</th><th scope="col">Finish</th><th scope="col">Duration</th></tr></thead>
+    <tbody>${plan.tasks.map(t=>`<tr><th scope="row">${escapeHtml(t.label)}</th><td>${t.start}</td><td>${t.end}</td><td>${t.duration}</td></tr>`).join("")}</tbody></table>
+    <h4>Full WBS</h4><pre class="code" tabindex="0" aria-label="Full WBS for ${target==="witnessPlanA"?"A":"B"}">${escapeHtml(plan.wbsText)}</pre>`;
+}
+
+function renderProcessWitness(caseName){
+  journeyCase = journeyOrder.includes(caseName) ? caseName : "baseline";
+  caseName = journeyCase;
+  const settings = witnessCases[caseName];
+  const result = compareProcessWitness(witnessBaseNet, settings, defaultDurations);
+  document.querySelectorAll("[data-witness]").forEach(button=>{
+    button.setAttribute("aria-pressed", String(button.dataset.witness===caseName));
+  });
+  document.getElementById("witnessSettings").textContent =
+    `Both models: ${settings.crewTokens} crew, ${settings.toolsTokens} tools, ${settings.liftTokens} lift token(s); ${settings.policy==="wallsFirst"?"walls-first":"roof-first"} preference. Fixed default durations in days.`;
+  const complete = result.planA!==null && result.planB!==null;
+  document.getElementById("witnessStatus").textContent = !complete
+    ? "Comparison incomplete — no equality claim."
+    : result.samePlan
+      ? `Full plans match. Both finish on day ${result.planA.makespan}.`
+      : `Full plans differ. A finishes on day ${result.planA.makespan}; B on day ${result.planB.makespan}.`;
+  for(const [name,run] of [["A",result.runA],["B",result.runB]]){
+    const rows = ["walls","roof"].map(id=>{
+      const task=run.schedule.find(t=>t.id===id);
+      return [id==="walls"?"Walls":"Roof",task?`${task.start}–${task.end??"unfinished"} days`:"Not started"];
+    });
+    rows.push(["Project finish",run.ok?`Day ${run.makespan}`:"Incomplete"]);
+    document.getElementById("witnessMetrics"+name).innerHTML = rows
+      .map(([label,value])=>`<dt>${label}</dt><dd>${value}</dd>`).join("");
+  }
+  const messages = {
+    baseline:"One resource set forces A to work in sequence too. Its plan hides the difference between waiting for capacity and waiting for the added process rule in B.",
+    capacity:"A second crew alone would still be constrained by tools and lift. Here all three capacities are doubled: A can overlap walls and roof, while B must still respect its added sequencing rule.",
+    preference:"The resource counts return to one each. A can choose roof before walls; B cannot. Even when the finish date matches, the complete task plans can differ."
+  };
+  document.getElementById("witnessMeaning").textContent = complete?messages[caseName]:"At least one run did not complete. Inspect the models before drawing a comparison.";
+  const scenes = {
+    baseline:{title:"The schedules match. The reasons don’t.",intro:"Both teams finish on day 36. In A, the order comes from shared resources. B also has a rule: walls must finish before the roof.",next:"Double the resources →"},
+    capacity:{title:"More capacity saves five days—or two.",intro:"Both teams now have two crews, two sets of tools and two lift tokens. A can overlap walls and roof. B must keep their required order.",next:"Try a different order →"},
+    preference:{title:"Same finish. Different work sequence.",intro:"Return to one resource set, then prefer roof first. A can reverse the work. B still needs walls first. Both finish on day 36.",next:"Try your own assumptions →"}
+  };
+  const scene=scenes[caseName];
+  document.getElementById("journeyPosition").textContent=`Step ${journeyOrder.indexOf(caseName)+1} of 3`;
+  document.getElementById("witnessTitle").textContent=scene.title;
+  document.getElementById("sceneIntro").textContent=scene.intro;
+  document.getElementById("journeyNext").textContent=scene.next;
+  document.getElementById("journeyBack").disabled=caseName==="baseline";
+  document.getElementById("journeyTakeaway").hidden=caseName!=="preference";
+  for(const [name,plan] of [["A",result.planA],["B",result.planB]]){
+    document.getElementById("witnessFinish"+name).textContent=plan?`day ${plan.makespan}`:"Incomplete";
+    const saved=plan?36-plan.makespan:0;
+    document.getElementById("witnessSaving"+name).textContent=saved>0?`${saved} days earlier`:"Baseline finish";
+    const tasks=plan?plan.tasks.filter(t=>["walls","roof"].includes(t.id)):[];
+    document.getElementById("witnessTimeline"+name).innerHTML=`<div class="timelineAxis" aria-hidden="true"><span>Day 18</span><span>21</span><span>24</span><span>27</span></div>`+["walls","roof"].map(id=>{
+      const task=tasks.find(t=>t.id===id);if(!task)return "";
+      const label=id==="walls"?"Walls":"Roof";
+      return `<div class="timelineRow"><span>${label}</span><div class="timelineTrack" role="img" aria-label="${label}: day ${task.start} to day ${task.end}"><span class="timelineBar ${id}" style="left:${(task.start-18)/9*100}%;width:${(task.end-task.start)/9*100}%">${task.start}–${task.end}</span></div></div>`;
+    }).join("");
+  }
+  renderWitnessPlan(result.planA,"witnessPlanA");
+  renderWitnessPlan(result.planB,"witnessPlanB");
+  const roofA=result.models.independent.transitions.find(tr=>tr.id==="roof");
+  const roofB=result.models.sequenced.transitions.find(tr=>tr.id==="roof");
+  document.getElementById("witnessRule").textContent=JSON.stringify({
+    A:{requires:roofA.pre,returnsWhenFinished:roofA.post},
+    B:{requires:roofB.pre,returnsWhenFinished:roofB.post}
+  },null,2);
+  document.getElementById("witnessJson").textContent=JSON.stringify({samePlan:result.samePlan,planA:result.planA,planB:result.planB},null,2);
+}
+
+document.querySelectorAll("[data-witness]").forEach(button=>{
+  button.addEventListener("click",()=>renderProcessWitness(button.dataset.witness));
+});
+document.getElementById("journeyNext").addEventListener("click",()=>{
+  const next=journeyOrder.indexOf(journeyCase)+1;
+  if(next<journeyOrder.length)renderProcessWitness(journeyOrder[next]);
+  else openWorkbench(true);
+});
+document.getElementById("journeyBack").addEventListener("click",()=>renderProcessWitness(journeyOrder[Math.max(0,journeyOrder.indexOf(journeyCase)-1)]));
+document.getElementById("journeyRestart").addEventListener("click",()=>renderProcessWitness("baseline"));
+function openWorkbench(withStartingPlan=false){
+  document.getElementById("workbench").open=true;
+  if(withStartingPlan && !candidates.length){generateSchedules();if(candidates.length)scheduleList.querySelector("button").click();}
+  renderSelected();
+  const heading=document.getElementById("schedule-lab");heading.focus();heading.scrollIntoView({block:"start"});
+}
+function revealTarget(hash){
+  let id;try{id=decodeURIComponent(hash.slice(1));}catch{return;}
+  const target=document.getElementById(id);if(!target)return;
+  if(target.matches("details"))target.open=true;
+  let parent=target.parentElement;while(parent){if(parent.matches("details"))parent.open=true;parent=parent.parentElement;}
+  if(id==="schedule-lab")renderSelected();
+  requestAnimationFrame(()=>{target.scrollIntoView({block:"start"});if(target.matches("h2,h3"))target.focus();});
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",event=>{
+  const hash=a.getAttribute("href");
+  if(!document.getElementById(hash.slice(1)))return;
+  event.preventDefault();
+  if(a.hasAttribute("data-open-workbench"))openWorkbench(true);
+  if(location.hash!==hash)history.pushState(null,"",hash);
+  revealTarget(hash);
+}));
+window.addEventListener("hashchange",()=>revealTarget(location.hash));
+document.getElementById("workbench").addEventListener("toggle",()=>{if(document.getElementById("workbench").open)renderSelected();});
+renderProcessWitness("baseline");
+
 /* ---------- Copy net JSON ---------- */
 
 const netJsonEl = document.getElementById("netJson");
@@ -1377,15 +1733,17 @@ const btnCopyJson = document.getElementById("btnCopyJson");
 const copyStatus = document.getElementById("copyStatus");
 const EXPLAIN = {
   notes: [
-    "• The Petri net is the source of truth for physical logic (what depends on what; what resources gate parallelism).",
-    "• Schedules are generated as executions of that same net (different priorities, resource-token counts, and durations ⇒ different valid schedules).",
+    "• The Petri net encodes this toy example's dependency and resource assumptions. It does not validate a real construction method.",
+    "• Schedules are generated as executions of that same net (different priorities, resource-token counts, and durations can produce different schedules that satisfy the encoded rules).",
     "• WBS is treated as a view/projection of the same underlying process: one schedule ⇒ one “schedule-derived elementary WBS”, plus an SMC-style expression that exposes ⊗ (parallel) vs ; (sequential).",
     "",
-    "Petri net (fundamentals): places/tokens = project state & resource availability; transitions = work. This captures the “physics” of what is possible independent of any particular schedule.",
-    "• SMC (compositional schedule syntax): the same plan can be written as different string diagrams / compositions—vertical composition for sequencing and horizontal composition for parallelism—which is exactly the lens you want for “different schedules as different (but equivalent) composites.”",
-    "• Elementary WBS (hierarchical): when you have an SMC expression / execution trace, an operad-style decomposition viewpoint tells you how to “break down and reconstitute the whole” while keeping correctness under substitution—this is a good mathematical fit for WBS factoring choices."
+    "Petri net (fundamentals): places/tokens represent modeled state and resource availability; transitions represent work. Missing real-world constraints remain outside the model.",
+    "• SMC-style notation: ⊗ groups tasks with the same start time; ; orders those groups. This is an illustrative projection, not a proof that whole groups execute sequentially or that different schedules are categorically equivalent.",
+    "• Elementary WBS: the execution trace provides one possible hierarchy of stages and tasks. An operad-style decomposition is a candidate interpretation; this app has not established a substitution-correctness guarantee."
   ].join("\n")
 };
+
+document.getElementById("methodNotes").textContent=EXPLAIN.notes;
 
 function netAsJson(){
   const spec = deepCopy(net);
@@ -1409,30 +1767,6 @@ btnCopyJson.addEventListener("click", async ()=>{
   }catch(e){
     copyStatus.textContent = "Copy failed (browser permissions).";
   }
-});
-
-/* ---------- Modal explainers ---------- */
-
-function openModal(title, body){
-  document.getElementById("modalTitle").textContent = title;
-  document.getElementById("modalBody").textContent = body;
-  document.getElementById("modal").classList.add("open");
-}
-function closeModal(){
-  document.getElementById("modal").classList.remove("open");
-}
-
-document.querySelector("#modal .close").addEventListener("click", closeModal);
-window.addEventListener("click",(e)=>{ if(e.target && e.target.id==="modal") closeModal(); });
-window.addEventListener("keydown",(e)=>{ if(e.key==="Escape") closeModal(); });
-
-Array.from(document.querySelectorAll("[data-explain]")).forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    const key = btn.dataset.explain;
-    const txt = EXPLAIN[key] || "No explainer found.";
-    const title = btn.textContent || key;
-    openModal(title, txt);
-  });
 });
 
 /* ---------- Buttons / event wiring ---------- */
@@ -1503,6 +1837,7 @@ document.getElementById("btnApplyResources").addEventListener("click", ()=>{
   P["lift"].tokens = liftTokens;
   P["lift"].initial = liftTokens;
   renderAll();
+  document.getElementById("manualApplyStatus").textContent=`Manual resources set: ${crewTokens} crew, ${toolsTokens} tools, ${liftTokens} lift.`;
 });
 
 document.getElementById("btnGenerate").addEventListener("click", ()=>{
@@ -1531,6 +1866,7 @@ renderDurationEditor();
 renderAll();
 renderCandidates();
 renderSelected();
+if(location.hash)revealTarget(location.hash);
 </script>
 </body>
 </html>

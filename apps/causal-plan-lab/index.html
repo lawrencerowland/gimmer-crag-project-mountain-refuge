@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generate plans from a small Petri process and test exactly what a sequential/parallel work breakdown preserves. An executable Gimmer Crag research lab.">
+  <title>Can a WBS preserve the process? · Gimmer Crag</title>
+  <link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<a class="skip" href="#workbench">Skip to the experiment</a>
+<header class="topbar"><a href="../../process-to-plan-lab/" class="brand"><span class="brand-mark" aria-hidden="true">↗</span> GIMMER CRAG <span class="brand-sub">PROCESS → PLAN LAB</span></a><a href="#method">Method & evidence <span aria-hidden="true">↘</span></a></header>
+<main>
+<section class="hero">
+  <p class="eyebrow">AUTONOMOUS FORAY 155 · EXPERIMENT 02</p>
+  <h1>Can a WBS preserve<br>the way work happens?</h1>
+  <p class="lede">Start with what makes work possible. Generate a complete execution. Then find out whether a tree of “do these in sequence” and “do these in parallel” keeps every freedom and every constraint.</p>
+  <div class="hero-line"><span class="dot"></span> Computed in your browser <span>Fictional cliffside refuge</span><a href="#findings">Three findings ↓</a></div>
+</section>
+<section class="case-strip" aria-label="Guided experiments">
+  <button data-case="refuge"><span class="case-number">01</span><span><strong>A tree that fits</strong><small>Generate the work from physical logic</small></span><span aria-hidden="true">↗</span></button>
+  <button data-case="n-obstruction"><span class="case-number">02</span><span><strong>The crossing a tree loses</strong><small>Find an invented dependency</small></span><span aria-hidden="true">↗</span></button>
+  <button data-case="token-provenance"><span class="case-number">03</span><span><strong>Same tokens. Two answers.</strong><small>Change ancestry, keep the markings</small></span><span aria-hidden="true">↗</span></button>
+</section>
+<section id="workbench" class="workbench" aria-labelledby="workbench-title">
+  <aside class="controls">
+    <p class="eyebrow">SET UP AN EXPERIMENT</p><h2 id="workbench-title">Choose the process</h2>
+    <label for="scenario">Working example</label><select id="scenario"></select>
+    <p id="scenario-description" class="muted"></p>
+    <div class="field" id="capacity-field" hidden><label for="capacity">Reusable lifting tokens <output id="capacity-output">1</output></label><input id="capacity" type="range" min="1" max="3" step="1" value="1"><p class="help">Watch resource handoffs change while the physical prerequisites stay the same.</p></div>
+    <div class="field"><label for="allocation">Choose token ancestry</label><select id="allocation"><option value="fifo">Oldest available token first</option><option value="lifo">Newest available token first</option></select><p class="help">Tokens at a place are interchangeable. This chooses one auditable witness of which output supplied which input.</p></div>
+    <button id="generate" class="primary">Generate complete executions <span aria-hidden="true">→</span></button>
+    <p id="search-status" class="status" role="status" aria-live="polite">Loading the process…</p>
+    <label for="execution">Choose an execution</label><select id="execution"></select>
+    <div class="button-pair"><button id="export" class="secondary">Export result</button><button id="import" class="secondary">Open saved result</button><input id="import-file" type="file" accept="application/json,.json" hidden></div>
+    <p id="save-status" class="help" role="status"></p>
+    <details id="model-editor"><summary>Edit the model</summary><p class="help">Explicit token counts, durations and firing bounds. Applying invalid input keeps the previous valid result.</p><label for="model-json">Process model JSON</label><textarea id="model-json" spellcheck="false" rows="15"></textarea><button id="apply-model" class="secondary">Apply model</button></details>
+    <button id="reset" class="text-button">Reset this experiment</button>
+    <div id="error" role="alert" class="error" hidden></div>
+  </aside>
+  <div class="results">
+    <section class="result-head"><div><p class="eyebrow">YOUR SELECTED EXECUTION</p><h2 id="result-title">From possibility to a plan</h2></div><span id="verdict" class="badge">Computing</span></section>
+    <p id="verdict-explanation" class="result-intro"></p>
+    <div id="metrics" class="metrics"></div>
+    <div class="view-tabs" role="tablist" aria-label="Views of the selected result">
+      <button role="tab" id="tab-causal" aria-controls="panel-causal" aria-selected="true" tabindex="0">Causal plan</button>
+      <button role="tab" id="tab-tree" aria-controls="panel-tree" aria-selected="false" tabindex="-1">WBS test</button>
+      <button role="tab" id="tab-process" aria-controls="panel-process" aria-selected="false" tabindex="-1">Process & markings</button>
+    </div>
+    <section id="panel-causal" role="tabpanel" aria-labelledby="tab-causal" class="view-panel">
+      <div class="panel-heading"><h3>What actually needs what?</h3><label class="toggle"><input type="checkbox" id="show-added"> Overlay the stage tree’s added rules</label></div>
+      <p class="help">An arrow follows a consumed token back to the event that produced it. It is a dependency of this chosen witness, not just a position in a task list.</p>
+      <div class="legend"><span><i class="line physical"></i>Condition or material</span><span><i class="line resource"></i>Resource handoff</span><span><i class="line added"></i>Added by stage grouping</span></div>
+      <div id="graph" class="diagram"></div>
+      <div id="edge-inspector" class="inspector">Select an event to inspect the tokens behind it.</div>
+      <div class="panel-heading"><h3>Earliest schedule for this witness</h3><span class="unit-label">TOY TIME UNITS</span></div>
+      <div id="gantt" class="diagram gantt"></div>
+      <p class="help">Outputs become available at completion. Every shown handoff is respected. This is the earliest schedule for the selected token-flow witness, not a global optimum over all possible witnesses.</p>
+      <details><summary>Read the exact dependency and timing tables</summary><div id="order-table" class="table-scroll"></div></details>
+    </section>
+    <section id="panel-tree" role="tabpanel" aria-labelledby="tab-tree" class="view-panel" hidden>
+      <div id="tree-intro"></div><div id="exact-tree" class="tree-area"></div>
+      <div id="obstruction" class="finding-callout" hidden></div>
+      <details id="stage-details"><summary>Compare the old same-start stage rule</summary><p class="help">Group events with equal earliest start; put the groups in sequence. A sequence block means every event in an earlier block must finish before any in the next. The comparison below tests the full resulting order.</p><div id="staged-tree" class="tree-area"></div><div id="stage-difference"></div></details>
+      <div class="certificate"><p class="eyebrow">EXACTNESS CERTIFICATE</p><div id="certificate"></div></div>
+    </section>
+    <section id="panel-process" role="tabpanel" aria-labelledby="tab-process" class="view-panel" hidden>
+      <h3>The physical and resource logic</h3><p class="help">A transition consumes its input tokens and produces its outputs. Search stops the first time the goal marking is covered. Alternative access methods compete for the same one-use choice token.</p>
+      <div id="model-table" class="table-scroll"></div>
+      <h3>Replay this execution</h3><p id="trace" class="trace"></p><div id="markings" class="table-scroll"></div>
+      <div id="provenance-comparison" class="finding-callout"></div>
+    </section>
+  </div>
+</section>
+<section id="findings" class="findings">
+  <div><p class="eyebrow">WHAT THIS ATTEMPT ESTABLISHES</p><h2>Three results.<br>One important boundary.</h2></div>
+  <article><span class="finding-num">01 / CONSTRUCTION</span><h3>Plans can be derived and replayed.</h3><p>A bounded Petri model generates complete legal executions. Each chosen token-flow witness yields a dependency graph, an earliest schedule, and a testable projection.</p></article>
+  <article><span class="finding-num">02 / REPRESENTATION</span><h3>A tree can add work-order rules.</h3><p>An induced N-shaped order cannot be expressed exactly by this leaf/sequence/parallel grammar. Typed monoidal wiring and the causal DAG can retain the crossing. The restriction belongs to the elementary tree.</p></article>
+  <article><span class="finding-num">03 / INFORMATION</span><h3>Markings do not fix ancestry.</h3><p>In the token-pool case, the same transition sequence and collective markings admit two token-flow witnesses. One has an exact tree; the other contains N. A certificate must say which witness it certifies.</p></article>
+</section>
+<section id="method" class="method">
+  <p class="eyebrow">METHOD & EVIDENCE</p><h2>A finite compiler, with inspectable limits.</h2>
+  <div class="method-grid"><div><h3>The contract</h3><p>The compiler maps a selected token-flow execution to its finite causal partial order. Exact tree compilation requires a bijection on event occurrences and equality of the full precedence relation. Series and parallel composition mean ordinal sum and disjoint union.</p><p>It does not establish a general functor from arbitrary processes to WBS trees. Full monoidal composition can connect selected boundary wires; a sequence of whole event blocks imposes all cross-block precedences.</p><p><a href="../../planning/causal-plan-method.md">Read the definitions, findings and verification record →</a></p></div><div><h3>What the limits mean</h3><ul><li>Fictional models: at most 64 places, 32 transitions and 32 events per execution; 1,500 results and 50,000 search nodes. Search limits do not establish impossibility.</li><li>Chosen token ancestry; no claim to a unique individual history.</li><li>Positive toy durations, no calendar, weather forecast or engineering calibration.</li><li>A WBS here means a specific Seq/Par event-block tree. Ordinary deliverable WBS hierarchies need not encode precedence.</li><li>Automated and agent-operated checks are separate from practitioner or human-user validation.</li></ul></div><div><h3>Grounding</h3><p><a href="https://arxiv.org/abs/1808.05415">Baez & Master, <cite>Open Petri Nets</cite></a> supplies the process/monoidal context and token-semantics boundary.</p><p><a href="https://arxiv.org/abs/1811.07959">Zaguia, <cite>The Aharoni–Korman conjecture for N-free posets with no infinite antichain</cite></a>, Theorem 5, states the finite N-free / series-parallel characterization used here.</p><p><a href="../mountain-refuge-petri-wbs-demo/">Earlier result: one plan, two possible projects →</a></p><p><a href="https://github.com/lawrencerowland/gimmer-crag-project-mountain-refuge">Source, tests and run record on GitHub ↗</a></p></div></div>
+</section>
+</main>
+<footer><a href="../../process-to-plan-lab/">← Process-to-Plan Lab</a><span>Foray 155 · Built through an autonomous construct / challenge / revise run · 7 September 2026</span></footer>
+<script type="module" src="app.mjs"></script>
+</body></html>
