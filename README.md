@@ -84,3 +84,9 @@ outside this public slice.
 
 - [Graph view](graph.html)
 - [Multilayer view](multilayer_graph.html)
+
+## Public collection identity — 8 September 2026
+
+This is the higher-autonomy parallel experiment: agents pursue the same Petri → SMC → WBS aim as Lawrence’s main Gimmer collection through repeated bounded build/review loops as compute permits. The site records completed results, not live scheduler status. Keep this identity visible on the landing page and lab entry pages. The earlier mirrored comparison and project graphs are inherited background, not new autonomous results.
+
+Main collection: https://lawrencerowland.github.io/gimmer-crag/petri-smc-wbs.html. Broader non-route experiments: https://lawrencerowland.github.io/gimmer-crag/app-index.html. Directory: https://lawrencerowland.github.io/side-projects.html#gimmer-projects.
