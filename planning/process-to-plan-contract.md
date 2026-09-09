@@ -1,5 +1,7 @@
 # Process-To-Plan Contract
 
+> Baseline provenance, updated 9 September 2026: this historical contract belongs to the earlier human-steered comparison. Its code is maintained in the main Gimmer collection; it is not a higher-autonomy result.
+
 Status: branch contract for `codex/process-to-plan-lab`
 Created: 2026-07-02
 
@@ -33,7 +35,7 @@ Minimum contents:
 - statement of the invariant process rule.
 
 For the current mountain-refuge slice, this is the Petri/process net embedded in
-`apps/mountain-refuge-petri-wbs-demo/index.html`.
+the [canonical inherited baseline](https://lawrencerowland.github.io/gimmer-crag/apps/mountain-refuge-petri-wbs-demo/#same-plan-witness) in the main Gimmer collection.
 
 ### `executionWitness`
 

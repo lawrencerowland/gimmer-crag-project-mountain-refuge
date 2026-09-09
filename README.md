@@ -14,9 +14,6 @@ Start at [the Process-to-Plan Lab](process-to-plan-lab/).
 - [Causal Plan Lab](apps/causal-plan-lab/) constructs a chosen token-flow execution witness,
   derives its causal dependency DAG and schedule, and checks whether an elementary sequence/parallel
   task tree preserves exactly the same order. An obstruction leaves the exact DAG available.
-- [Two processes, one chosen plan](apps/mountain-refuge-petri-wbs-demo/#same-plan-witness)
-  is the retained comparison: different process assumptions can generate the same complete baseline
-  plan while responding differently to a change in resources or priority.
 - [Causal method and limits](planning/causal-plan-method.md) and
   [earlier autonomous run record](planning/autonomous-run-2026-09-07.md) state the single-witness construction, counterexamples and evidence.
 - [Process contract method](planning/process-contract-method.md) and
@@ -26,20 +23,19 @@ Start at [the Process-to-Plan Lab](process-to-plan-lab/).
 - [Earlier translation contract](planning/process-to-plan-contract.md) and
   [route boundary](planning/process-to-plan-route-boundary.md) describe the original Petri/WBS slice.
 
-The experiments progress from two processes sharing one plan, through a single causal witness,
-to alternatives across a selected trace's ancestry family and composition through typed wires.
+The autonomous experiments develop a single causal witness into ancestry families and composition through typed wires.
 Exactness is always tied to the declared object and completed enumeration. An exact sequential-order
 language does not establish concurrent-step or timed equivalence. Computation limits remain visible.
 A failure of the restricted task/sequence/parallel tree grammar does not rule out a richer typed
 wire construction. Scenarios and durations are illustrative, not verified construction methods.
 
-## Source lineage
+## Inherited baseline — main Gimmer collection
 
-This is the public, watchable home for the Gimmer Crag mountain-refuge experiment. The earlier
-simulator began in `lawrencerowland/gimmer-crag` on `codex/process-to-plan-lab`.
-Its current mirror was refreshed from source commit
-`03e778b9e2e4b5162167785d6f3f3dc1fe79cf6a` on 2026-09-07, retaining the original
-model and adapting its return links to this site's landing page.
+[Two processes, one chosen plan](https://lawrencerowland.github.io/gimmer-crag/apps/mountain-refuge-petri-wbs-demo/#same-plan-witness) is earlier human-steered, AI-assisted work and is not a higher-autonomy experiment. It supplies the starting question. The [canonical application](https://github.com/lawrencerowland/gimmer-crag/blob/main/apps/mountain-refuge-petri-wbs-demo/index.html), [baseline tests](https://github.com/lawrencerowland/gimmer-crag/blob/main/scripts/process-witness.test.js) and [method](https://github.com/lawrencerowland/gimmer-crag/blob/main/planning/two-process-same-plan-witness.md) are maintained in `lawrencerowland/gimmer-crag`.
+
+On 9 September 2026 the duplicated application and baseline-only test were withdrawn from this repository at Lawrence’s request. The old application URL is a redirect preserving query and fragment; active references go directly to the canonical main collection. The former “Experiment 01” label is retired. The two autonomous engines do not depend on the withdrawn implementation.
+
+The mirror had been refreshed from upstream `03e778b9e2e4b5162167785d6f3f3dc1fe79cf6a` on 7 September. Historical run counts below and in dated run records describe that earlier repository state. [Withdrawal and preservation record](planning/inherited-baseline-withdrawal-2026-09-09.md).
 
 ## Check and serve locally
 
@@ -59,6 +55,8 @@ The optional ordinary-browser regression scripts require Playwright and a Chromi
 ```sh
 LAB_BASE_URL=http://localhost:8000 node scripts/process-contract-browser.mjs
 ```
+
+The baseline-withdrawal navigation check uses `node scripts/inherited-baseline-browser.mjs` and the same environment options. It verifies external references, redirects, fragment/query preservation and canonical return links.
 
 The contract script covers alternative languages, typed wires, joint starts, correction, persistence, portable results, cancellation and mobile navigation. Its evidence defaults to `/tmp/process-contract-browser-evidence`. The earlier causal lab retains its own browser journey:
 
@@ -87,6 +85,6 @@ outside this public slice.
 
 ## Public collection identity — 8 September 2026
 
-This is the higher-autonomy parallel experiment: agents pursue the same Petri → SMC → WBS aim as Lawrence’s main Gimmer collection through repeated bounded build/review loops as compute permits. The site records completed results, not live scheduler status. Keep this identity visible on the landing page and lab entry pages. The earlier mirrored comparison and project graphs are inherited background, not new autonomous results.
+This is the higher-autonomy parallel experiment: agents pursue the same Petri → SMC → WBS aim as Lawrence’s main Gimmer collection through repeated bounded build/review loops as compute permits. The site records completed results, not live scheduler status. Keep this identity visible on the landing page and lab entry pages. The baseline is now an external inherited reference in the main Gimmer collection. Project graphs remain inherited background, not new autonomous results.
 
 Main collection: https://lawrencerowland.github.io/gimmer-crag/petri-smc-wbs.html. Broader non-route experiments: https://lawrencerowland.github.io/gimmer-crag/app-index.html. Directory: https://lawrencerowland.github.io/side-projects.html#gimmer-projects.
