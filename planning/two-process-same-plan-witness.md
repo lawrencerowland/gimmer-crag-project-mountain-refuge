@@ -2,13 +2,13 @@
 
 Implemented upstream: 2026-09-05. Refreshed into this public mirror on 2026-09-07 from
 `lawrencerowland/gimmer-crag` commit `03e778b9e2e4b5162167785d6f3f3dc1fe79cf6a`.
-The upstream app and its 12 focused tests are retained here with navigation adapted to this site.
+The application copy and duplicate tests were withdrawn here on 9 September 2026. This is historical baseline documentation, not an autonomous result. Current code and the 12 baseline tests are maintained only in the [main Gimmer repository](https://github.com/lawrencerowland/gimmer-crag/blob/main/apps/mountain-refuge-petri-wbs-demo/index.html); see the [withdrawal record](inherited-baseline-withdrawal-2026-09-09.md).
 
 The original translation panel explained that a plan loses process information. The app now
 computes a concrete example: two different process models produce the same complete baseline
 plan, but respond differently to the same changes in resources or preference.
 
-Open [the mountain-refuge app](../apps/mountain-refuge-petri-wbs-demo/index.html#same-plan-witness).
+Open [the mountain-refuge app](https://lawrencerowland.github.io/gimmer-crag/apps/mountain-refuge-petri-wbs-demo/#same-plan-witness).
 The section **One plan can hide two different processes** is visible on entry. Select each of the
 three comparison buttons and expand **Inspect both complete plans and the hidden rule** to see
 the complete task tables, WBS, model difference and computed plan JSON.
@@ -82,10 +82,10 @@ public toy model; record-level source provenance and the local experiment receip
 
 ## Validation
 
-Run from the repository root with Node:
+Run from the **main `gimmer-crag` repository** root with Node:
 
 ```sh
-node --test tests/process-witness.test.mjs
+node --test scripts/process-witness.test.js
 ```
 
 The 12 focused tests use the app's actual pure core, not a second implementation. They cover the
