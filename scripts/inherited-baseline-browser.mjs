@@ -10,7 +10,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const base=(process.env.LAB_BASE_URL||'http://127.0.0.1:8789').replace(/\/$/,'');
 const out=process.env.LAB_EVIDENCE_DIR||'/private/tmp/pw155-withdraw-evidence/local';
 const canonical='https://lawrencerowland.github.io/gimmer-crag/apps/mountain-refuge-petri-wbs-demo/';
-const canonicalReturn='https://lawrencerowland.github.io/gimmer-crag/petri-smc-wbs.html#app-20';
+const canonicalReturn='https://lawrencerowland.github.io/gimmer-crag/app-index.html#app-20-comparison';
 const legacy=base+'/apps/mountain-refuge-petri-wbs-demo/';
 await fs.mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,channel:process.env.LAB_BROWSER_CHANNEL||'chrome'});
@@ -24,7 +24,7 @@ async function check(name,fn){
   catch(e){failures.push({name,error:String(e)});console.error('FAIL '+name+' — '+String(e));await page.screenshot({path:path.join(out,'failure-'+failures.length+'.png'),fullPage:true}).catch(()=>{});}
 }
 async function go(url){const response=await page.goto(url,{waitUntil:'domcontentloaded'});if(response)assert.ok(response.ok(),`${url}: HTTP ${response.status()}`);else assert.equal(page.url(),url,'A same-document navigation must retain the requested URL.');}
-async function baselineReady(){await page.waitForURL(url=>url.origin+url.pathname===canonical,{waitUntil:'domcontentloaded'});await page.locator('#witnessStatus').waitFor({state:'visible'});await page.waitForFunction(()=>document.querySelector('#witnessStatus')?.textContent.includes('Full plans'));}
+async function baselineReady(){await page.waitForURL(url=>url.origin+url.pathname===canonical,{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>document.querySelector('#witnessStatus')?.textContent.includes('Full plans'));}
 const noOverflow=async()=>assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),'Document has horizontal overflow.');
 const baselineLink='a[href="'+canonical+'#same-plan-witness"]';
 
@@ -54,11 +54,11 @@ try{
       assert.match(await page.locator('#witnessStatus').innerText(),/Full plans match\. Both finish on day 36/);
     });
   }
-  await check('canonical return link reaches the main processes-to-plans collection at app 20',async()=>{
+  await check('canonical comparison returns to the broader collection at its inherited reference',async()=>{
     await go(canonical+'#same-plan-witness');await baselineReady();
     const link=page.locator('.pageNav a').first();assert.equal(await link.evaluate(a=>a.href),canonicalReturn);
     await link.click();await page.waitForURL(canonicalReturn,{waitUntil:'domcontentloaded'});
-    await page.locator('#app-20').waitFor({state:'visible'});
+    await page.locator('#app-20-comparison').waitFor({state:'visible'});
     assert.equal(page.url(),canonicalReturn);
   });
   await check('canonical baseline comparison still computes equal complete baseline plans',async()=>{

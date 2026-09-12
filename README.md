@@ -7,6 +7,7 @@ inspectable. The public lab uses fictional refuge scenarios.
 
 Start at [the Process-to-Plan Lab](process-to-plan-lab/).
 
+- [Marking-to-Plan Lab](apps/marking-plan-lab/) generates the bounded whole family across meaningful starting markings and encoded work branches, with jointly enabled starts, typed supply witnesses, work structures and independently replayed schedules. [Method and source uses](planning/marking-plan-method.html); [build and review record](planning/marking-plan-run-2026-09-12.html).
 - [Process Contract Lab](apps/process-contract-lab/) explores the producer-count ancestry families
   compatible with a selected complete trace, preserves their alternative sequential event orders,
   and tests whether one dependency graph can express that language. It also compiles typed
@@ -23,15 +24,15 @@ Start at [the Process-to-Plan Lab](process-to-plan-lab/).
 - [Earlier translation contract](planning/process-to-plan-contract.md) and
   [route boundary](planning/process-to-plan-route-boundary.md) describe the original Petri/WBS slice.
 
-The autonomous experiments develop a single causal witness into ancestry families and composition through typed wires.
+The current forward experiment connects a supplied mechanism and goal to the bounded family of state changes, work branches and replayable plans. Earlier autonomous experiments develop single causal witnesses, ancestry families and composition through typed wires. The adopted detailed WAYS for this lane retain methods from the highlighted source documents; they do not narrow the main investigation’s open source-led WAYS.
 Exactness is always tied to the declared object and completed enumeration. An exact sequential-order
 language does not establish concurrent-step or timed equivalence. Computation limits remain visible.
 A failure of the restricted task/sequence/parallel tree grammar does not rule out a richer typed
 wire construction. Scenarios and durations are illustrative, not verified construction methods.
 
-## Inherited baseline — main Gimmer collection
+## Inherited baseline — broader Gimmer collection
 
-[Two processes, one chosen plan](https://lawrencerowland.github.io/gimmer-crag/apps/mountain-refuge-petri-wbs-demo/#same-plan-witness) is earlier human-steered, AI-assisted work and is not a higher-autonomy experiment. It supplies the starting question. The [canonical application](https://github.com/lawrencerowland/gimmer-crag/blob/main/apps/mountain-refuge-petri-wbs-demo/index.html), [baseline tests](https://github.com/lawrencerowland/gimmer-crag/blob/main/scripts/process-witness.test.js) and [method](https://github.com/lawrencerowland/gimmer-crag/blob/main/planning/two-process-same-plan-witness.md) are maintained in `lawrencerowland/gimmer-crag`.
+[Two processes, one chosen plan](https://lawrencerowland.github.io/gimmer-crag/apps/mountain-refuge-petri-wbs-demo/#same-plan-witness) is earlier human-steered, AI-assisted work and is not a higher-autonomy experiment. It supplies a complementary question about what a displayed plan can hide. Its forward scheduler remains available in the core collection through another entrance into the same implementation. The [canonical application](https://github.com/lawrencerowland/gimmer-crag/blob/main/apps/mountain-refuge-petri-wbs-demo/index.html), [baseline tests](https://github.com/lawrencerowland/gimmer-crag/blob/main/scripts/process-witness.test.js) and [method](https://github.com/lawrencerowland/gimmer-crag/blob/main/planning/two-process-same-plan-witness.md) are maintained in `lawrencerowland/gimmer-crag`.
 
 On 9 September 2026 the duplicated application and baseline-only test were withdrawn from this repository at Lawrence’s request. The old application URL is a redirect preserving query and fragment; active references go directly to the canonical main collection. The former “Experiment 01” label is retired. The two autonomous engines do not depend on the withdrawn implementation.
 
@@ -55,6 +56,8 @@ The optional ordinary-browser regression scripts require Playwright and a Chromi
 ```sh
 LAB_BASE_URL=http://localhost:8000 node scripts/process-contract-browser.mjs
 ```
+
+The new forward journey uses `node scripts/marking-plan-browser.mjs` with the same environment options.
 
 The baseline-withdrawal navigation check uses `node scripts/inherited-baseline-browser.mjs` and the same environment options. It verifies external references, redirects, fragment/query preservation and canonical return links.
 
