@@ -1,0 +1,124 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Forward generation: methods and limits · Gimmer Crag</title><link rel="stylesheet" href="../apps/marking-plan-lab/style.css"><style>main{max-width:980px;padding:30px 0 60px}main h1{font-size:clamp(34px,5vw,54px)}main h2{margin-top:38px;font-size:30px}main li{margin:7px 0}.table-scroll{margin:22px 0}pre{white-space:pre-wrap}td{min-width:120px}</style></head><body><!-- Generated from marking-plan-method.md; sha256 61b52a4788547deb51375f3d419bfa2f68fa920901ef7a46978ff15271196e64 --><header><a class="brand" href="../apps/marking-plan-lab/">↗ GIMMER CRAG</a><nav><a href="../apps/marking-plan-lab/">Open the forward generator</a><a href="../process-to-plan-lab/">All lab methods</a></nav></header><main><h1 id="one-mechanism-a-bounded-family-of-ways-to-finish">One mechanism, a bounded family of ways to finish</h1>
+<p>The <a href="../apps/marking-plan-lab/">Marking-to-Plan Lab</a> starts with a supplied Petri mechanism, initial marking and completion goal. It generates alternatives across work branches, serial orders and token-supply histories, then carries each retained witness into a typed execution diagram, work structure and representative schedule.</p>
+<p>This is the forward direction: <strong>review the mechanism, preserve what must hold, then generate what may vary</strong>. A marking is a state, not a plan. One marking may permit several executions. Changing a resource marking and changing a task&#39;s prerequisite are different interventions.</p>
+<h2 id="the-model-contract">The model contract</h2>
+<p>The finite subset has at most eight once-only transition occurrences and 64 places. Every transition consumes a nonempty multiset of tokens and produces its declared outputs. Counts are nonnegative safe integers; durations are positive finite numbers. Repeated work requires separately named occurrences in this subset. The goal is coverage of an explicit token multiset, not equality with a complete final marking.</p>
+<p>The refuge has one token committing delivery to either helicopter or winch. Both routes supply the same foundation and panel packages. Foundation and panel work borrow reusable lifting capacity; assembly needs both completed packages; commissioning produces the goal. These are reviewed toy assumptions, not approved construction engineering.</p>
+<p>The browser exposes the complete signatures and initial counts. Different methods are generated from choices already encoded in this mechanism; missing real-world tasks are not discovered automatically.</p>
+<h2 id="whole-states-joint-starts-and-first-goal-plans">Whole states, joint starts and first-goal plans</h2>
+<p>A reachable state is identified by its marking and fired occurrence subset. With fixed once-only transitions the subset determines the resulting count vector, but it still matters: an already fired occurrence is unavailable even if its resource tokens have returned. The search retains all reachable states rather than assuming every arithmetically constructible marking is reachable.</p>
+<p>The state/step contract includes possible work after a goal-covered state. At each idle decision point it tests nonempty sets of remaining transitions against their <strong>summed input demand</strong>. Outputs of one chosen start cannot supply another start in that same set. The target marking is the state after all selected work has completed; this untimed contract does not say different-duration tasks finish simultaneously.</p>
+<p>Plan search has a separate policy: enumerate serial firing traces that stop when they <strong>first</strong> cover the goal. Reaching an already satisfied goal yields the empty identity trace. Alternative routes to the same state are retained as traces. A jointly enabled set can commit extra work which no first-goal serial trace retains; those sets remain in the state/step view without silently redefining the plan policy.</p>
+<p>The work scope of a first-goal trace is preserved through its later representation. An earliest concurrent schedule can cover the goal before every retained task finishes; its certificate still requires completion of that selected scope and goal coverage at the final marking. First-goal selection of an atomic trace is not a promise of earliest timed goal termination across arbitrary concurrent policies.</p>
+<h2 id="from-all-traces-to-distinct-supply-histories">From all traces to distinct supply histories</h2>
+<p>For every retained first-goal trace, the existing ancestry analyser enumerates compatible producer-count allocations. Initial tokens at a place are indistinguishable; tokens supplied by a particular producer are aggregated by count. Different places, producers, consumer occurrences and consumed multiplicities remain distinct.</p>
+<p>The new construction unions those histories across all generated traces and deduplicates identical supply allocations. It does not use a selected trace&#39;s alternative-order language as a substitute for generating all branches. Work scopes with different occurrence sets remain separate.</p>
+<p>A commutation cache avoids repeating ancestry analysis when adjacent events have no shared consumed place and no producer/consumer interference. Shared output places alone do not forbid the swap. This is a defined optimisation checked against independent exhaustive enumeration; it does not identify different resource reuse orders.</p>
+<p>Each witness retains physical/condition edges separately from chosen resource handoffs. A shared crane may require A before B in one witness and B before A in another. Neither order becomes a universal physical rule merely because one representative selected it.</p>
+<h2 id="typed-execution-and-timing">Typed execution and timing</h2>
+<p>Every consumed token bundle has a source; residual tokens appear at the output boundary. Initial tokens unused by every task pass through identity wires. The counted diagram records place types, multiplicities and exact event endpoints. No input supply is invented to make a plan fit.</p>
+<p>Where individual wire expansion fits the existing 64-port compiler bound, the engine builds a concrete event/identity/permutation/tensor/sequence term. It checks the compiled term against the selected ancestry order. Larger counted interfaces retain their exact counted diagram and explicitly report that expanded-term construction is unavailable. This is a chosen token-flow witness, not a canonical collective-process equivalence or a universal free-SMC claim.</p>
+<p>The elementary work-tree grammar permits task, sequence and parallel blocks. A tree is returned only when its strict order matches that witness&#39;s causal order. An induced N obstruction leaves the selective graph and lawful schedule available. Failure of that grammar does not rule out richer monoidal wiring or every conventional WBS.</p>
+<p>Earliest task starts are calculated from the fixed witness&#39;s dependency paths and positive durations. A separate aggregate-count replay credits outputs at completion, before starts at the same timestamp, then subtracts all simultaneous start demands jointly. It verifies each retained occurrence, its duration, token availability and final goal coverage. This avoids inferring concurrent resource feasibility from serial-order equality.</p>
+<p>Finish ranges compare <strong>earliest representatives</strong> across generated allocations. They are not probability intervals, forecasts, or bounds on arbitrary inserted waiting. No unrestricted optimisation claim is made.</p>
+<h2 id="concrete-consequences-in-the-supplied-examples">Concrete consequences in the supplied examples</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Supplied case</th>
+<th align="right">First-goal orders</th>
+<th align="right">Work branches</th>
+<th align="right">Distinct plan witnesses</th>
+<th align="right">Fastest representative finish</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Refuge, one lifting token</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">13</td>
+</tr>
+<tr>
+<td>Same mechanism, two lifting tokens</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">6</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td>Two tokens, added foundation-before-panel rule</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">13</td>
+</tr>
+<tr>
+<td>No lifting token</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">No completing plan</td>
+</tr>
+<tr>
+<td>No flight window</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">15</td>
+</tr>
+</tbody></table></div>
+<p>These numbers are calculations in toy time units. Added capacity preserves the four serial orders while enabling a joint start and new allocation witnesses. Adding a real prerequisite removes that freedom despite spare capacity. The no-lift marking is valid but cannot finish; a negative token count is rejected as invalid. The workbench also retains either/or support and selective-N examples.</p>
+<h2 id="source-methods">Source methods</h2>
+<p>The investigation&#39;s highlighted source collection supplies the methods below. The private foray retains the precise source-register and curated-record provenance; these are public bibliographic links and explicit uses.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Method used here</th>
+<th>Boundary</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://arxiv.org/abs/1808.05415">Open Petri Nets</a></td>
+<td>Transition signatures, markings, execution semantics and goal reachability; untouched context</td>
+<td>The open-net composition theorem is not newly proved or implemented in full here</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/abs/2101.04238">Categories of Nets</a></td>
+<td>Explicit choice of token semantics and which histories remain distinguishable</td>
+<td>A counted provenance witness does not certify that every coarser categorical quotient preserves causality</td>
+</tr>
+<tr>
+<td><a href="https://topos.institute/blog/2022-09-20-ai-planning-csets/">Using categorical logic for AI planning</a></td>
+<td>Forward search with backtracking, explicit applicability, goals and use bounds</td>
+<td>Count-Petri enabling replaces general C-set matches; this is not a DPO rewriting implementation</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/abs/2107.05850">Encoding Compositionality in Classical Planning Solutions</a></td>
+<td>Trace conditions through action signatures, identity context and braids</td>
+<td>STRIPS literal/negation assumptions are not copied into linear token accounting</td>
+</tr>
+<tr>
+<td><a href="https://golem.ph.utexas.edu/category/2013/03/project_planning_parallel_proc.html">Project Scheduling and Copresheaves</a></td>
+<td>Schedule assignments satisfying weighted precedence constraints; earliest path calculation</td>
+<td>Resource allocations are fixed first; latest times/float and unrestricted resource optimisation are not implemented here</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1098/rspa.2021.0099">Operads for complex system design</a></td>
+<td>Separate composition syntax from the interpretation used for analysis</td>
+<td>The elementary tree is a declared restricted target, not all WBS structures or a new general operadic result</td>
+</tr>
+<tr>
+<td><a href="https://link.springer.com/article/10.1186/s40551-015-0005-8">Infrastructure pathways</a></td>
+<td>Distinguish prerequisite-constrained alternative pathways and their comparative consequences</td>
+<td>The toy timing comparison is not an engineering appraisal</td>
+</tr>
+</tbody></table></div>
+<p>The existing <a href="causal-plan-method.md">causal method</a> and <a href="process-contract-method.md">process contract method</a> supply the retained finite hierarchy and ancestry constructions. Source results, this implementation&#39;s adaptations and independent verification are distinct evidence.</p>
+<h2 id="bounds-recovery-and-evidence">Bounds, recovery and evidence</h2>
+<p>The result reports separate completeness for states, joint steps, first-goal traces, ancestry and representation. Effective state, step, trace, ancestry, plan and serialized-data caps travel with the result. A reached cap yields a partial result; absence from a sample never proves impossibility. Numeric overflow is rejected. A worker cancellation or timeout produces no completed result claim.</p>
+<p>Saving stores the model and view choices in this browser only. Portable downloads contain inputs and bounded metadata. Reopening or importing recomputes the result; imported result claims are ignored. A failed import preserves the currently displayed model. Editing hides stale results until a new calculation succeeds. This does not update a remote engineering model or approve any plan.</p>
+<p>The independent oracle checks small count nets using a separate state/step/trace search and individually labelled-token allocations before quotienting to producer counts. It compares fixed-witness timing, all boundary/frame balances, supplied scenarios and computational cutoffs. Ordinary browser checks cover the complete change/generate/inspect/save/reopen/correct/recover journey. See the <a href="marking-plan-run-2026-09-12.html">dated build and review record</a> for actual verification state.</p>
+<p>The next question is compositional refinement with explicit interfaces and resource ownership, using this whole-family contract as an oracle. That subsequent goal is not started automatically by publishing this experiment.</p>
+</main><footer><a href="../apps/marking-plan-lab/">← Return to the experiment</a><a href="marking-plan-method.md">Markdown source</a></footer></body></html>
