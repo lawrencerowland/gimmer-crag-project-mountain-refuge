@@ -7,6 +7,7 @@ inspectable. The public lab uses fictional refuge scenarios.
 
 Start at [the Process-to-Plan Lab](process-to-plan-lab/).
 
+- [Feedback-to-Plan Lab](apps/feedback-plan-lab/) adds review–revise–retest, selective evidence invalidation, repeated event occurrences and policies that respond only to observed outcomes. It distinguishes possible completion from a guarantee across every modeled outcome within the finite horizon. Each inspected successful history retains typed supplies and a checked schedule. [Method and source uses](planning/feedback-plan-method.html); [build and challenge record](planning/feedback-plan-run-2026-09-12.html).
 - [Marking-to-Plan Lab](apps/marking-plan-lab/) generates the bounded whole family across meaningful starting markings and encoded work branches, with jointly enabled starts, typed supply witnesses, work structures and independently replayed schedules. [Method and source uses](planning/marking-plan-method.html); [build and review record](planning/marking-plan-run-2026-09-12.html).
 - [Process Contract Lab](apps/process-contract-lab/) explores the producer-count ancestry families
   compatible with a selected complete trace, preserves their alternative sequential event orders,
@@ -24,7 +25,7 @@ Start at [the Process-to-Plan Lab](process-to-plan-lab/).
 - [Earlier translation contract](planning/process-to-plan-contract.md) and
   [route boundary](planning/process-to-plan-route-boundary.md) describe the original Petri/WBS slice.
 
-The current forward experiment connects a supplied mechanism and goal to the bounded family of state changes, work branches and replayable plans. Earlier autonomous experiments develop single causal witnesses, ancestry families and composition through typed wires. The adopted detailed WAYS for this lane retain methods from the highlighted source documents; they do not narrow the main investigation’s open source-led WAYS.
+The current feedback experiment extends the supplied mechanism and goal to repeated work and observed-state response policies. The preceding forward experiment retains the bounded family of state changes, work branches and replayable plans. Earlier autonomous experiments develop single causal witnesses, ancestry families and composition through typed wires. The adopted detailed WAYS for this lane retain methods from the highlighted source documents; they do not narrow the main investigation’s open source-led WAYS.
 Exactness is always tied to the declared object and completed enumeration. An exact sequential-order
 language does not establish concurrent-step or timed equivalence. Computation limits remain visible.
 A failure of the restricted task/sequence/parallel tree grammar does not rule out a richer typed
@@ -57,7 +58,9 @@ The optional ordinary-browser regression scripts require Playwright and a Chromi
 LAB_BASE_URL=http://localhost:8000 node scripts/process-contract-browser.mjs
 ```
 
-The new forward journey uses `node scripts/marking-plan-browser.mjs` with the same environment options.
+The feedback journey uses `node scripts/feedback-plan-browser.mjs`, including checkpoint persistence, selective rework, non-anticipating policies and desktop/phone use.
+
+The preceding forward journey uses `node scripts/marking-plan-browser.mjs` with the same environment options.
 
 The baseline-withdrawal navigation check uses `node scripts/inherited-baseline-browser.mjs` and the same environment options. It verifies external references, redirects, fragment/query preservation and canonical return links.
 
@@ -74,12 +77,9 @@ existing Playwright module. No production account or server-side write is involv
 
 ## Provenance rule
 
-Public artifacts stay at cluster level. Detailed DEVONthink record titles, UUIDs and record-level
-provenance remain in the private Portfolio Wave working folder. Public notes name the reusable
-concepts and explicit assumptions.
+Public notes cite public scholarly sources and state their concrete uses and limits. Private DEVONthink identifiers, archive locations, personal context and record-level reading evidence remain in the Portfolio Wave working folder.
 
-The broader hill/travel process-to-plan scenario remains private. Dynamic project states remain
-outside this public slice.
+The broader hill/travel process-to-plan scenario remains private. Feedback uses explicit completed-event checkpoints; continuous operation and partial observation remain outside this public slice.
 
 ## Earlier views
 

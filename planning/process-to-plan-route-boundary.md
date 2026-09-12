@@ -1,5 +1,15 @@
 # Process-To-Plan Route Boundary
 
+## Current scope — 12 September 2026
+
+The higher-autonomy lane now follows the forward direction: a supplied mechanism and meaningful marking generate permitted executions; typed supply witnesses connect realised work to plan structures and checked representative schedules. [Experiment 04](marking-plan-method.html) retains bounded whole-family generation. [Experiment 05](feedback-plan-method.html) adds repeated work, explicit current/stale evidence and observed-state response policies within a finite occurrence horizon. The policy guarantee and the retrospective schedule of one successful branch have different domains.
+
+These toy completed-event checkpoints do not claim the broader dynamic-project-states foray is implemented. The private hill/travel programme and continuous-operation questions remain outside this slice. Public scholarly methods may be cited; private archive identifiers and personal context remain private.
+
+The July boundary below is retained as the historical scope of the inherited baseline. Its selected-schedule projection does not describe the full capability or certificate claims of the later experiments.
+
+## Historical boundary — 4 July 2026
+
 Status: public boundary note for the watchable Gimmer Crag mountain-refuge lab
 Created: 2026-07-04
 
