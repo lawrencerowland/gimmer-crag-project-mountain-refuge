@@ -7,6 +7,8 @@ inspectable. The public lab uses fictional refuge scenarios.
 
 Start at [the Process-to-Plan Lab](process-to-plan-lab/).
 
+Keep this an exploration that moves forward: remove redundant public entries as stronger essays absorb them. Fold any distinct, useful remainder into a surviving method. The two earlier method entrances are ancestry analysis (including the single-graph diagnostic) and typed composition; the former separate “Keep the either” card has been absorbed into ancestry analysis.
+
 - [Feedback-to-Plan Lab](apps/feedback-plan-lab/) adds review–revise–retest, selective evidence invalidation, repeated event occurrences and policies that respond only to observed outcomes. It distinguishes possible completion from a guarantee across every modeled outcome within the finite horizon. Each inspected successful history retains typed supplies and a checked schedule. [Method and source uses](planning/feedback-plan-method.html); [build and challenge record](planning/feedback-plan-run-2026-09-12.html).
 - [Marking-to-Plan Lab](apps/marking-plan-lab/) generates the bounded whole family across meaningful starting markings and encoded work branches, with jointly enabled starts, typed supply witnesses, work structures and independently replayed schedules. [Method and source uses](planning/marking-plan-method.html); [build and review record](planning/marking-plan-run-2026-09-12.html).
 - [Process Contract Lab](apps/process-contract-lab/) explores the producer-count ancestry families

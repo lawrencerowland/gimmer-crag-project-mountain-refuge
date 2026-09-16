@@ -43,13 +43,12 @@
     .section-heading h2,.retained h2,.scope h2{font:400 32px/1.2 var(--serif);letter-spacing:-.4px;margin:0}
     .section-heading p{font-size:12px;color:var(--muted);margin:0;max-width:290px}
     .journey{border-top:1px solid var(--line);padding:38px 0 48px}
-    .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--white)}
+    .steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--white)}
     .step{display:block;padding:26px;border-right:1px solid var(--line);color:inherit;text-decoration:none}
     .step:hover{background:var(--mint)}
     .step:focus-visible{outline-offset:-4px}
     .step h3{text-decoration:underline;text-underline-offset:4px}
     .step:last-child{border:0}
-    .step-number{font:400 31px/1 var(--serif);color:var(--green)}
     .step h3{font-size:17px;font-weight:650;line-height:1.35;margin:16px 0 10px}
     .step p{font-size:13px;color:var(--muted);margin:0}
     .step small{display:block;font-size:11px;color:var(--green);margin-top:19px}
@@ -96,27 +95,18 @@
 
     <section class="retained" id="forward" aria-labelledby="forward-title"><div><p class="eyebrow">EXPERIMENT 04 · RETAINED</p><h2 id="forward-title">One mechanism.<br>Many ways through.</h2></div><div><p>Choose a project state and generate the bounded family of ways to complete the refuge. Keep work branches, joint resource starts, token-supply histories and schedules visible.</p><a class="button" href="../apps/marking-plan-lab/">Generate ways to complete the refuge →</a><nav class="retained-links" aria-label="Forward experiment documentation"><a href="../planning/marking-plan-method.html">Forward-generation method</a><a href="../planning/marking-plan-run-2026-09-12.html">Build and review record</a></nav></div></section>
 
-    <p><a class="button" href="../apps/process-contract-lab/">Open the Process Contract Lab ↗</a></p>
     <section class="journey" id="journey" aria-labelledby="journey-title">
       <div class="section-heading">
-        <h2 id="journey-title">Earlier methods, retained.</h2>
-        <p>The Process Contract Lab keeps the earlier ancestry-family and typed-composition questions available.</p>
+        <h2 id="journey-title">Two methods to explore further.</h2>
+        <p>Explore alternative causal histories, or build the mechanism from connected parts.</p>
       </div>
       <div class="steps">
-        <a class="step" href="../apps/process-contract-lab/?example=either-supplier#workbench" aria-labelledby="method-either">
-          <span class="step-number" aria-hidden="true">01</span>
-          <h3 id="method-either">Keep the “either”</h3>
-          <p>Compare the alternative sequential orders supported by a selected execution’s histories. Test whether a single dependency graph preserves them, or exhibits a false permission or restriction.</p>
-          <small>Open this experiment →</small>
-        </a>
         <a class="step" href="../apps/process-contract-lab/?example=token-provenance#workbench" aria-labelledby="method-ancestry">
-          <span class="step-number" aria-hidden="true">02</span>
           <h3 id="method-ancestry">Explore every compatible ancestry</h3>
-          <p>Enumerate producer-count token histories for the selected trace. Discover whether all, some or none admit an exact task tree. A cutoff keeps the answer explicitly unresolved.</p>
+          <p>Explore the token histories behind a selected execution. Test which histories fit a task tree, and whether one dependency graph can faithfully express their alternatives.</p>
           <small>Open this experiment →</small>
         </a>
         <a class="step" href="../apps/process-contract-lab/?example=typed-refuge#workbench" aria-labelledby="method-wires">
-          <span class="step-number" aria-hidden="true">03</span>
           <h3 id="method-wires">Build with actual wires</h3>
           <p>Compose refuge activities through matching typed ports. Keep identity wires, resource ownership and selective handoffs visible, then generate the resulting executions.</p>
           <small>Open this experiment →</small>

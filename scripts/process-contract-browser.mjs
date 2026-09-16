@@ -10,7 +10,7 @@ async function source(def){if(!await page.locator('#source-json').isVisible())aw
 async function download(name){const pending=page.waitForEvent('download');await page.locator('#export').click();await (await pending).saveAs(path.join(out,name));return JSON.parse(await fs.readFile(path.join(out,name),'utf8'));}
 async function upload(data,name='result.json'){await page.locator('#import-file').setInputFiles({name,mimeType:'application/json',buffer:Buffer.from(JSON.stringify(data))});await page.waitForFunction(()=>document.querySelector('#import-file').value==='');await ready();}
 try{
- await page.goto(base+'/apps/process-contract-lab/');await ready();
+ await page.goto(base+'/apps/process-contract-lab/?example=either-supplier#workbench');await ready();
  await check('OR support exhausts two ancestries, each exact, but needs an alternative contract',async()=>{assert.equal(await page.locator('#witness-select option').count(),2);assert.match(await text('verdict'),/Every ancestry fits/);assert.match(await text('result-summary'),/cannot be captured by one dependency graph/);assert.match(await text('metrics'),/4\s*sequential orders/);assert.match(await text('metrics'),/5–6/);});
  await check('common relation counterexample is excluded by every compatible history',async()=>{await page.locator('#tab-rules').click();await page.locator('#try-spurious').click();assert.match(await text('order-result'),/Not admitted by any ancestry/);assert.match(await text('order-result'),/fails direct token-count replay/);});
  await check('union relation excludes a lawful alternative',async()=>{await page.locator('#try-excluded').click();assert.match(await text('order-result'),/Admitted by history/);});
