@@ -9,6 +9,7 @@ Start at [the Process-to-Plan Lab](process-to-plan-lab/).
 
 Keep this an exploration that moves forward: remove redundant public entries as stronger essays absorb them. Fold any distinct, useful remainder into a surviving method. The two earlier method entrances are ancestry analysis (including the single-graph diagnostic) and typed composition; the former separate “Keep the either” card has been absorbed into ancestry analysis.
 
+- [Boundary Contract Lab](apps/boundary-contract-lab/) composes finite open method fragments while preserving resource ownership and jointly enabled steps. It compares enriched contracts with direct source-net gluing and exposes failures of closed summaries, fabricated supply and whole-fragment barriers. [Method and source uses](planning/boundary-contract-method.html); [build and independent challenge](planning/boundary-contract-run-2026-09-19.md).
 - [Feedback-to-Plan Lab](apps/feedback-plan-lab/) adds review–revise–retest, selective evidence invalidation, repeated event occurrences and policies that respond only to observed outcomes. It distinguishes possible completion from a guarantee across every modeled outcome within the finite horizon. Each inspected successful history retains typed supplies and a checked schedule. [Method and source uses](planning/feedback-plan-method.html); [build and challenge record](planning/feedback-plan-run-2026-09-12.html).
 - [Marking-to-Plan Lab](apps/marking-plan-lab/) generates the bounded whole family across meaningful starting markings and encoded work branches, with jointly enabled starts, typed supply witnesses, work structures and independently replayed schedules. [Method and source uses](planning/marking-plan-method.html); [build and review record](planning/marking-plan-run-2026-09-12.html).
 - [Process Contract Lab](apps/process-contract-lab/) explores the producer-count ancestry families
@@ -27,7 +28,7 @@ Keep this an exploration that moves forward: remove redundant public entries as 
 - [Earlier translation contract](planning/process-to-plan-contract.md) and
   [route boundary](planning/process-to-plan-route-boundary.md) describe the original Petri/WBS slice.
 
-The current feedback experiment extends the supplied mechanism and goal to repeated work and observed-state response policies. The preceding forward experiment retains the bounded family of state changes, work branches and replayable plans. Earlier autonomous experiments develop single causal witnesses, ancestry families and composition through typed wires. The adopted detailed WAYS for this lane retain methods from the highlighted source documents; they do not narrow the main investigation’s open source-led WAYS.
+The current boundary experiment tests a fixed selected-work composition claim; it does not replace the earlier goal-branch generator or feedback policy solver. The feedback experiment extends the supplied mechanism and goal to repeated work and observed-state response policies. The preceding forward experiment retains the bounded family of state changes, work branches and replayable plans. Earlier autonomous experiments develop single causal witnesses, ancestry families and composition through typed wires. The adopted detailed WAYS for this lane retain methods from the highlighted source documents; they do not narrow the main investigation’s open source-led WAYS.
 Exactness is always tied to the declared object and completed enumeration. An exact sequential-order
 language does not establish concurrent-step or timed equivalence. Computation limits remain visible.
 A failure of the restricted task/sequence/parallel tree grammar does not rule out a richer typed
@@ -59,6 +60,8 @@ The optional ordinary-browser regression scripts require Playwright and a Chromi
 ```sh
 LAB_BASE_URL=http://localhost:8000 node scripts/process-contract-browser.mjs
 ```
+
+The boundary-contract journey uses `node scripts/boundary-contract-browser.mjs`, including inspection, resource edits, correction, save/reopen/import, cutoffs and desktop/phone checks.
 
 The feedback journey uses `node scripts/feedback-plan-browser.mjs`, including checkpoint persistence, selective rework, non-anticipating policies and desktop/phone use.
 
