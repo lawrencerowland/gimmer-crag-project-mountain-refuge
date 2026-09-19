@@ -49,3 +49,12 @@ Run `node --test tests/*.test.mjs` for the model suite. With Playwright and Chro
 ## What remains open
 
 The enriched contract retains substantial internal information. Whether a smaller behavior summary can remain composable is a further question, as is whether explicit interfaces earn their maintenance cost in a realistic method revision. Full goal-branch discovery remains with the earlier forward generator; feedback policies remain with the earlier feedback lab. This essay neither replaces those capabilities nor starts another research run automatically.
+
+
+## Explanatory revision — 19 September 2026
+
+The research construction is unchanged. The essay now puts the End/Ways/Means bridge and each source’s contribution on its normal entrance. A Petri-net diagram follows the checked marking, named boundary connections show which exposed places become one place, and a monoidal view displays each offered step’s event arrows, untouched token context and resulting marking. One shared lift and two independent lifts provide a direct comparison. The method page follows the same route while retaining the full technical argument and limitations.
+
+The renderer consumes the checked net and returned steps; it does not introduce a second enabling algorithm. Ordinary-interface checks include marking advancement, shared versus disjoint ownership, joint arrows, edited arc multiplicities, untouched token context and phone use. Independent review also identified and repaired a no-state cutoff that could leave the previous diagram visible, a shortcut into a hidden tab, and long occurrence identifiers overflowing task boxes. The no-state case now clears all former state-dependent controls and explains why no executable arrow can be shown.
+
+Local verification: all 184 model tests and all 28 desktop/phone browser checks passed. The six additional checks extend the existing 22-check journey. Publication is followed by rerunning the same browser journey against Pages and comparing served files with the reviewed revision; live status is recorded in GitHub and the private foray receipt. These checks do not establish engineering validity or independent human-use validation.
