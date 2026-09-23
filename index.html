@@ -183,6 +183,12 @@
       }
     }
   </style>
+<style>
+/* Scenario-first orientation: scoped to avoid changing the models below. */
+.pw-scenario{box-sizing:border-box;display:grid;grid-template-columns:minmax(150px,240px) minmax(0,1fr);gap:clamp(18px,3vw,32px);align-items:center;width:100%;max-width:1100px;margin:24px auto;padding:clamp(18px,3vw,28px);background:#f3f0e6;color:#203e3b;border:1px solid #d5dacf;border-radius:16px;text-align:left;font-family:system-ui,sans-serif;line-height:1.55}
+.pw-scenario figure{margin:0;min-width:0}.pw-scenario img{display:block;width:100%;height:210px;object-fit:contain;border-radius:8px;background:#f9f7ef}.pw-scenario figcaption{font-size:11px;line-height:1.4;color:#52665e;margin-top:8px}.pw-scenario .pw-kicker{font-size:11px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:#476f62;margin:0 0 8px}.pw-scenario h2{font-size:clamp(21px,2.7vw,30px);line-height:1.2;letter-spacing:-.025em;margin:0 0 12px;color:#203e3b;max-width:none}.pw-scenario p{font-size:15px;line-height:1.6;max-width:none;margin:0 0 12px;color:#304b44}.pw-scenario .pw-question{font-weight:700;margin:0;color:#165c4c}
+@media(max-width:600px){.pw-scenario{grid-template-columns:1fr}.pw-scenario>div{grid-row:1}.pw-scenario img{height:165px}.pw-scenario figcaption{max-width:440px}.pw-scenario{margin:16px auto}}
+</style>
 </head>
 <body>
 <aside aria-label="Experiment provenance" style="box-sizing:border-box;background:#e8f0e9;color:#17332f;padding:12px 20px;border-bottom:1px solid #b3cbbb;font:14px/1.6 system-ui,sans-serif"><strong>Higher-autonomy experiments</strong> · Agent-led build and review loops, as compute permits.<br><a style="color:inherit" href="https://lawrencerowland.github.io/gimmer-comparison/">Compare nine approaches</a> · <a style="color:inherit" href="index.html">All higher-autonomy experiments</a> · <a style="color:inherit" href="https://lawrencerowland.github.io/gimmer-crag/petri-smc-wbs.html">Lawrence’s main processes-to-plans collection</a> · <a style="color:inherit" href="https://lawrencerowland.github.io/gimmer-crag/app-index.html">Broader Gimmer collection</a> · <a style="color:inherit" href="https://lawrencerowland.github.io/side-projects.html#gimmer-projects">Side projects</a></aside>
@@ -192,6 +198,11 @@
       <div class="hero-inner">
         <div class="eyebrow">Higher-autonomy experiments</div>
         <h1>Gimmer: higher-autonomy experiments</h1>
+<section class="pw-scenario" aria-label="Scenario and motivating question">
+  <figure><img src="https://lawrencerowland.github.io/gimmer-crag-project-mountain-refuge/input/processes%20to%20plans%20for%20Gimmer.PNG" alt="Cliffside timber refuge with process-to-plan sketches" width="640" height="400" decoding="async"><figcaption>Existing Gimmer scenario emblem. Each lab makes its actual nets, resources and assumptions inspectable.</figcaption></figure>
+  <div><p class="pw-kicker">Toy scenario</p><h2>Build a cliffside refuge, including its awkward handovers.</h2><p>Two work packages may need the same lift. One may release useful work before it has finished; an inspection may require rework. This lane uses small refuge examples to ask what a reusable process description must preserve so that combining packages still gives honest plans.</p><p class="pw-question">Can the pieces be composed without inventing resources or hiding possible work?</p></div>
+</section>
+
         <p class="lede">
           An agent-led parallel investigation of the same Petri → SMC → WBS aim as Lawrence’s main Gimmer work. Agents choose bounded next steps and repeat build, test and review loops as compute permits. Published pages record completed checkpoints; they do not indicate whether a run is active right now.
         </p>
